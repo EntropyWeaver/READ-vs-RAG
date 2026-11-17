@@ -2,6 +2,10 @@
 
 **Español** · [English](README.md)
 
+[![Probar el depurador](docs/debugger/try-es.svg)](https://entropyweaver.github.io/READ-vs-RAG/?lang=es)
+
+Elige una respuesta y compara READ y RAG por chunks en tres casos reales. [Abrir en local](docs/debugger/README.md).
+
 **¿Cuándo compensa que un agente busque y lea un documento completo, frente a recuperar chunks?**
 
 Laboratorio Python para investigar la afirmación de The Batch sobre

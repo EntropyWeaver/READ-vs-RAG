@@ -2,6 +2,10 @@
 
 **English** · [Español](README.es.md)
 
+[![Try the debugger](docs/debugger/try-en.svg)](https://entropyweaver.github.io/READ-vs-RAG/)
+
+Pick an answer, then compare READ and chunked RAG in three recorded cases. [Run locally](docs/debugger/README.md).
+
 **When does it pay to let an agent search and read a document directly instead of retrieving chunks?**
 
 This Python lab investigates The Batch's coverage of [READ / Beyond Top-K](https://arxiv.org/abs/2608.06305).

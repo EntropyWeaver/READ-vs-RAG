@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="184" height="36" viewBox="0 0 184 36" role="img" aria-label="Probar el depurador">
+  <rect width="184" height="36" rx="7" fill="#4c3694"/>
+  <path d="m14 12 10 6-10 6z" fill="#fff"/>
+  <text x="32" y="23" fill="#fff" font-family="system-ui, sans-serif" font-size="14" font-weight="600">Probar el depurador</text>
+</svg>

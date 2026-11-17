@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Replay three real READ vs RAG experiments. Read the evidence, pick an answer, and inspect the recorded retrieval traces.">
+  <meta name="theme-color" content="#171b2d">
+  <title>Retrieval debugger · READ vs RAG</title>
+  <link rel="stylesheet" href="debugger/styles.css">
+  <script src="debugger/cases.js" defer></script>
+  <script src="debugger/app.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="shell topbar">
+      <a class="brand" href="https://github.com/EntropyWeaver/READ-vs-RAG" aria-label="READ vs RAG on GitHub">
+        <span class="brand-icon" aria-hidden="true">↳</span> READ <span class="vs">vs</span> RAG
+      </a>
+      <nav class="languages" aria-label="Language" id="languages">
+        <button type="button" data-language="en" lang="en" aria-pressed="true">EN</button>
+        <button type="button" data-language="es" lang="es" aria-pressed="false">ES</button>
+      </nav>
+    </div>
+    <div class="shell hero">
+      <h1 id="title">Retrieval debugger</h1>
+      <p id="intro">Read the evidence, pick an answer, and see what the models did with it.</p>
+    </div>
+  </header>
+  <main class="shell workspace" id="workspace">
+    <nav id="case-nav" class="case-nav" aria-label="Experiment cases"></nav>
+    <section id="case-panel" aria-labelledby="question"></section>
+    <noscript><p>This debugger needs JavaScript. El depurador necesita JavaScript.</p></noscript>
+  </main>
+  <footer class="shell footer">
+    <span id="replay-note">Recorded benchmark runs · GPT-5.4 mini</span>
+    <div>
+      <a id="report-link" href="https://github.com/EntropyWeaver/READ-vs-RAG/blob/main/studies/gujarat-volume-i/results/report.md">Study report</a>
+      <a id="repo-link" href="https://github.com/EntropyWeaver/READ-vs-RAG">Code on GitHub</a>
+    </div>
+  </footer>
+</body>
+</html>
