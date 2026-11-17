@@ -10,7 +10,7 @@ from pathlib import Path
 from .corpus import ReadTools, bounded_result
 from .io import append_jsonl, load_jsonl, provenance, sha256_file, stable_hash, utcnow, write_json
 from .metrics import parse_prediction, score, span_lines, validate_questions
-from .provider import BudgetExceeded, Gemini, Ledger, ProviderError
+from .provider import BudgetExceeded, Ledger, ProviderError, make_provider
 from .retrieval import Retriever
 
 ANSWER_INSTRUCTION = """Answer the question using only the supplied corpus evidence.
@@ -179,9 +179,11 @@ def run_one(question, system, corpus, provider, budgets, repeat, retriever=None)
             "evidence_chars": exposure_chars, "finished_at": utcnow()}
 
 
-def load_experiment(config_path):
+def load_experiment(config_path, provider_config=None):
     config_path = Path(config_path).resolve()
     cfg = json.loads(config_path.read_text(encoding="utf-8"))
+    if provider_config is not None:
+        cfg["provider"] = json.loads(Path(provider_config).read_text(encoding="utf-8"))
     root = (config_path.parent / cfg.get("project_root", "..")).resolve()
     from .corpus import Corpus
     corpus = Corpus(root / cfg["corpus"])
@@ -199,8 +201,8 @@ def load_experiment(config_path):
     return cfg, root, corpus, questions
 
 
-def plan(config_path, split="dev", limit=None):
-    cfg, root, corpus, questions = load_experiment(config_path)
+def plan(config_path, split="dev", limit=None, *, provider_config=None):
+    cfg, root, corpus, questions = load_experiment(config_path, provider_config)
     qs = [q for q in questions if q["split"] == split and q["verified"]]
     if limit is not None:
         if limit <= 0:
@@ -212,6 +214,7 @@ def plan(config_path, split="dev", limit=None):
     info = {"dataset_kind": cfg.get("dataset_kind", "user_documents"), "split": split,
             "questions": len(qs), "systems": [s["name"] for s in cfg["systems"]],
             "repeats": cfg["repeats"], "cells": cells, "model": cfg["provider"]["model"],
+            "provider": cfg["provider"].get("name", "gemini"),
             "max_model_calls": len(qs) * len(cfg["repeats"]) *
             sum(cfg["budgets"]["max_model_calls"] if s["kind"] in {"read", "agentic_rag"} else 1 for s in cfg["systems"]),
             "max_run_cost_usd": cfg["max_run_cost_usd"],
@@ -221,8 +224,8 @@ def plan(config_path, split="dev", limit=None):
     return info, cfg, root, corpus, qs
 
 
-def run(config_path, output, split="dev", limit=None, retry_errors=False):
-    info, cfg, root, corpus, questions = plan(config_path, split, limit)
+def run(config_path, output, split="dev", limit=None, retry_errors=False, *, provider_config=None):
+    info, cfg, root, corpus, questions = plan(config_path, split, limit, provider_config=provider_config)
     output = Path(output)
     output.mkdir(parents=True, exist_ok=True)
     code_hash = stable_hash({p.name: sha256_file(p) for p in Path(__file__).parent.glob("*.py")})
@@ -248,7 +251,7 @@ def run(config_path, output, split="dev", limit=None, retry_errors=False):
     os.close(fd)
     try:
         ledger = Ledger(output / "budget.jsonl", cfg["max_run_cost_usd"], cfg["max_run_tokens"])
-        provider = Gemini(cfg["provider"], ledger)
+        provider = make_provider(cfg["provider"], ledger)
         if not manifest_path.exists():
             write_json(manifest_path, {"fingerprint": fingerprint, "plan": info,
                                       "experiment": experiment, "provenance": provenance()})

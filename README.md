@@ -67,7 +67,34 @@ no mide rendimiento generativo de READ. `plan` no llama APIs ni descarga modelos
 
 ## Nuevas ejecuciones
 
-El adaptador inicial usa **Gemini**, como el paper. La clave solo se lee de
+El runner admite OpenAI y Gemini. Para OpenAI, el piloto fija GPT-5.4 mini y usa
+el mismo modelo para READ y BM25. La API cuenta los tokens de entrada antes de cada
+generación y devuelve el uso real para calcular el coste. El adaptador solicita
+`store: false` y conserva el estado entre turnos en memoria.
+
+```powershell
+python -m read_vs_rag plan --provider-config configs/openai-mini.json --limit 3
+$secret = Read-Host "OpenAI API key" -AsSecureString
+$env:OPENAI_API_KEY = [System.Net.NetworkCredential]::new("", $secret).Password
+Remove-Variable secret
+python -m read_vs_rag run --provider-config configs/openai-mini.json --limit 3 --output runs/openai-pilot-001
+Remove-Item Env:OPENAI_API_KEY
+```
+
+Una clave de proyecto debe permitir generar en `POST /v1/responses` y contar
+en `POST /v1/responses/input_tokens`. El piloto ejecuta seis celdas sobre tres
+preguntas sintéticas. Puedes usar `--provider-config configs/openai-mini.json` con
+`configs/matrix.example.json` para aplicar el mismo generador a la matriz ampliada.
+Los embeddings BGE siguen ejecutándose localmente. Para probar otro modelo, prepara
+un JSON con su modelo, parámetros y tarifas, y usa otro directorio de ejecución.
+Los IDs de repetición se registran, ya que Responses no admite una semilla de muestreo.
+
+El comando `judge` toma por defecto el proveedor de la ejecución. Su opción
+`--provider-config` permite evaluar con otro modelo y mantiene su presupuesto separado.
+El adaptador OpenAI se verificó con respuestas simuladas. El primer piloto con
+credenciales verificará la integración real.
+
+La configuración original usa **Gemini**, como el paper. La clave solo se lee de
 `GEMINI_API_KEY`, nunca de los archivos de configuración. Para establecerla sin
 escribirla en el historial de PowerShell:
 
@@ -94,7 +121,7 @@ python -m read_vs_rag judge runs/pilot-001 --max-cost-usd 1
 python -m read_vs_rag report runs/pilot-001
 ```
 
-**Las tres configuraciones distribuidas apuntan a fixtures hasta que cambies sus rutas.**
+**Las configuraciones de experimento distribuidas apuntan a fixtures hasta que cambies sus rutas.**
 No lances el barrido completo pensando que son preguntas de un documento real.
 
 La documentación de Google consultada el 17-11-2026 anuncia que `gemini-2.5-pro`

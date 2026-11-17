@@ -1,10 +1,11 @@
-"""Gemini REST adapter with durable, pessimistic reservations before billable calls.
+"""Model providers and durable reservations before generation calls.
 
 No hidden retries. Ambiguous network failures retain their reserved upper estimate.
 Prices are user-supplied estimates, not a provider-side billing guarantee.
 """
 
 import json
+import math
 import os
 import time
 import urllib.error
@@ -69,37 +70,66 @@ class Ledger:
         self.entries[key] = event
 
 
-class Gemini:
+class ModelProvider:
+    key_env = ""
+
     def __init__(self, config, ledger):
         self.config, self.ledger = config, ledger
-        self.key = os.environ.get(config.get("api_key_env", "GEMINI_API_KEY"))
+        key_env = config.get("api_key_env", self.key_env)
+        self.key = os.environ.get(key_env)
         if not self.key:
-            raise ValueError(f"Set {config.get('api_key_env', 'GEMINI_API_KEY')} locally; never commit the key")
+            raise ValueError(f"Set {key_env} locally; never commit the key")
         self.model = config["model"]
         if not self.model or any(c not in "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._" for c in self.model):
             raise ValueError("Invalid model identifier")
-        self.endpoint = "https://generativelanguage.googleapis.com/v1beta/models/" + self.model
         self.pricing = config["pricing"]
-        if not self.pricing.get("valid_through") or date.today() > date.fromisoformat(self.pricing["valid_through"]):
-            raise ValueError("Pricing/model validity date expired; verify availability/rates and create a new config")
         for k in ("input_per_million", "output_per_million", "cached_input_per_million"):
-            if self.pricing[k] < 0:
-                raise ValueError("Prices cannot be negative")
+            rate = self.pricing[k]
+            if type(rate) not in (int, float) or not math.isfinite(rate) or rate < 0:
+                raise ValueError(f"Invalid token price: {k}")
+        if self.pricing["cached_input_per_million"] > self.pricing["input_per_million"]:
+            raise ValueError("Cached input price exceeds standard input price")
+        output_cap = config.get("max_output_tokens", 4096)
+        if type(output_cap) is not int or output_cap <= 0:
+            raise ValueError("max_output_tokens must be a positive integer")
         self.calls = []
 
-    def _post(self, action, payload):
-        request = urllib.request.Request(self.endpoint + ":" + action,
+    def _request(self, url, action, payload, headers):
+        request = urllib.request.Request(url,
                                          data=json.dumps(payload).encode(),
-                                         headers={"Content-Type": "application/json", "x-goog-api-key": self.key},
+                                         headers={"Content-Type": "application/json", **headers},
                                          method="POST")
         try:
             with urllib.request.urlopen(request, timeout=self.config.get("timeout_s", 90)) as response:
                 return json.load(response)
         except urllib.error.HTTPError as exc:
             # Do not log response bodies, request headers, or credentials.
-            raise ProviderError(f"Gemini {action} returned HTTP {exc.code}; no automatic retry") from None
+            raise ProviderError(f"{action} returned HTTP {exc.code}; no automatic retry") from None
         except (OSError, ValueError) as exc:
-            raise ProviderError(f"Gemini {action} failed ({type(exc).__name__}); no automatic retry") from None
+            raise ProviderError(f"{action} failed ({type(exc).__name__}); no automatic retry") from None
+
+    def _reserve(self, input_count, max_input_tokens, output_cap, tag):
+        if type(input_count) is not int or input_count < 0:
+            raise ProviderError("Provider token count missing or invalid")
+        cap = min(max_input_tokens, self.pricing.get("input_tier_limit", max_input_tokens))
+        if input_count > cap:
+            raise BudgetExceeded(f"Input is {input_count} tokens, above per-call/tariff cap {cap}")
+        cost = (input_count * self.pricing["input_per_million"] +
+                output_cap * self.pricing["output_per_million"]) / 1e6
+        return self.ledger.reserve(cost, input_count + output_cap, tag)
+
+
+class Gemini(ModelProvider):
+    key_env = "GEMINI_API_KEY"
+
+    def __init__(self, config, ledger):
+        super().__init__(config, ledger)
+        self.endpoint = "https://generativelanguage.googleapis.com/v1beta/models/" + self.model
+        if not self.pricing.get("valid_through") or date.today() > date.fromisoformat(self.pricing["valid_through"]):
+            raise ValueError("Pricing/model validity date expired; verify availability/rates and create a new config")
+
+    def _post(self, action, payload):
+        return self._request(self.endpoint + ":" + action, f"Gemini {action}", payload, {"x-goog-api-key": self.key})
 
     def generate(self, system, contents, declarations, *, tag, seed, max_input_tokens, final=False):
         config = {"temperature": self.config.get("temperature", 0.),
@@ -115,17 +145,7 @@ class Gemini:
         started = time.perf_counter()
         # Exact server-side input count, including function declarations and history.
         count = self._post("countTokens", {"generateContentRequest": {"model": "models/" + self.model, **request}})
-        input_count = count.get("totalTokens")
-        if type(input_count) is not int or input_count < 0:
-            raise ProviderError("countTokens returned no usable count")
-        cap = min(max_input_tokens, self.pricing.get("input_tier_limit", max_input_tokens))
-        if input_count > cap:
-            raise BudgetExceeded(f"Input is {input_count} tokens, above per-call/tariff cap {cap}")
-        # 2.5 maxOutputTokens includes reasoning; reserve the full output allowance.
-        reserve_tokens = input_count + config["maxOutputTokens"]
-        reserve_cost = (input_count * self.pricing["input_per_million"] +
-                        config["maxOutputTokens"] * self.pricing["output_per_million"]) / 1e6
-        key = self.ledger.reserve(reserve_cost, reserve_tokens, tag)
+        key = self._reserve(count.get("totalTokens"), max_input_tokens, config["maxOutputTokens"], tag)
         response = self._post("generateContent", request)
         usage = response.get("usageMetadata", {})
         if "promptTokenCount" not in usage or "totalTokenCount" not in usage:
@@ -153,3 +173,13 @@ class Gemini:
             raise ProviderError("Model returned no candidate (blocked or empty); billed usage recorded")
         call["finish_reason"] = candidates[0].get("finishReason")
         return candidates[0]["content"], call
+
+
+def make_provider(config, ledger):
+    name = config.get("name", "gemini")
+    if name == "gemini":
+        return Gemini(config, ledger)
+    if name == "openai":
+        from .openai_provider import OpenAI
+        return OpenAI(config, ledger)
+    raise ValueError(f"Unknown model provider: {name}")

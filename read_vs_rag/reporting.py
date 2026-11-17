@@ -93,6 +93,7 @@ def report_run(run_dir, output=None):
             c["p_holm"] = corrected.get(c["system"])
     ledger = Ledger(run_dir / "budget.jsonl", cfg["max_run_cost_usd"], cfg["max_run_tokens"])
     result = {"source": "new_model_run", "fingerprint": manifest["fingerprint"],
+              "provider": cfg["provider"].get("name", "gemini"), "model": cfg["provider"]["model"],
               "dataset_kind": cfg.get("dataset_kind"), "systems": systems, "comparisons": comparisons,
               "budget_reserved_or_billed_usd_all_attempts": ledger.spent,
               "unsettled_requests": sum(e["event"] == "reserve" for e in ledger.entries.values()),
@@ -120,7 +121,9 @@ def report_run(run_dir, output=None):
                      f"{s['scored_cells']} | {pct(s['accuracy_on_scored'])} | "
                      f"{pct(s['accuracy_lower_bound'])} – {pct(s['accuracy_upper_bound'])} | "
                      f"{latency if latency is not None else 'N/A'} |")
-    md = "# Ejecución READ vs RAG\n\n" + f"Dataset: **{cfg.get('dataset_kind')}**.\n\n" + "\n".join(table)
+    md = ("# Ejecución READ vs RAG\n\n"
+          f"Se evaluó **{cfg.get('dataset_kind')}** con `{result['model']}` ({result['provider']}).\n\n"
+          + "\n".join(table))
     md += "\n\n" + "\n".join("- " + n for n in result["notes"]) + "\n"
     (output / "report.md").write_text(md, encoding="utf-8")
     cases = "".join(f"<details><summary>{html.escape(r['system']+' / '+r['question_id'])} · {r['status']}</summary>"

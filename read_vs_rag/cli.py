@@ -14,6 +14,7 @@ def main():
     for name in ("plan", "run"):
         p = sub.add_parser(name)
         p.add_argument("--config", default="configs/pilot.json")
+        p.add_argument("--provider-config", help="Replace the experiment's model provider settings with this JSON")
         p.add_argument("--split", choices=["dev", "test"], default="dev")
         p.add_argument("--limit", type=int)
         if name == "run":
@@ -25,6 +26,7 @@ def main():
     judge = sub.add_parser("judge", help="Optional blinded, separately metered LLM correctness/support grading")
     judge.add_argument("run_dir")
     judge.add_argument("--max-cost-usd", type=float, default=3.0)
+    judge.add_argument("--provider-config", help="JSON settings for a separate judge model")
     smoke = sub.add_parser("smoke", help="Offline fixture/tool checks, never a generative READ-vs-RAG comparison")
     smoke.add_argument("--output", default="reports/smoke.json")
     args = parser.parse_args()
@@ -38,10 +40,11 @@ def main():
             print(f"Audited {result['n_rows']} published rows; report: {args.output}/index.html")
         elif args.command == "plan":
             from .runner import plan
-            print(json.dumps(plan(args.config, args.split, args.limit)[0], indent=2))
+            print(json.dumps(plan(args.config, args.split, args.limit, provider_config=args.provider_config)[0], indent=2))
         elif args.command == "run":
             from .runner import run
-            result = run(args.config, args.output, args.split, args.limit, args.retry_errors)
+            result = run(args.config, args.output, args.split, args.limit, args.retry_errors,
+                         provider_config=args.provider_config)
             from .reporting import report_run
             report_run(result)
         elif args.command == "report":
@@ -50,7 +53,7 @@ def main():
             print(json.dumps(result, indent=2))
         elif args.command == "judge":
             from .judging import judge_run
-            print(judge_run(args.run_dir, args.max_cost_usd))
+            print(judge_run(args.run_dir, args.max_cost_usd, provider_config=args.provider_config))
         else:
             from .smoke import smoke
             print(json.dumps(smoke(args.output), indent=2))
