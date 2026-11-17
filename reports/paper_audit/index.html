@@ -1,0 +1,184 @@
+<!doctype html><html lang="es"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>READ / RAG · Evidence lab</title>
+<style>:root{color-scheme:dark}body{margin:0;background:#10151d;color:#e7edf7;font:16px/1.6 system-ui}
+main{max-width:1100px;margin:60px auto;padding:0 28px}small{color:#83dbba;letter-spacing:.16em}
+h1{font-size:clamp(32px,6vw,64px);line-height:1.05}h2{margin-top:48px}p,li{max-width:90ch}
+.tag{border-left:4px solid #efbd6b;padding:14px 22px;background:#25252a}.scroll{overflow:auto}
+table{border-collapse:collapse;min-width:780px;width:100%}th,td{padding:12px;text-align:left;border-bottom:1px solid #334052}
+th{color:#83dbba}a{color:#83dbba}details{padding:14px;border:1px solid #334052;margin:10px 0;border-radius:8px}
+summary{cursor:pointer}pre{white-space:pre-wrap;word-break:break-word;background:#19222f;padding:16px}
+input{padding:12px;background:#19222f;border:1px solid #526178;color:inherit;border-radius:6px;width:min(90%,480px)}
+</style><main><small>ENTROPYWEAVER / EXPERIMENT 001</small><h1>READ vs RAG<br>Del titular a los datos.</h1>
+<p class="tag">Reanálisis de 663 ejecuciones publicadas por TwoSpoon. No son llamadas nuevas nuestras.
+51 preguntas · un informe financiero · Gemini 2.5 Pro.</p><h2>Calidad, coste y latencia</h2>
+<p>Accuracy original, intervalo Wilson al 95%. Costes y tiempos registrados por los autores para generación.</p>
+<div class="scroll"><table><thead><tr><th>Sistema</th><th>Aciertos</th><th>Accuracy</th><th>IC 95%</th>
+<th>$/pregunta</th><th>p50</th><th>p95</th></tr></thead><tbody><tr><td>read_naive_grep</td><td>34/51</td><td>66.7%</td><td>53.0% – 78.0%</td><td>$0.0431</td><td>19.6s</td><td>51.5s</td></tr><tr><td>read_no_outline</td><td>34/51</td><td>66.7%</td><td>53.0% – 78.0%</td><td>$0.0397</td><td>19.3s</td><td>55.1s</td></tr><tr><td>read</td><td>30/51</td><td>58.8%</td><td>45.2% – 71.2%</td><td>$0.0580</td><td>23.2s</td><td>58.5s</td></tr><tr><td>bm25</td><td>26/51</td><td>51.0%</td><td>37.7% – 64.1%</td><td>$0.0202</td><td>10.5s</td><td>16.9s</td></tr><tr><td>hybrid</td><td>15/51</td><td>29.4%</td><td>18.7% – 43.0%</td><td>$0.0224</td><td>16.4s</td><td>24.5s</td></tr><tr><td>agentic_rag</td><td>14/51</td><td>27.5%</td><td>17.1% – 40.9%</td><td>$0.0505</td><td>19.8s</td><td>47.7s</td></tr><tr><td>dense</td><td>8/51</td><td>15.7%</td><td>8.2% – 28.0%</td><td>$0.0228</td><td>10.7s</td><td>23.5s</td></tr></tbody></table></div>
+<p>READ no demuestra superioridad estadística frente a BM25 en este conjunto.</p><h2>Qué exige revisión</h2><ul><li>En la matriz principal hay 9 respuestas a preguntas sin respuesta que el juez considera correctas y el detector de abstención puntúa como incorrectas. Incluyen «do not contain» y «do not specify». Se conservan ambas señales: no se sustituyen etiquetas sin revisión humana.</li><li>15 preguntas marcadas verified=true conservan metadatos «awaiting human audit». Esto no prueba que falte la revisión, pero la procedencia requiere aclaración antes de llamarlas verificadas por nosotros.</li><li>Solo hay 5 preguntas sin respuesta: cualquier tasa de alucinación derivada tiene gran incertidumbre. El detector publicado solo evalúa ese subconjunto; no mide todas las afirmaciones falsas.</li><li>La puntuación numérica upstream permite tolerancia relativa del 0,5%, absoluta de 0,01 crore y dos interpretaciones de algunas cifras sin unidad. Puede aceptar errores pequeños y confundir unidades; el nuevo runner exige unidades explícitas y tolerancias por pregunta.</li><li>El judge-only es un análisis de sensibilidad con las etiquetas LLM existentes, no una nueva verdad de referencia. Los intervalos y tests no corrigen sesgos del juez ni del corpus.</li></ul>
+<h2>Inspeccionar desacuerdos</h2><label for="filter">Filtrar por sistema o ID</label><br>
+<input id="filter" placeholder="dense, unans-001…"><section id="cases"><details data-search='read_no_outline unans-003'><summary>read_no_outline · unans-003 · original=False / juez=True</summary><p>What is the detailed head-of-account breakdown of expenditure on Co-operation given in Volume II?</p><pre>I am sorry, but I only have access to Volume I of the Gujarat Finance Accounts 2024-25. The information you are asking for is in Volume II, which I do not have.</pre><p>Juez: The candidate correctly states that the requested information is in Volume II, which is not available, matching the substance of the reference answer.</p></details><details data-search='dense unans-002'><summary>dense · unans-002 · original=False / juez=True</summary><p>According to this volume, what was the state of Maharashtra&#x27;s revenue surplus in 2024-25?</p><pre>ANSWER:
+The provided excerpts are from the Finance Accounts for the Government of Gujarat. They do not contain any information regarding the state of Maharashtra&#x27;s revenue surplus.
+
+EVIDENCE:
+chunk 0 | lines 1-47 | pages 1-1</pre><p>Juez: The candidate correctly states that the document is for Gujarat and does not contain information for Maharashtra, which matches the substance of the reference answer.</p></details><details data-search='dense unans-001'><summary>dense · unans-001 · original=False / juez=True</summary><p>What was the Government of Gujarat&#x27;s fiscal deficit for the year 2027-28?</p><pre>ANSWER:
+The provided excerpts do not contain information about the Government of Gujarat&#x27;s fiscal deficit for the year 2027-28. The document is the Finance Accounts for 2024-25, and the data included covers the fiscal years 2023-24 and 2024-25.
+
+EVIDENCE:
+- chunk 0 | lines 1-47 | pages 1-1
+- chunk 98 | lines 2162-2177 | pages 52-53
+- chunk 64 | lines 1271-1294 | pages 24-25</pre><p>Juez: The candidate correctly states that the information for the requested year is not in the document, which matches the reference answer.</p></details><details data-search='bm25 unans-001'><summary>bm25 · unans-001 · original=False / juez=True</summary><p>What was the Government of Gujarat&#x27;s fiscal deficit for the year 2027-28?</p><pre>ANSWER:
+The provided excerpts do not contain the Government of Gujarat&#x27;s fiscal deficit for the year 2027-28. The financial data in the excerpts pertains to the fiscal years 2024-25 and 2023-24.
+
+EVIDENCE:
+The requested figure is not present in the retrieved excerpts.</pre><p>Juez: The candidate correctly states that the information for the requested year is not in the document, which matches the reference answer.</p></details><details data-search='bm25 unans-003'><summary>bm25 · unans-003 · original=False / juez=True</summary><p>What is the detailed head-of-account breakdown of expenditure on Co-operation given in Volume II?</p><pre>ANSWER:
+The provided excerpts do not contain the detailed head-of-account breakdown of expenditure on Co-operation from Volume II. The excerpts are from the &quot;GUIDE TO THE FINANCE ACCOUNTS&quot; and describe the structure and contents of the report, but they do not include the actual data tables with financial figures for specific departments or heads of account.
+
+EVIDENCE:
+The requested information is not present in any of the provided chunks (12, 13, 14, 15, 16, 19, 20, 21).</pre><p>Juez: The candidate correctly states that the requested information is not in the document, which matches the reference answer.</p></details><details data-search='hybrid unans-002'><summary>hybrid · unans-002 · original=False / juez=True</summary><p>According to this volume, what was the state of Maharashtra&#x27;s revenue surplus in 2024-25?</p><pre>ANSWER:
+The provided excerpts are from the Finance Accounts of the Government of Gujarat for the year 2024-25. They do not contain information on the revenue surplus for the state of Maharashtra.
+
+EVIDENCE:
+The document is identified as &quot;Finance Accounts (Volume-I) 2024-25 Government of Gujarat&quot; in chunk 0, lines 1-4. While Maharashtra is mentioned in chunk 90, line 2009, it is in the historical context of the Bombay Reorganisation Act 1960 and does not provide any current financial figures for that state.</pre><p>Juez: The candidate correctly states that the document is about Gujarat and does not contain the requested information for Maharashtra, which matches the reference answer.</p></details><details data-search='hybrid unans-001'><summary>hybrid · unans-001 · original=False / juez=True</summary><p>What was the Government of Gujarat&#x27;s fiscal deficit for the year 2027-28?</p><pre>ANSWER:
+The provided excerpts do not contain the Government of Gujarat&#x27;s fiscal deficit for the year 2027-28. The report is the Finance Accounts for 2024-25, and the data it contains is for the fiscal years 2023-24 and 2024-25.
+
+EVIDENCE:
+chunk 2 | lines 95-102
+chunk 64 | lines 1271-1294
+chunk 98 | lines 2162-2177
+chunk 109 | lines 2256-2269</pre><p>Juez: The candidate correctly states that the information for the requested year is not in the document, which matches the reference answer.</p></details><details data-search='read_naive_grep unans-011'><summary>read_naive_grep · unans-011 · original=True / juez=False</summary><p>According to Statement No. 17, what rate of interest was paid on the loans from NABARD?</p><pre>ANSWER:
+According to Statement No. 17, the loans from NABARD (National Bank for Agricultural and Rural Development) carry various rates of interest. The document does not provide a single interest rate but instead shows the outstanding loan amounts distributed across different interest rate bands.
+
+As of 31 March 2025, the interest rates on outstanding loans from NABARD were as follows:
+
+*   **2.00 to 2.99%:** on ₹ 3,72,594.99 lakh of loans
+*   **3.00 to 3.99%:** on ₹ 1,07,863.91 lakh of loans
+*   **4.00 to 4.99%:** on ₹ 1,10,158.69 lakh of loans
+*   **5.00 to 5.99%:** on ₹ 10,34,580.06 lakh of loans
+*   **6.00 to 6.99%:** on ₹ 2,64,258.25 lakh of loans
+*   **7.00 to 7.99%:** on ₹ 1,21,219.73 lakh of loans
+
+EVIDENCE:
+The figures are from the &quot;Interest Rate Profile of Outstanding Loans&quot; table within Statement No. 17, specifically lines 14894, 14897, 14898, 14899, 14900, 14901, and 14902.</pre><p>Juez: The reference answer states that the interest rate is not in the document, whereas the candidate provides specific interest rate bands.</p></details><details data-search='dense unans-011'><summary>dense · unans-011 · original=False / juez=True</summary><p>According to Statement No. 17, what rate of interest was paid on the loans from NABARD?</p><pre>ANSWER:
+The provided excerpts from Statement No. 17 do not specify the rate of interest paid on loans from NABARD. They do, however, list the total amount of interest paid.
+
+The interest paid on &quot;Loans from the National Bank for Agricultural and Rural Development&quot; was 87,608.21 in lakh rupees. The excerpts do not specify which fiscal year this figure pertains to.
+
+EVIDENCE:
+chunk 660, line 14653</pre><p>Juez: The candidate correctly states that the interest rate is not provided, which matches the reference answer.</p></details><details data-search='bm25 unans-011'><summary>bm25 · unans-011 · original=True / juez=False</summary><p>According to Statement No. 17, what rate of interest was paid on the loans from NABARD?</p><pre>ANSWER:
+Statement No. 17 does not provide a single interest rate for loans from the National Bank for Agricultural and Rural Development (NABARD). Instead, it provides an &quot;Interest Rate Profile&quot; which shows the total outstanding loan amounts across several interest rate bands as of 31 March 2025.
+
+The outstanding amounts for loans from NABARD are distributed as follows:
+*   **2.00 to 2.99 %:** ₹ 3,72,594.99 lakh
+*   **3.00 to 3.99 %:** ₹ 1,07,863.91 lakh
+*   **4.00 to 4.99 %:** ₹ 1,10,158.69 lakh
+*   **5.00 to 5.99%:** ₹ 10,34,580.06 lakh
+*   **6.00 To 6.99%:** ₹ 2,64,258.25 lakh
+*   **7.00 to 7.99%:** ₹ 1,21,219.73 lakh
+
+EVIDENCE:
+chunk 670 | lines 14888-14902 | pages 444-445</pre><p>Juez: </p></details><details data-search='hybrid unans-011'><summary>hybrid · unans-011 · original=False / juez=True</summary><p>According to Statement No. 17, what rate of interest was paid on the loans from NABARD?</p><pre>ANSWER:
+The provided excerpts from Statement No. 17 do not specify the rate of interest paid on loans from the National Bank for Agricultural and Rural Development (NABARD).
+
+However, one table in Statement No. 17 does list the total *amount* of interest paid on these loans during the year. For the row &quot;Loans from the National Bank for Agricultural and Rural Development&quot;, the interest paid was ₹ 87,608.21 lakh.
+
+EVIDENCE:
+chunk 660 | lines 14652-14653</pre><p>Juez: The candidate correctly states that the interest rate is not provided, which matches the reference answer.</p></details><details data-search='agentic_rag unans-010'><summary>agentic_rag · unans-010 · original=True / juez=False</summary><p>What was the closing balance of Market Loans as on 31 March 2026?</p><pre>ANSWER:
+The closing balance for Market Loans as on 31 March 2026 is not present in this document, which covers the financial year ending 31 March 2025.
+
+The latest available figure is for the year ending 31 March 2025. The closing balance of Market Loans as on that date was ₹ 3,11,285.87 crore.
+
+EVIDENCE:
+- chunk 59, lines 1193-1207, page 22</pre><p>Juez: </p></details><details data-search='dense_c2000_k4 unans-002'><summary>dense_c2000_k4 · unans-002 · original=False / juez=True</summary><p>According to this volume, what was the state of Maharashtra&#x27;s revenue surplus in 2024-25?</p><pre>ANSWER:
+The provided excerpts do not contain information about the state of Maharashtra&#x27;s revenue surplus. The document is the Finance Accounts for the Government of Gujarat.
+
+EVIDENCE:
+chunk 0 | lines 1-47</pre><p>Juez: The candidate correctly states that the document does not contain the requested information about Maharashtra.</p></details><details data-search='dense_c2000_k4 unans-001'><summary>dense_c2000_k4 · unans-001 · original=False / juez=True</summary><p>What was the Government of Gujarat&#x27;s fiscal deficit for the year 2027-28?</p><pre>ANSWER:
+The provided excerpts from the Gujarat Finance Accounts 2024-25 do not contain the fiscal deficit for the year 2027-28. The report covers the fiscal years 2023-24 and 2024-25.
+
+EVIDENCE:
+*   chunk 0 | lines 2, 5 | pages 1-1
+*   chunk 64 | lines 1280-1281 | pages 24-25
+*   chunk 98 | lines 2165-2166 | pages 52-53</pre><p>Juez: The candidate correctly states that the requested information for 2027-28 is not in the document, which matches the reference answer.</p></details><details data-search='dense_c2000_k4 unans-011'><summary>dense_c2000_k4 · unans-011 · original=False / juez=True</summary><p>According to Statement No. 17, what rate of interest was paid on the loans from NABARD?</p><pre>ANSWER:
+The provided excerpts do not state the interest *rate* for loans from the National Bank for Agricultural and Rural Development (NABARD). They do, however, list the total amount of interest paid.
+
+The interest paid on these loans was 87,608.21 ₹ in lakh.
+
+EVIDENCE:
+- chunk 660, line 14650
+- chunk 660, line 14654
+- chunk 661, lines 14674-14675</pre><p>Juez: The candidate correctly states that the interest rate is not provided in the document, which matches the reference answer.</p></details><details data-search='dense_c2000_k8 unans-001'><summary>dense_c2000_k8 · unans-001 · original=False / juez=True</summary><p>What was the Government of Gujarat&#x27;s fiscal deficit for the year 2027-28?</p><pre>ANSWER:
+The provided excerpts from the Gujarat Finance Accounts 2024-25 do not contain information about the fiscal deficit for the year 2027-28. The financial data in the excerpts pertains to the fiscal years 2023-24 and 2024-25.
+
+EVIDENCE:
+chunk 98, lines 2167-2168
+chunk 64, lines 1280-1281</pre><p>Juez: The candidate correctly states that the information for the requested year is not in the document, which matches the reference answer.</p></details><details data-search='dense_c2000_k8 unans-002'><summary>dense_c2000_k8 · unans-002 · original=False / juez=True</summary><p>According to this volume, what was the state of Maharashtra&#x27;s revenue surplus in 2024-25?</p><pre>ANSWER:
+The provided excerpts are from the Finance Accounts for the Government of Gujarat. They do not contain any information regarding the revenue surplus for the state of Maharashtra.
+
+EVIDENCE:
+chunk 0 | lines 1-47 | pages 1-1</pre><p>Juez: The candidate correctly states that the document does not contain the requested information about Maharashtra.</p></details><details data-search='dense_c2000_k8 unans-011'><summary>dense_c2000_k8 · unans-011 · original=False / juez=True</summary><p>According to Statement No. 17, what rate of interest was paid on the loans from NABARD?</p><pre>ANSWER:
+The provided excerpts from Statement No. 17 do not specify the rate of interest paid on loans from NABARD. They do, however, list the total amount of interest paid.
+
+The interest paid on &quot;Loans from the National Bank for Agricultural and Rural Development&quot; was 87,608.21 in lakh rupees. The excerpts do not specify which fiscal year this figure pertains to.
+
+EVIDENCE:
+chunk 660, line 14653</pre><p>Juez: The candidate correctly states that the rate of interest is not provided in the document, which matches the reference answer.</p></details><details data-search='dense_c2000_k16 unans-002'><summary>dense_c2000_k16 · unans-002 · original=False / juez=True</summary><p>According to this volume, what was the state of Maharashtra&#x27;s revenue surplus in 2024-25?</p><pre>ANSWER:
+The retrieved excerpts are from the &quot;Finance Accounts (Volume-I) 2024-25&quot; for the Government of Gujarat. They do not contain any information about the state of Maharashtra&#x27;s revenue surplus.
+
+EVIDENCE:
+chunk 0, lines 1-47
+chunk 2, lines 95-102</pre><p>Juez: The candidate correctly states that the document does not contain the requested information about Maharashtra.</p></details><details data-search='dense_c2000_k16 unans-011'><summary>dense_c2000_k16 · unans-011 · original=False / juez=True</summary><p>According to Statement No. 17, what rate of interest was paid on the loans from NABARD?</p><pre>ANSWER:
+The provided excerpts from Statement No. 17 do not specify the rate of interest paid on loans from NABARD. They do, however, list the total amount of interest paid. For &quot;Loans from the National Bank for Agricultural and Rural Development,&quot; the interest paid was ₹ 87,608.21 lakh.
+
+EVIDENCE:
+- chunk 660 | lines 14649-14654
+- chunk 661 | lines 14675-14681</pre><p>Juez: The candidate correctly states that the rate of interest is not provided in the document, which matches the reference answer.</p></details><details data-search='dense_c4000_k4 unans-002'><summary>dense_c4000_k4 · unans-002 · original=False / juez=True</summary><p>According to this volume, what was the state of Maharashtra&#x27;s revenue surplus in 2024-25?</p><pre>ANSWER:
+The provided excerpts are from the Finance Accounts for the Government of Gujarat. They do not contain information on the revenue surplus for the state of Maharashtra.
+
+EVIDENCE:
+chunk 0, lines 1-94
+chunk 39, lines 1993-2038</pre><p>Juez: The candidate correctly states that the document does not contain the requested information for Maharashtra, which matches the reference answer.</p></details><details data-search='dense_c4000_k4 unans-001'><summary>dense_c4000_k4 · unans-001 · original=False / juez=True</summary><p>What was the Government of Gujarat&#x27;s fiscal deficit for the year 2027-28?</p><pre>ANSWER:
+The provided excerpts from the Gujarat Finance Accounts 2024-25 do not contain the fiscal deficit for the year 2027-28. The financial data in the report pertains to the fiscal years 2023-24 and 2024-25.
+
+EVIDENCE:
+All provided excerpts were reviewed, and none contained financial data for the fiscal year 2027-28. For example, Statement No. 6 (chunk 27) and Statement No. 10 (chunk 35) provide figures for 2023-24 and 2024-25.</pre><p>Juez: The candidate correctly states that the requested information is not in the document, which matches the reference answer.</p></details><details data-search='dense_c4000_k4 unans-003'><summary>dense_c4000_k4 · unans-003 · original=False / juez=True</summary><p>What is the detailed head-of-account breakdown of expenditure on Co-operation given in Volume II?</p><pre>ANSWER:
+The provided excerpts are from Volume I of the Gujarat Finance Accounts 2024-25, not Volume II. Therefore, they do not contain the detailed head-of-account breakdown of expenditure on Co-operation from Volume II.
+
+The excerpts from Volume I do list the following items under Capital Expenditure:
+*   **Labour Co-operatives / Forest Co-operatives of the weaker section**: Expenditure to end of 2024-2025 was (-)72.58 ₹ in lakh.
+*   **Labour Co-operatives**: Expenditure to end of 2024-2025 was (-)35.38 ₹ in lakh.
+
+EVIDENCE:
+chunk 187, lines 9838-9841</pre><p>Juez: Both the reference and candidate answers correctly state that the requested information is in Volume II, which is not part of the provided document.</p></details><details data-search='dense_c4000_k4 unans-011'><summary>dense_c4000_k4 · unans-011 · original=False / juez=True</summary><p>According to Statement No. 17, what rate of interest was paid on the loans from NABARD?</p><pre>ANSWER:
+The provided excerpts from Statement No. 17 do not state the rate of interest paid on loans from NABARD. While NABARD is mentioned in footnotes, it is in the context of a subsidy, not a loan. The tables in the excerpts do not list a specific borrowing from NABARD or provide a column for the interest rate.
+
+EVIDENCE:
+chunk 283 | lines 14660-14714</pre><p>Juez: Both the reference and candidate answers correctly state that the document does not provide the rate of interest.</p></details><details data-search='dense_c4000_k8 unans-001'><summary>dense_c4000_k8 · unans-001 · original=False / juez=True</summary><p>What was the Government of Gujarat&#x27;s fiscal deficit for the year 2027-28?</p><pre>ANSWER:
+The provided excerpts from the Gujarat Finance Accounts 2024-25 do not contain information about the fiscal deficit for the year 2027-28. The data in the report is for the fiscal years 2023-24 and 2024-25.
+
+EVIDENCE:
+All retrieved excerpts, including the Table of Contents, pertain to the Finance Accounts for 2024-25 and contain data for the fiscal years 2023-24 and 2024-25. No data for the year 2027-28 is present.</pre><p>Juez: The candidate correctly states that the information for the requested year is not in the document, which matches the reference answer.</p></details><details data-search='dense_c4000_k8 unans-003'><summary>dense_c4000_k8 · unans-003 · original=False / juez=True</summary><p>What is the detailed head-of-account breakdown of expenditure on Co-operation given in Volume II?</p><pre>ANSWER:
+The provided excerpts are from Volume I of the Gujarat Finance Accounts 2024-25. They do not contain any information from Volume II.
+
+EVIDENCE:
+This answer is based on the fact that the user&#x27;s question refers to &quot;Volume II,&quot; but all the provided excerpts are from &quot;Volume I&quot; of the report, as stated in the instructions.</pre><p>Juez: The candidate correctly states that the requested information is not in the provided document because it is from Volume I, not Volume II.</p></details><details data-search='dense_c4000_k8 unans-002'><summary>dense_c4000_k8 · unans-002 · original=False / juez=True</summary><p>According to this volume, what was the state of Maharashtra&#x27;s revenue surplus in 2024-25?</p><pre>ANSWER:
+The provided excerpts are from the Gujarat Finance Accounts 2024-25 and do not contain information on the revenue surplus for the state of Maharashtra. The document exclusively details the finances of the Government of Gujarat.
+
+EVIDENCE:
+The title of the report is &quot;Finance Accounts (Volume-I) 2024-25 Government of Gujarat&quot; (chunk 0, lines 1-94). All financial data within the excerpts pertains to Gujarat.</pre><p>Juez: The candidate correctly states that the document is about Gujarat and does not contain the requested information for Maharashtra, which matches the reference answer.</p></details><details data-search='dense_c4000_k16 unans-002'><summary>dense_c4000_k16 · unans-002 · original=False / juez=True</summary><p>According to this volume, what was the state of Maharashtra&#x27;s revenue surplus in 2024-25?</p><pre>ANSWER:
+The provided excerpts are from the Finance Accounts of the Government of Gujarat for the year 2024-25. They do not contain information on the revenue surplus for the state of Maharashtra.
+
+EVIDENCE:
+chunk 0, lines 1-94
+chunk 39, lines 1993-2038</pre><p>Juez: The candidate correctly states that the document is about Gujarat and does not contain the requested information for Maharashtra.</p></details><details data-search='dense_c4000_k16 unans-001'><summary>dense_c4000_k16 · unans-001 · original=False / juez=True</summary><p>What was the Government of Gujarat&#x27;s fiscal deficit for the year 2027-28?</p><pre>ANSWER:
+The provided excerpts from the Gujarat Finance Accounts 2024-25 do not contain the fiscal deficit for the year 2027-28. The financial data in the report is for the fiscal years 2023-24 and 2024-25.
+
+EVIDENCE:
+The report is titled &quot;Finance Accounts (Volume-I) 2024-25&quot; (chunk 0, lines 2-5). The financial tables consistently provide figures for the fiscal years 2023-24 and 2024-25 (e.g., chunk 27, lines 1290-1291; chunk 35, lines 1729-1730). There is no information for the future fiscal year 2027-28.</pre><p>Juez: The candidate correctly states that the requested information is not in the document, which matches the reference answer.</p></details><details data-search='dense_c4000_k16 unans-011'><summary>dense_c4000_k16 · unans-011 · original=False / juez=True</summary><p>According to Statement No. 17, what rate of interest was paid on the loans from NABARD?</p><pre>ANSWER:
+The provided excerpts from Statement No. 17 do not contain the rate of interest paid on loans from NABARD. While a table under &quot;MATURITY PROFILE OF INTERNAL DEBT&quot; lists the principal amounts of loans from NABARD maturing in future years, it does not specify the interest rates for these loans.
+
+EVIDENCE:
+chunk 286 | lines 14813-14875 | pages 443-444</pre><p>Juez: Both the reference and candidate answers correctly state that the rate of interest is not provided in the document.</p></details></section>
+<p><a href="report.md">Informe completo</a> · <a href="audit.json">Estadísticas JSON</a> ·
+<a href="per_question.csv">Resultados CSV</a> · <a href="https://arxiv.org/abs/2608.06305">Paper original</a></p>
+<script>document.getElementById('filter').addEventListener('input',e=>{const q=e.target.value.toLowerCase();
+document.querySelectorAll('[data-search]').forEach(x=>x.hidden=!x.dataset.search.toLowerCase().includes(q))});</script></main></html>

@@ -1,0 +1,44 @@
+{
+  "commit": "c3c368d4a78b0a152f0dfe7f9f74110347f02397",
+  "files": {
+    "results.jsonl": {
+      "path": "results/results.jsonl",
+      "git_blob_sha": "cf0c27b87ac4f42c6ff56cc1eb91e27460eb88fe",
+      "sha256": "ee7da62cfbc4512149f7a1121ec719e44f1d3b398840774729470cc58b0d496c",
+      "bytes": 1923872
+    },
+    "results_sweep.jsonl": {
+      "path": "results/results_sweep.jsonl",
+      "git_blob_sha": "e71c84a6d80bcf28c874594aa999a88146d7a2cd",
+      "sha256": "3def55ea03d4b7de831bc6f73faf583096ccde0bd766325cc816540f1792434d",
+      "bytes": 2086074
+    },
+    "questions.jsonl": {
+      "path": "benchmark/questions.jsonl",
+      "git_blob_sha": "db29787bf0a5c47770a34a1970e675e11adc260d",
+      "sha256": "9241f4399b88751eed94292db42407fcf3f438008c1ef7f1f35d53d04eb3174f",
+      "bytes": 43264
+    },
+    "LICENSE": {
+      "path": "LICENSE",
+      "git_blob_sha": "8e27d4d044317409ef33efbe659fadd3a0d4f222",
+      "sha256": "672d1db623e14c553c4002b8b1270b70b26ba20b509fe99be689a9e33d58aead",
+      "bytes": 1112
+    },
+    "experiments.yaml": {
+      "path": "config/experiments.yaml",
+      "git_blob_sha": "5c3506e255890c128a9ff88a75e702a45517ea67",
+      "sha256": "4659820a51cabe50e44cd9d40bce503dab83d354f6c68ec83486c5473f857965",
+      "bytes": 3086
+    },
+    "SCHEMA.md": {
+      "path": "benchmark/SCHEMA.md",
+      "git_blob_sha": "79376260e18f27f81f8770598c45bf3dbacf148b",
+      "sha256": "f23ec08fe442dcb3b1f1260ce3c5b9fcb43acc9d7ce831bc5e822199766d62e9",
+      "bytes": 5718
+    }
+  },
+  "source": "https://github.com/twospoon/READ",
+  "retrieved_on": "2026-11-17",
+  "license": "MIT; see LICENSE in this directory"
+}

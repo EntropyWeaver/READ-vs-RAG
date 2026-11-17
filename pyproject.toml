@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "read-vs-rag"
+version = "0.1.0"
+description = "Auditable READ vs chunked RAG experiments, with paired statistics and cost accounting"
+requires-python = ">=3.12"
+dependencies = []
+
+[project.optional-dependencies]
+dense = ["sentence-transformers>=3.4,<6", "numpy>=1.26,<3"]
+plots = ["matplotlib>=3.8,<4"]
+dev = ["ruff>=0.9,<1"]
+
+[project.scripts]
+read-vs-rag = "read_vs_rag.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["read_vs_rag*"]
+
+[tool.ruff]
+line-length = 110
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F"]

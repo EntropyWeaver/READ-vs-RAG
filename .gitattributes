@@ -1,0 +1,4 @@
+* text=auto
+data/upstream/* -text
+examples/corpus/*.md -text
+*.png binary

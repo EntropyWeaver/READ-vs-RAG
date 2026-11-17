@@ -1,0 +1,108 @@
+# Main experiment grid.
+#
+# Paths are relative to the repository root (run scripts from there, or pass
+# --config with absolute paths).
+#
+# Provider is Google Gemini (see read_eval/llm.py).
+# Cost control: every cell is one or more API calls. Start with
+#   uv run python scripts/03_run_experiment.py --dry-run
+# to see the cell count, then --limit N to smoke-test before the full run.
+
+corpus_path: memory/FA_2024_25_GUJARAT/pymupdf4llm.md
+memory_root: memory
+benchmark_path: benchmark/questions.jsonl
+results_path: results/results.jsonl
+cache_dir: results/index_cache
+
+models:
+  - gemini-2.5-pro          # primary: GA, verified pricing, efficient in the pilot
+  # - gemini-3.6-flash     # second point for the backbone-scaling figure
+judge_model: gemini-2.5-pro   # keep the judge fixed across systems
+thinking_budget: -1     # -1 = dynamic (model decides), 0 = off
+seeds: [0]
+
+max_workers: 4       # raise cautiously; each worker holds an API slot
+max_retries: 3
+run_judge: true
+
+systems:
+  # ---- the system under test -------------------------------------------
+  - name: read
+    kind: read
+    profile: full
+    max_turns: 30
+
+  # ---- ablations of the interface --------------------------------------
+  # The headline ablation: bypasses normalization-aware matching, which is
+  # what CLAUDE.md records as the fix for 7 consecutive dead greps.
+  - name: read_naive_grep
+    kind: read
+    profile: naive_grep
+    max_turns: 30
+
+  - name: read_no_outline
+    kind: read
+    profile: no_outline
+    max_turns: 30
+
+  # ---- retrieval baselines ---------------------------------------------
+  - name: dense
+    kind: rag
+    retriever: dense
+    k: 8
+    chunk_chars: 2000
+    overlap_chars: 200
+    table_aware: true
+    embed_model: BAAI/bge-base-en-v1.5
+
+  - name: bm25
+    kind: rag
+    retriever: bm25
+    k: 8
+    chunk_chars: 2000
+    overlap_chars: 200
+    table_aware: true
+
+  - name: hybrid
+    kind: rag
+    retriever: hybrid
+    k: 8
+    chunk_chars: 2000
+    overlap_chars: 200
+    table_aware: true
+    rerank: true
+
+  # Chunking without table awareness — separates "chunking is misconfigured"
+  # from "chunking is the wrong idea".
+  - name: dense_naive_chunk
+    kind: rag
+    retriever: dense
+    k: 8
+    chunk_chars: 2000
+    overlap_chars: 200
+    table_aware: false
+    enabled: false
+
+  # ---- the interface-vs-iteration control ------------------------------
+  # An agent that iterates, but through a vector interface. If READ's gain were
+  # merely "it can loop", this closes it.
+  - name: agentic_rag
+    kind: agentic_rag
+    retriever: dense
+    k: 8
+    max_turns: 30
+
+  # ---- ceilings --------------------------------------------------------
+  # Perfect retrieval over the same chunks: is top-k enough even when the
+  # retriever cannot miss?
+  - name: oracle
+    kind: rag
+    retriever: oracle
+    k: 8
+    enabled: false
+
+  # No retrieval at all. ~1.7 MB of Markdown fits the 1M window; the document
+  # is cached with a 1h TTL so repeated questions bill the prefix at read rates.
+  - name: long_context
+    kind: long_context
+    enabled: false

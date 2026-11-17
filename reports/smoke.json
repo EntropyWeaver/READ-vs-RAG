@@ -1,0 +1,114 @@
+{
+  "source": "local_offline_synthetic_fixture",
+  "llm_calls": 0,
+  "claim": "Tool and retrieval plumbing only; no READ-vs-RAG generative conclusion.",
+  "normalized_search_hits": 1,
+  "naive_search_hits": 0,
+  "bm25_build_s": 0.0009034989998326637,
+  "rows": [
+    {
+      "question_id": "dev-lookup",
+      "retrieval_s": 4.999299994778994e-05,
+      "retrieved_chunks": 3,
+      "annotated_line_recall": 1.0
+    },
+    {
+      "question_id": "dev-arithmetic",
+      "retrieval_s": 6.678099998680409e-05,
+      "retrieved_chunks": 3,
+      "annotated_line_recall": 1.0
+    },
+    {
+      "question_id": "dev-units",
+      "retrieval_s": 4.645900003197312e-05,
+      "retrieved_chunks": 3,
+      "annotated_line_recall": 1.0
+    },
+    {
+      "question_id": "dev-owner",
+      "retrieval_s": 1.722199999676377e-05,
+      "retrieved_chunks": 1,
+      "annotated_line_recall": 1.0
+    },
+    {
+      "question_id": "dev-negative",
+      "retrieval_s": 2.4772999950073427e-05,
+      "retrieved_chunks": 3,
+      "annotated_line_recall": 1.0
+    },
+    {
+      "question_id": "dev-unans-year",
+      "retrieval_s": 3.090099994551565e-05,
+      "retrieved_chunks": 3,
+      "annotated_line_recall": null
+    },
+    {
+      "question_id": "dev-nearzero",
+      "retrieval_s": 3.2483999802934704e-05,
+      "retrieved_chunks": 3,
+      "annotated_line_recall": 1.0
+    },
+    {
+      "question_id": "dev-injection",
+      "retrieval_s": 2.607800001896976e-05,
+      "retrieved_chunks": 2,
+      "annotated_line_recall": 1.0
+    },
+    {
+      "question_id": "test-prioryear",
+      "retrieval_s": 0.00013461699995787058,
+      "retrieved_chunks": 3,
+      "annotated_line_recall": 1.0
+    },
+    {
+      "question_id": "test-ratio",
+      "retrieval_s": 3.960499998356681e-05,
+      "retrieved_chunks": 3,
+      "annotated_line_recall": 1.0
+    },
+    {
+      "question_id": "test-retention",
+      "retrieval_s": 2.742699984992214e-05,
+      "retrieved_chunks": 3,
+      "annotated_line_recall": 1.0
+    },
+    {
+      "question_id": "test-escalation",
+      "retrieval_s": 2.6233999960822985e-05,
+      "retrieved_chunks": 2,
+      "annotated_line_recall": 1.0
+    },
+    {
+      "question_id": "test-unans-state",
+      "retrieval_s": 2.3781999971106416e-05,
+      "retrieved_chunks": 2,
+      "annotated_line_recall": null
+    },
+    {
+      "question_id": "test-unans-rate",
+      "retrieval_s": 2.9185999892433756e-05,
+      "retrieved_chunks": 2,
+      "annotated_line_recall": null
+    },
+    {
+      "question_id": "test-water",
+      "retrieval_s": 3.50160000834876e-05,
+      "retrieved_chunks": 3,
+      "annotated_line_recall": 1.0
+    },
+    {
+      "question_id": "test-growth",
+      "retrieval_s": 6.557100005011307e-05,
+      "retrieved_chunks": 3,
+      "annotated_line_recall": 1.0
+    }
+  ],
+  "provenance": {
+    "created_at": "2026-11-17T17:00:31.141831+00:00",
+    "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+    "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+    "processor": "",
+    "git_commit": null,
+    "git_dirty": true
+  }
+}

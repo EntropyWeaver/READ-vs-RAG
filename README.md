@@ -12,7 +12,7 @@ de los datos publicados y un runner independiente para nuevas comparaciones.
 > no sirven para afirmar que READ supera a RAG. Los adaptadores densos y el proveedor
 > real requieren validación de integración con sus modelos antes de una campaña.
 
-![Auditoría de las ejecuciones publicadas](reports/paper_audit/comparison.png)
+![Auditoría de las ejecuciones publicadas](reports/paper_audit/comparison.svg)
 
 ## Lo que ya podemos medir
 
@@ -52,13 +52,16 @@ python -m venv .venv
 # Windows PowerShell: .venv\Scripts\Activate.ps1
 # Linux/macOS: source .venv/bin/activate
 python -m pip install -e ".[dev]"
+python -m read_vs_rag fetch-upstream  # una descarga inicial, hashes verificados
 python -m unittest discover -s tests -v
 python -m read_vs_rag audit
 python -m read_vs_rag smoke
 python -m read_vs_rag plan --limit 3
 ```
 
-La auditoría y los tests usan solo la biblioteca estándar. `smoke` ejecuta búsquedas
+La auditoría y los tests usan solo la biblioteca estándar. Los dos logs originales
+se descargan una vez (4 MB en total) desde un commit fijo, con verificación SHA-256;
+después, la auditoría funciona sin red. Los informes calculados sí están incluidos. `smoke` ejecuta búsquedas
 y BM25 reales sobre 16 preguntas sintéticas, sin generador: valida la implementación,
 no mide rendimiento generativo de READ. `plan` no llama APIs ni descarga modelos.
 
