@@ -1,79 +1,89 @@
 # READ vs RAG · Evidence Lab
 
-**¿Cuándo compensa que un agente busque y lea un documento completo, frente a recuperar chunks?**
+**English** · [Español](README.es.md)
 
-Laboratorio Python para investigar la afirmación de The Batch sobre
-[READ / Beyond Top-K](https://arxiv.org/abs/2608.06305). Incluye un reanálisis verificable
-de los datos publicados y un runner independiente para nuevas comparaciones.
+**When does it pay to let an agent search and read a document directly instead of retrieving chunks?**
 
-> **Estado, 17 noviembre 2026:** se han recalculado las 663 ejecuciones publicadas y probado
-> el código localmente. **No se han ejecutado nuevas llamadas a un LLM.** No había claves
-> de API en el entorno de desarrollo. Los ejemplos locales son fixtures sintéticos;
-> no sirven para afirmar que READ supera a RAG. Los adaptadores densos y el proveedor
-> real requieren validación de integración con sus modelos antes de una campaña.
+This Python lab investigates The Batch's coverage of [READ / Beyond Top-K](https://arxiv.org/abs/2608.06305).
+It includes a reproducible audit of the published data and an independent runner for new comparisons.
 
-![Auditoría de las ejecuciones publicadas](reports/paper_audit/comparison.svg)
+## Live OpenAI study
 
-## Lo que ya podemos medir
+The study compares six variants with GPT-5.4 mini on 36 questions about Volume I of the
+2024–25 Gujarat Finance Accounts. It covers **216 paired evaluations** on a 94-page report.
 
-Resultados recalculados desde las filas originales, conservando sus etiquetas:
-
-| Sistema | Aciertos / 51 | Accuracy | Coste registrado por pregunta |
+| System | Correct answers | Median latency | USD/question |
 |---|---:|---:|---:|
-| READ sin outline | 34 | 66,7% | $0,0397 |
-| READ con grep literal | 34 | 66,7% | $0,0431 |
-| READ | 30 | 58,8% | $0,0580 |
-| BM25 | 26 | 51,0% | $0,0202 |
-| Híbrido publicado | 15 | 29,4% | $0,0224 |
-| RAG denso agéntico | 14 | 27,5% | $0,0505 |
-| RAG denso | 8 | 15,7% | $0,0228 |
+| READ | 27/36 (75.0%) | 68.5 s | 0.0072 |
+| BM25 + BGE hybrid | 24/36 (66.7%) | 13.6 s | 0.0092 |
+| BM25 | 21/36 (58.3%) | 13.0 s | 0.0096 |
+| Iterative BM25 | 19/36 (52.8%) | 25.1 s | 0.0065 |
+| BGE, longer chunks | 18/36 (50.0%) | 13.2 s | 0.0097 |
+| BGE, shorter chunks | 14/36 (38.9%) | 14.0 s | 0.0099 |
 
-El mejor RAG denso del barrido publicado alcanza **35,3%**. READ vs BM25 tiene
-13 victorias y 9 derrotas en pares discordantes, **p de Holm = 1,00**: estos datos no
-demuestran superioridad frente a BM25. Tampoco demuestran equivalencia.
-Costes y latencias son los registrados por los autores para generación, no mediciones
-de nuestra máquina ni el coste total de conversión, indexación y evaluación.
+Latency is measured on valid responses during concurrent runs. READ scored 8.3 percentage
+points above the hybrid (95% paired CI: −11.1 to +27.8). The study covers one report and one model.
 
-La auditoría identifica **9 abstenciones** en la matriz principal que el juez acepta
-y el detector por regex penaliza. Se muestran los textos y ambas etiquetas;
-no se sustituyen automáticamente por una supuesta verdad corregida.
+[Study report (Spanish)](studies/gujarat-volume-i/results/report.md) ·
+[Per-question CSV](studies/gujarat-volume-i/results/per_question.csv) ·
+[Reproduction guide (Spanish)](studies/gujarat-volume-i/README.md)
 
-- [Informe con intervalos, comparaciones y limitaciones](reports/paper_audit/report.md)
-- [Explorador HTML descargable](reports/paper_audit/index.html) — abrir localmente; GitHub no ejecuta el HTML
-- [Estadísticas completas](reports/paper_audit/audit.json) · [CSV por pregunta](reports/paper_audit/per_question.csv)
-- [Casos para revisión](reports/paper_audit/review_queue.jsonl) · [Desgloses](reports/paper_audit/slices.csv)
+## Audit of the published results
 
-## Empezar sin gastar en modelos
+We recomputed the metrics for **663 published runs** from the original study, using the authors' labels.
 
-Python **3.12+**. Desde la raíz del repositorio:
+![Audit of the published runs](reports/paper_audit/comparison.svg)
+
+| System | Correct / 51 | Accuracy | Recorded cost per question |
+|---|---:|---:|---:|
+| READ without outline | 34 | 66.7% | $0.0397 |
+| READ with literal grep | 34 | 66.7% | $0.0431 |
+| READ | 30 | 58.8% | $0.0580 |
+| BM25 | 26 | 51.0% | $0.0202 |
+| Published hybrid | 15 | 29.4% | $0.0224 |
+| Agentic dense RAG | 14 | 27.5% | $0.0505 |
+| Dense RAG | 8 | 15.7% | $0.0228 |
+
+The best dense RAG configuration in the published sweep reached **35.3%**. READ beat BM25
+on 13 questions where the methods disagreed, and BM25 won on 9 (Holm-adjusted p = 1.00).
+These data establish neither superiority nor equivalence. The published cost and latency figures
+cover answer generation and exclude conversion, indexing, and evaluation.
+
+The audit also found **nine abstentions** in the main matrix that the judge accepted and the regex
+detector penalized. Both labels and the response text are available for review.
+
+- [Audit report with intervals, comparisons, and limitations (Spanish)](reports/paper_audit/report.md)
+- [HTML explorer](reports/paper_audit/index.html) (download and open locally)
+- [Full statistics](reports/paper_audit/audit.json) · [Per-question CSV](reports/paper_audit/per_question.csv)
+- [Cases for review](reports/paper_audit/review_queue.jsonl) · [Breakdowns](reports/paper_audit/slices.csv)
+
+## Get started without paid model calls
+
+Use **Python 3.12+**. Run these commands from the repository root.
 
 ```bash
 python -m venv .venv
 # Windows PowerShell: .venv\Scripts\Activate.ps1
 # Linux/macOS: source .venv/bin/activate
 python -m pip install -e ".[dev]"
-python -m read_vs_rag fetch-upstream  # una descarga inicial, hashes verificados
+python -m read_vs_rag fetch-upstream  # One-time download with hash verification
 python -m unittest discover -s tests -v
 python -m read_vs_rag audit
 python -m read_vs_rag smoke
 python -m read_vs_rag plan --limit 3
 ```
 
-La auditoría y los tests usan solo la biblioteca estándar. Los dos logs originales
-se descargan una vez (4 MB en total) desde un commit fijo, con verificación SHA-256;
-después, la auditoría funciona sin red. Los informes calculados sí están incluidos. `smoke` ejecuta búsquedas
-y BM25 reales sobre 16 preguntas sintéticas, sin generador: valida la implementación,
-no mide rendimiento generativo de READ. `plan` no llama APIs ni descarga modelos.
+The audit and tests use the standard library. `fetch-upstream` downloads two logs (4 MB total)
+from a pinned commit and verifies their SHA-256 hashes. Once downloaded, the audit works offline.
+The computed reports are included in the repository. `smoke` runs real retrieval and BM25 on 16
+synthetic questions to check the implementation. `plan` inspects the run without calling APIs or
+fetching model weights.
 
-## Nuevas ejecuciones
+## Run a new comparison
 
-El [estudio con llamadas reales a OpenAI](studies/gujarat-volume-i/results/report.md)
-compara seis variantes sobre 36 preguntas del Volumen I de las cuentas de Gujarat.
-
-El runner admite OpenAI y Gemini. Para OpenAI, el piloto fija GPT-5.4 mini y usa
-el mismo modelo para READ y BM25. La API cuenta los tokens de entrada antes de cada
-generación y devuelve el uso real para calcular el coste. El adaptador solicita
-`store: false` y conserva el estado entre turnos en memoria.
+The runner supports OpenAI and Gemini. The OpenAI pilot pins GPT-5.4 mini and uses the same
+model for READ and BM25. The adapter counts input tokens before generation, calculates costs
+from reported usage, requests `store: false`, and keeps turn history in memory.
 
 ```powershell
 python -m read_vs_rag plan --provider-config configs/openai-mini.json --limit 3
@@ -84,22 +94,18 @@ python -m read_vs_rag run --provider-config configs/openai-mini.json --limit 3 -
 Remove-Item Env:OPENAI_API_KEY
 ```
 
-Una clave de proyecto debe permitir generar en `POST /v1/responses` y contar
-en `POST /v1/responses/input_tokens`. El piloto ejecuta seis celdas sobre tres
-preguntas sintéticas. Puedes usar `--provider-config configs/openai-mini.json` con
-`configs/matrix.example.json` para aplicar el mismo generador a la matriz ampliada.
-Los embeddings BGE siguen ejecutándose localmente. Para probar otro modelo, prepara
-un JSON con su modelo, parámetros y tarifas, y usa otro directorio de ejecución.
-Los IDs de repetición se registran, ya que Responses no admite una semilla de muestreo.
+Use a project key that can generate at `POST /v1/responses` and count input tokens at
+`POST /v1/responses/input_tokens`. The pilot runs six cells on three synthetic questions.
+Apply `--provider-config configs/openai-mini.json` to `configs/matrix.example.json` to use the
+same generator for the extended matrix. BGE embeddings run locally. To try a different model,
+prepare a JSON file with its model ID, settings, and rates and use a new run directory. The runner
+records repeat IDs. Responses does not expose a sampling seed.
 
-El comando `judge` toma por defecto el proveedor de la ejecución. Su opción
-`--provider-config` permite evaluar con otro modelo y mantiene su presupuesto separado.
-El adaptador OpenAI se verificó con respuestas simuladas. El primer piloto con
-credenciales verificará la integración real.
+By default, `judge` uses the run's provider. Use `--provider-config` to select a different judge
+model. Judging has its own budget.
 
-La configuración original usa **Gemini**, como el paper. La clave solo se lee de
-`GEMINI_API_KEY`, nunca de los archivos de configuración. Para establecerla sin
-escribirla en el historial de PowerShell:
+The original configuration uses Gemini, as the paper did. The runner reads the key from
+`GEMINI_API_KEY`. In PowerShell, you can set it without typing the value into command history.
 
 ```powershell
 $secret = Read-Host "Gemini API key" -AsSecureString
@@ -108,90 +114,77 @@ python -m read_vs_rag run --config configs/pilot.json --split dev --limit 3 --ou
 python -m read_vs_rag report runs/pilot-001
 ```
 
-El piloto usa READ y BM25 sobre fixtures y reserva un máximo estimado de **$3 para
-la ejecución completa**. Es una prueba de integración. Para un experimento real,
-sustituye corpus y preguntas siguiendo [el formato de datos](docs/DATA.md).
-El coste usa las tarifas configuradas; no es un límite de facturación del proveedor.
+The pilot sets an estimated **$3 budget for the full run**. The estimate uses configured rates,
+and provider billing may differ. To run on your own corpus, follow the [data format guide (Spanish)](docs/DATA.md).
 
 ```bash
-# Matriz ampliada: descarga pesos de embeddings/reranker al ejecutar, no al planificar.
+# The extended matrix downloads embedding and reranker weights when run.
 python -m pip install -e ".[dense]"
 python -m read_vs_rag plan --config configs/matrix.example.json
 python -m read_vs_rag run --config configs/matrix.example.json --split dev --output runs/matrix-dev-001
 
-# Evaluación semántica opcional; otra partida de gasto, separada de la generación.
+# Optional semantic evaluation with a separate budget.
 python -m read_vs_rag judge runs/pilot-001 --max-cost-usd 1
 python -m read_vs_rag report runs/pilot-001
 ```
 
-**Las configuraciones de experimento distribuidas apuntan a fixtures hasta que cambies sus rutas.**
-No lances el barrido completo pensando que son preguntas de un documento real.
+The pilot and examples in `configs/` use synthetic data by default. For the Gujarat report,
+follow the [study instructions (Spanish)](studies/gujarat-volume-i/README.md).
 
-La documentación de Google consultada el 17-11-2026 anuncia que `gemini-2.5-pro`
-se redirigirá a otro modelo el 1-12-2026. Por eso las tarifas de ejemplo caducan
-el 30-11 y el runner verifica `modelVersion`. Después hay que verificar un modelo y
-sus tarifas, ajustar el config y abrir una nueva carpeta de ejecución. No cambiar
-solo la fecha para ocultar la migración. [Fuente oficial](https://ai.google.dev/gemini-api/docs/pricing#gemini-2.5-pro).
+The Gemini example records the rates checked on November 17, 2026. Google announced that
+`gemini-2.5-pro` would be routed to a different model on December 1, 2026, so the example rates
+expire on November 30 and the runner checks `modelVersion`. For later runs, verify the model and
+rates, update the configuration, and start a new run directory. [Google's pricing notes](https://ai.google.dev/gemini-api/docs/pricing#gemini-2.5-pro)
 
-## Comparadores implementados
+## Retrieval methods and controls
 
-| Variante | Acceso a la evidencia | Propósito |
+| Variant | Evidence access | What it tests |
 |---|---|---|
-| `read` | `memory_list`, `memory_grep`, `memory_outline`, `memory_read` | Implementación independiente inspirada en READ |
-| `read_naive_grep` | Búsqueda literal, sin normalización | Ablación de normalización |
-| `read_no_outline` | Sin índice de encabezados | Ablación de navegación |
-| `bm25` | Chunks, búsqueda léxica | Baseline imprescindible |
-| `dense` | BGE fijado a un commit | RAG denso real, sin sustituto TF-IDF |
-| `dense_naive_chunks` | Sin arrastre de contexto | Efecto del chunker |
-| `hybrid` | BM25 + BGE mediante RRF | Recuperación combinada |
-| `hybrid_rerank` | RRF + BGE cross-encoder | Baseline reforzado |
-| `agentic_dense` | Mismo bucle y límites; herramienta vectorial | Separar interfaz de iteración |
-| `full_context` | Todo el corpus | Control; rechaza truncamiento silencioso |
-| `oracle` | Líneas gold ± margen | Techo diagnóstico; **usa etiquetas**, nunca rival real |
+| `read` | `memory_list`, `memory_grep`, `memory_outline`, `memory_read` | Independent implementation inspired by READ |
+| `read_naive_grep` | Literal search | Effect of normalization |
+| `read_no_outline` | Search and read with headings index disabled | Effect of document navigation |
+| `bm25` | Lexical search over chunks | Lexical baseline |
+| `dense` | BGE embeddings pinned to a commit | Dense RAG baseline |
+| `dense_naive_chunks` | Chunks without carried-over context | Effect of the chunker |
+| `hybrid` | BM25 and BGE combined with RRF | Hybrid retrieval |
+| `hybrid_rerank` | RRF with BGE cross-encoder reranking | Reranking baseline |
+| `agentic_dense` | Vector search tool with the same loop and limits | Effect of iterative retrieval |
+| `full_context` | Entire corpus, declining inputs that would be truncated | Full context control |
+| `oracle` | Annotated evidence lines with a surrounding margin | Diagnostic upper bound using gold labels |
 
-Las operaciones READ se exponen directamente al modelo; no requieren MCP. El chunker
-contextual conserva líneas completas, encabezados Markdown y declaraciones de unidad;
-no es una copia del chunker de los autores. Esta matriz estudia el mecanismo,
-**no es una reproducción exacta del paper**. La [ruta de reproducción oficial](docs/PROTOCOL.md#reproducción-exacta)
-usa el código de TwoSpoon.
+The model calls READ's document tools directly. The contextual chunker preserves complete lines,
+Markdown headings, and unit declarations. For an exact reproduction of the paper, follow the
+[guide using TwoSpoon's original code (Spanish)](docs/PROTOCOL.md#reproducción-exacta).
 
-## Qué queda registrado
+## What the runner records
 
-- Calidad: exactitud numérica con unidades, respuestas exactas/alias, abstención explícita,
-  juez semántico ciego al nombre del sistema y soporte de afirmaciones como señal separada.
-- Recuperación: cobertura de líneas, cobertura de todos los apoyos, hit/recall de chunks,
-  MRR y nDCG para recuperación de una sola pasada. Las anotaciones son una referencia incompleta.
-- Citas: validez de coordenadas, líneas realmente vistas y solapamiento con evidencia anotada.
-  Estas métricas no se llaman «faithfulness».
-- Recursos: latencia p50/p95/p99, tokens de entrada/salida/razonamiento, llamadas, coste,
-  gasto del juez y tiempo de indexación por separado; reservas desconocidas tras errores.
-- Inferencia: Wilson con una repetición, bootstrap por pregunta, McNemar exacto y Holm cuando
-  proceden. Las repeticiones no se cuentan como preguntas independientes.
-- Trazabilidad: respuestas, resultados de herramientas, parámetros, corpus y preguntas con hash,
-  versiones de librerías, código y modelo devuelto, errores y celdas pendientes visibles.
+- **Answer quality** — Numeric accuracy with units, exact matches and aliases, explicit abstentions, and a semantic judge blinded to the system name. Claim support is scored separately.
+- **Retrieval** — Coverage of annotated evidence lines, all-support coverage, chunk hits and recall, MRR, and nDCG for single-pass retrieval. Annotations cover a subset of possible evidence.
+- **Citations** — Coordinate validity, whether the cited lines were available to the model, and overlap with annotated evidence.
+- **Resources** — p50/p95/p99 latency, input/output/reasoning tokens, calls, estimated cost, pending reservations, and separate judge spending and indexing time.
+- **Inference** — Wilson intervals for single-repeat runs, per-question bootstrap, exact McNemar tests, and Holm correction where applicable. Repeats are grouped by question.
+- **Provenance** — Answers, tool results, configuration, corpus and question hashes, library and model versions, errors, and pending cells.
 
-Reejecutar el mismo comando reanuda las celdas pendientes. Código, configuración,
-dataset o dependencias distintos requieren un nuevo directorio. Los errores solo se
-reintentan con `--retry-errors`, conservando el gasto previo. Un JSONL roto se rechaza
-para repararlo explícitamente. Se bloquean dos procesos que escriban la misma ejecución.
+Rerunning the same command resumes pending cells. Changes to code, configuration, datasets, or
+dependencies require a new run directory. `--retry-errors` retries failed cells and preserves prior
+spending. Malformed JSONL requires explicit repair, and a run directory has a single writer.
 
-## Diseño y desarrollo
+## Design and development
 
-- [Protocolo experimental y limitaciones](docs/PROTOCOL.md)
-- [Dataset, anotaciones y revisión humana](docs/DATA.md)
-- [Métricas: definición y denominadores](docs/METRICS.md)
-- [Verificación y lo que aún no se ha probado](docs/VALIDATION.md)
+- [Experimental protocol and limitations (Spanish)](docs/PROTOCOL.md)
+- [Dataset, annotations, and human review (Spanish)](docs/DATA.md)
+- [Metric definitions and denominators (Spanish)](docs/METRICS.md)
+- [Initial validation and remaining limitations (Spanish)](docs/VALIDATION.md)
 
 ```bash
 ruff check .
 python -m unittest discover -s tests -v
-# Opcional: regenerar figuras con matplotlib
+# Optional: regenerate the audit figures.
 python -m pip install -e ".[plots]"
 python scripts/plot_audit.py
 ```
 
-La CI está configurada para Python 3.12 en Linux y Windows, sin claves ni llamadas
-facturables. Los datos descargados para nuevos experimentos, índices, claves y `runs/`
-están excluidos de Git. No hay un servidor desplegado ni analítica externa.
+CI runs on Python 3.12 on Linux and Windows without credentials or billable model calls. Local
+downloads, indexes, and new run outputs under `runs/` are excluded from Git.
 
-MIT. Material de terceros y atribución: [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+MIT. See [third-party notices](THIRD_PARTY_NOTICES.md) for attribution.
