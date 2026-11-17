@@ -1,5 +1,7 @@
 # Selector híbrido → READ
 
+[Resultados de las 72 evaluaciones en Haryana y Tripura](holdout/report.md).
+
 ## Política
 
 El selector empieza con BM25 + BGE y comprueba que las citas se hayan mostrado al modelo.
@@ -79,3 +81,12 @@ python -m read_vs_rag run --config runs/selector-tripura.json --split test --out
 Los resultados y veredictos de revisión quedan en `results.jsonl`. La carpeta
 `report/` contiene `summary.json`, el CSV por pregunta y el informe navegable.
 La demo pública de GitHub Pages reproduce los casos guardados de Gujarat.
+
+Para agregar ambas ejecuciones y repetir el diagnóstico acotado del verificador.
+
+```sh
+python studies/selector/summarize.py runs/selector-haryana-001 runs/selector-tripura-001 --output runs/selector-analysis
+python studies/selector/diagnose_review.py runs/selector-haryana-001 runs/selector-tripura-001 --output runs/selector-review-diagnostic/results.json
+```
+
+El agregador usa los resultados registrados. El diagnóstico requiere una llamada de modelo.

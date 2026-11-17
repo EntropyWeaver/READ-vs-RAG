@@ -34,7 +34,7 @@ de −11,1 a +27,8). La muestra corresponde a un informe y un modelo.
 [CSV por pregunta](studies/gujarat-volume-i/results/per_question.csv) ·
 [Reproducción](studies/gujarat-volume-i/README.md)
 
-[Segundo estudio](studies/selector/README.md) · Un selector híbrido → READ, una reproducción en Gujarat y un protocolo de evaluación en Haryana y Tripura.
+[Resultados del segundo estudio](studies/selector/holdout/report.md) · 72 evaluaciones nuevas en Haryana y Tripura. El selector y BM25 + BGE acertaron 19/24. Consulta el [método y la reproducción](studies/selector/README.md).
 
 ## Auditoría de los resultados publicados
 

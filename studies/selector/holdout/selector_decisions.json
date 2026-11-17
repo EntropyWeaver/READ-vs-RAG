@@ -1,0 +1,984 @@
+{
+  "haryana-tax-current": {
+    "decision": "hybrid",
+    "stages": [
+      {
+        "stage": "hybrid",
+        "reason": "label_not_supported",
+        "prediction": {
+          "answer": "92,008.34 crore",
+          "abstain": false,
+          "values": [
+            {
+              "value": 92008.34,
+              "unit": "crore"
+            }
+          ],
+          "citations": [
+            {
+              "doc": "haryana-vol-i.md",
+              "start": 844,
+              "end": 845
+            }
+          ]
+        },
+        "review": {
+          "accepted": true,
+          "reason": "The cited Statement 3 line for 2024-25 shows \"Total A\" as 92,008.34 crore, and the detailed section A figures (77,942.69 own tax revenue + 14,065.65 share of net proceeds) match that total.",
+          "model_calls": 1
+        },
+        "status": "ok",
+        "candidate_correct_offline": true
+      }
+    ]
+  },
+  "haryana-cash-balance": {
+    "decision": "hybrid",
+    "stages": [
+      {
+        "stage": "hybrid",
+        "reason": "period_not_supported",
+        "prediction": {
+          "answer": "1,672.20 crore",
+          "abstain": false,
+          "values": [
+            {
+              "value": 1672.2,
+              "unit": "crore"
+            }
+          ],
+          "citations": [
+            {
+              "doc": "haryana-vol-i.md",
+              "start": 726,
+              "end": 730
+            }
+          ]
+        },
+        "review": {
+          "accepted": true,
+          "reason": "The cited Annexure to Statement No. 2 shows “Total(A)- General Cash Balance-” as 1,672.20 on 31 March 2025, matching the proposal exactly.",
+          "model_calls": 1
+        },
+        "status": "ok",
+        "candidate_correct_offline": true
+      }
+    ]
+  },
+  "haryana-total-prior": {
+    "decision": "read",
+    "stages": [
+      {
+        "stage": "hybrid",
+        "reason": "subtotal_or_total",
+        "prediction": {
+          "answer": "Total Revenue Receipts for 2023-24 were 1,01,274.31 crore.",
+          "abstain": false,
+          "values": [
+            {
+              "value": 101274.31,
+              "unit": "crore"
+            }
+          ],
+          "citations": [
+            {
+              "doc": "haryana-vol-i.md",
+              "start": 2846,
+              "end": 2848
+            }
+          ]
+        },
+        "status": "ok",
+        "candidate_correct_offline": false
+      },
+      {
+        "stage": "read",
+        "reason": "label_not_supported",
+        "prediction": {
+          "answer": "Total Revenue Receipts for 2023-24 in Statement 3 were 1,01,314.84 crore.",
+          "abstain": false,
+          "values": [
+            {
+              "value": 101314.84,
+              "unit": "crore"
+            }
+          ],
+          "citations": [
+            {
+              "doc": "haryana-vol-i.md",
+              "start": 877,
+              "end": 877
+            }
+          ]
+        },
+        "review": {
+          "accepted": true,
+          "reason": "The cited Statement 3 line shows Total Revenue Receipts (A+B+C) for 2023-24 as 1,01,314.84 crore, matching the proposal.",
+          "model_calls": 1
+        },
+        "status": "ok",
+        "candidate_correct_offline": true
+      }
+    ]
+  },
+  "haryana-finance-commission": {
+    "decision": "hybrid",
+    "stages": [
+      {
+        "stage": "hybrid",
+        "reason": "label_not_supported",
+        "prediction": {
+          "answer": "Total Finance Commission Grants in 2024-25 were 2,392.53 crore.",
+          "abstain": false,
+          "values": [
+            {
+              "value": 2392.53,
+              "unit": "crore"
+            }
+          ],
+          "citations": [
+            {
+              "doc": "haryana-vol-i.md",
+              "start": 872,
+              "end": 873
+            }
+          ]
+        },
+        "review": {
+          "accepted": true,
+          "reason": "The cited Statement 3 line shows “Total- Finance Commission Grants” as 2,392.53 for 2024-25, matching the proposal exactly.",
+          "model_calls": 1
+        },
+        "status": "ok",
+        "candidate_correct_offline": true
+      }
+    ]
+  },
+  "haryana-total-current": {
+    "decision": "hybrid",
+    "stages": [
+      {
+        "stage": "hybrid",
+        "reason": "label_not_supported",
+        "prediction": {
+          "answer": "1,06,429.46 crore",
+          "abstain": false,
+          "values": [
+            {
+              "value": 106429.46,
+              "unit": "crore"
+            }
+          ],
+          "citations": [
+            {
+              "doc": "haryana-vol-i.md",
+              "start": 877,
+              "end": 879
+            }
+          ]
+        },
+        "review": {
+          "accepted": true,
+          "reason": "The cited Statement 3 line shows “C.3 Total Revenue Receipts (A+B+C)” for 2024-25 as 1,06,429.46 crore, matching the proposal.",
+          "model_calls": 1
+        },
+        "status": "ok",
+        "candidate_correct_offline": true
+      }
+    ]
+  },
+  "haryana-consolidated": {
+    "decision": "error",
+    "stages": [
+      {
+        "stage": "hybrid",
+        "reason": "relation_not_verified",
+        "prediction": {
+          "answer": "For 2024-25, Total Consolidated Fund Expenditure was 1,99,030.94 crore, comprising Revenue 1,25,849.21 crore, Capital 12,480.00 crore, and Loans and Advances 60,701.73 crore.",
+          "abstain": false,
+          "values": [
+            {
+              "value": 199030.94,
+              "unit": "crore"
+            },
+            {
+              "value": 125849.21,
+              "unit": "crore"
+            },
+            {
+              "value": 12480.0,
+              "unit": "crore"
+            },
+            {
+              "value": 60701.73,
+              "unit": "crore"
+            }
+          ],
+          "citations": [
+            {
+              "doc": "haryana-vol-i.md",
+              "start": 958,
+              "end": 960
+            }
+          ]
+        },
+        "review": {
+          "accepted": false,
+          "reason": "budget_exhausted",
+          "model_calls": 0
+        },
+        "status": "budget_exhausted",
+        "candidate_correct_offline": true
+      },
+      {
+        "stage": "read",
+        "reason": "relation_not_verified",
+        "prediction": {
+          "answer": "For 2024-25, Total Consolidated Fund Expenditure was 1,99,030.94 crore: Revenue 1,25,849.21 crore, Capital 12,480.00 crore, and Loans and Advances 60,701.73 crore.",
+          "abstain": false,
+          "values": [
+            {
+              "value": 199030.94,
+              "unit": "crore"
+            },
+            {
+              "value": 125849.21,
+              "unit": "crore"
+            },
+            {
+              "value": 12480.0,
+              "unit": "crore"
+            },
+            {
+              "value": 60701.73,
+              "unit": "crore"
+            }
+          ],
+          "citations": [
+            {
+              "doc": "haryana-vol-i.md",
+              "start": 956,
+              "end": 960
+            }
+          ]
+        },
+        "review": {
+          "accepted": false,
+          "reason": "budget_exhausted",
+          "model_calls": 0
+        },
+        "status": "budget_exhausted",
+        "candidate_correct_offline": true
+      }
+    ]
+  },
+  "haryana-wrong-state": {
+    "decision": "abstain",
+    "stages": [
+      {
+        "stage": "hybrid",
+        "reason": "candidate_abstained",
+        "prediction": {
+          "answer": "Abstain: the supplied evidence is for Haryana, not Gujarat, so Gujarat's total Revenue Receipts for 2024-25 in Statement 3 cannot be supported from this corpus.",
+          "abstain": true,
+          "values": [],
+          "citations": [
+            {
+              "doc": "haryana-vol-i.md",
+              "start": 359,
+              "end": 363
+            },
+            {
+              "doc": "haryana-vol-i.md",
+              "start": 466,
+              "end": 468
+            }
+          ]
+        },
+        "status": "ok",
+        "candidate_correct_offline": true
+      },
+      {
+        "stage": "read",
+        "reason": "candidate_abstained",
+        "prediction": {
+          "answer": "The supplied volume does not contain evidence for Gujarat's 2024-25 Statement 3 Revenue Receipts.",
+          "abstain": true,
+          "values": [],
+          "citations": [
+            {
+              "doc": "haryana-vol-i.md",
+              "start": 635,
+              "end": 643
+            }
+          ]
+        },
+        "status": "ok",
+        "candidate_correct_offline": true
+      }
+    ]
+  },
+  "haryana-cash-combined": {
+    "decision": "hybrid",
+    "stages": [
+      {
+        "stage": "hybrid",
+        "reason": "period_not_supported",
+        "prediction": {
+          "answer": "6,057.28 crore",
+          "abstain": false,
+          "values": [
+            {
+              "value": 6057.28,
+              "unit": "crore"
+            }
+          ],
+          "citations": [
+            {
+              "doc": "haryana-vol-i.md",
+              "start": 728,
+              "end": 733
+            }
+          ]
+        },
+        "review": {
+          "accepted": true,
+          "reason": "The cited table for the Annexure to Statement No. 2 shows on line 733: “Total (A) and (B)” = 6,057.28 for As on 31 March 2025, matching the proposal.",
+          "model_calls": 1
+        },
+        "status": "ok",
+        "candidate_correct_offline": true
+      }
+    ]
+  },
+  "haryana-schemes": {
+    "decision": "hybrid",
+    "stages": [
+      {
+        "stage": "hybrid",
+        "reason": "label_not_supported",
+        "prediction": {
+          "answer": "2,768.55 crore",
+          "abstain": false,
+          "values": [
+            {
+              "value": 2768.55,
+              "unit": "crore"
+            }
+          ],
+          "citations": [
+            {
+              "doc": "haryana-vol-i.md",
+              "start": 871,
+              "end": 871
+            }
+          ]
+        },
+        "review": {
+          "accepted": true,
+          "reason": "The cited Statement 3 row for C.1 shows “Total- Grants for Centrally Sponsored Schemes” with 2023-24 actuals of 2,768.55 crore, matching the proposal.",
+          "model_calls": 1
+        },
+        "status": "ok",
+        "candidate_correct_offline": true
+      }
+    ]
+  },
+  "haryana-receipts-change": {
+    "decision": "read",
+    "stages": [
+      {
+        "stage": "hybrid",
+        "reason": "subtotal_or_total",
+        "prediction": {
+          "answer": "Revenue Receipts increased by 2,717.87 crore.",
+          "abstain": false,
+          "values": [
+            {
+              "value": 2717.87,
+              "unit": "crore"
+            }
+          ],
+          "citations": [
+            {
+              "doc": "haryana-vol-i.md",
+              "start": 2834,
+              "end": 2846
+            }
+          ]
+        },
+        "status": "ok",
+        "candidate_correct_offline": false
+      },
+      {
+        "stage": "read",
+        "reason": "relation_not_verified",
+        "prediction": {
+          "answer": "Revenue Receipts increased by 7,539.02 crore.",
+          "abstain": false,
+          "values": [
+            {
+              "value": 7539.02,
+              "unit": "crore"
+            }
+          ],
+          "citations": [
+            {
+              "doc": "haryana-vol-i.md",
+              "start": 640,
+              "end": 643
+            }
+          ]
+        },
+        "review": {
+          "accepted": true,
+          "reason": "Statement 3 shows Revenue Receipts of 19,419.88 crore for 2024-25 and 11,880.86 crore for 2023-24; the increase is 7,539.02 crore, matching the proposal.",
+          "model_calls": 1
+        },
+        "status": "ok",
+        "candidate_correct_offline": false
+      }
+    ]
+  },
+  "haryana-other-transfers": {
+    "decision": "hybrid",
+    "stages": [
+      {
+        "stage": "hybrid",
+        "reason": "label_not_supported",
+        "prediction": {
+          "answer": "1,638.37 crore",
+          "abstain": false,
+          "values": [
+            {
+              "value": 1638.37,
+              "unit": "crore"
+            }
+          ],
+          "citations": [
+            {
+              "doc": "haryana-vol-i.md",
+              "start": 874,
+              "end": 875
+            }
+          ]
+        },
+        "review": {
+          "accepted": true,
+          "reason": "The cited Statement 3 line for C.3 shows the 2024-25 total Other Transfer/Grants to States/Union Territories with Legislatures as 1,638.37 crore.",
+          "model_calls": 1
+        },
+        "status": "ok",
+        "candidate_correct_offline": true
+      }
+    ]
+  },
+  "haryana-future-actuals": {
+    "decision": "abstain",
+    "stages": [
+      {
+        "stage": "hybrid",
+        "reason": "candidate_abstained",
+        "prediction": {
+          "answer": "The supplied Statement 3 excerpt shows actuals for 2024-25 and 2023-24 only; it does not show a 2025-26 total Finance Commission Grants figure.",
+          "abstain": true,
+          "values": [],
+          "citations": [
+            {
+              "doc": "haryana-vol-i.md",
+              "start": 867,
+              "end": 873
+            }
+          ]
+        },
+        "status": "ok",
+        "candidate_correct_offline": true
+      },
+      {
+        "stage": "read",
+        "reason": "label_not_supported",
+        "prediction": {
+          "answer": "2,392.53 crore",
+          "abstain": false,
+          "values": [
+            {
+              "value": 2392.53,
+              "unit": "crore"
+            }
+          ],
+          "citations": [
+            {
+              "doc": "haryana-vol-i.md",
+              "start": 873,
+              "end": 873
+            }
+          ]
+        },
+        "review": {
+          "accepted": false,
+          "reason": "The cited Statement 3 line shows Finance Commission Grants totals for 2024-25 and 2023-24, not 2025-26, so the proposed year is not supported by the excerpt.",
+          "model_calls": 1
+        },
+        "status": "ok",
+        "candidate_correct_offline": false
+      }
+    ]
+  },
+  "tripura-total-prior": {
+    "decision": "hybrid",
+    "stages": [
+      {
+        "stage": "hybrid",
+        "reason": "cited_amount_year_label_unit",
+        "prediction": {
+          "answer": "Total Revenue Receipts for 2023-24 in Statement 3 were 20,538.00 crore (the note says the actual figure was 20,538.02 crore).",
+          "abstain": false,
+          "values": [
+            {
+              "value": 20538.0,
+              "unit": "crore"
+            }
+          ],
+          "citations": [
+            {
+              "doc": "tripura-vol-i.md",
+              "start": 1168,
+              "end": 1171
+            }
+          ]
+        },
+        "status": "ok",
+        "candidate_correct_offline": true
+      }
+    ]
+  },
+  "tripura-disaster-grants": {
+    "decision": "hybrid",
+    "stages": [
+      {
+        "stage": "hybrid",
+        "reason": "label_not_supported",
+        "prediction": {
+          "answer": "₹7.10 crore",
+          "abstain": false,
+          "values": [
+            {
+              "value": 7.1,
+              "unit": "crore"
+            }
+          ],
+          "citations": [
+            {
+              "doc": "tripura-vol-i.md",
+              "start": 1151,
+              "end": 1156
+            }
+          ]
+        },
+        "review": {
+          "accepted": true,
+          "reason": "The cited Statement 3 table shows columns for 2024-25 and 2023-24, and the row for “Grants-in-aid for State Disaster Mitigation Fund” lists 7.10 in the 2023-24 column.",
+          "model_calls": 1
+        },
+        "status": "ok",
+        "candidate_correct_offline": true
+      }
+    ]
+  },
+  "tripura-excise-current": {
+    "decision": "hybrid",
+    "stages": [
+      {
+        "stage": "hybrid",
+        "reason": "label_not_supported",
+        "prediction": {
+          "answer": "State Excise was 484.09 crore in Statement 3 for 2024-25.",
+          "abstain": false,
+          "values": [
+            {
+              "value": 484.09,
+              "unit": "crore"
+            }
+          ],
+          "citations": [
+            {
+              "doc": "tripura-vol-i.md",
+              "start": 1048,
+              "end": 1053
+            }
+          ]
+        },
+        "review": {
+          "accepted": true,
+          "reason": "The cited Statement 3 table shows State Excise at 484.09 for 2024-25.",
+          "model_calls": 1
+        },
+        "status": "ok",
+        "candidate_correct_offline": true
+      }
+    ]
+  },
+  "tripura-surplus": {
+    "decision": "hybrid",
+    "stages": [
+      {
+        "stage": "hybrid",
+        "reason": "label_not_supported",
+        "prediction": {
+          "answer": "Statement 2 reports a Revenue Surplus of 1,585.01 crore for 2024-25.",
+          "abstain": false,
+          "values": [
+            {
+              "value": 1585.01,
+              "unit": "crore"
+            }
+          ],
+          "citations": [
+            {
+              "doc": "tripura-vol-i.md",
+              "start": 811,
+              "end": 811
+            }
+          ]
+        },
+        "review": {
+          "accepted": true,
+          "reason": "Statement 2 shows 2024-25 Revenue Receipts of 21,103.62 crore and Revenue Expenditure of 19,518.61 crore; the difference is 1,585.01 crore.",
+          "model_calls": 1
+        },
+        "status": "ok",
+        "candidate_correct_offline": true
+      }
+    ]
+  },
+  "tripura-total-current": {
+    "decision": "hybrid",
+    "stages": [
+      {
+        "stage": "hybrid",
+        "reason": "label_not_supported",
+        "prediction": {
+          "answer": "21,103.62 crore",
+          "abstain": false,
+          "values": [
+            {
+              "value": 21103.62,
+              "unit": "crore"
+            }
+          ],
+          "citations": [
+            {
+              "doc": "tripura-vol-i.md",
+              "start": 810,
+              "end": 811
+            }
+          ]
+        },
+        "review": {
+          "accepted": true,
+          "reason": "The cited Statement 3 line shows Revenue Receipts for 2024-25 as 21,103.62 crore.",
+          "model_calls": 1
+        },
+        "status": "ok",
+        "candidate_correct_offline": false
+      }
+    ]
+  },
+  "tripura-consolidated": {
+    "decision": "read",
+    "stages": [
+      {
+        "stage": "hybrid",
+        "reason": "candidate_abstained",
+        "prediction": {
+          "answer": "Abstain: the supplied evidence shows Statement 4A and some capital/loans figures, but it does not provide the full 2024-25 Revenue component or the overall total Consolidated Fund Expenditure needed to answer precisely.",
+          "abstain": true,
+          "values": [],
+          "citations": [
+            {
+              "doc": "tripura-vol-i.md",
+              "start": 1208,
+              "end": 1211
+            },
+            {
+              "doc": "tripura-vol-i.md",
+              "start": 2655,
+              "end": 2657
+            }
+          ]
+        },
+        "status": "ok",
+        "candidate_correct_offline": false
+      },
+      {
+        "stage": "read",
+        "reason": "relation_not_verified",
+        "prediction": {
+          "answer": "For 2024-25, Statement 4A shows total Consolidated Fund Expenditure of 24,761.18 crore, made up of Revenue Expenditure of 19,518.62 crore, Capital Expenditure of 4,709.24 crore, and Loans and Advances of 533.32 crore.",
+          "abstain": false,
+          "values": [
+            {
+              "value": 24761.18,
+              "unit": "crore"
+            },
+            {
+              "value": 19518.62,
+              "unit": "crore"
+            },
+            {
+              "value": 4709.24,
+              "unit": "crore"
+            },
+            {
+              "value": 533.32,
+              "unit": "crore"
+            }
+          ],
+          "citations": [
+            {
+              "doc": "tripura-vol-i.md",
+              "start": 1362,
+              "end": 1365
+            },
+            {
+              "doc": "tripura-vol-i.md",
+              "start": 1351,
+              "end": 1354
+            }
+          ]
+        },
+        "review": {
+          "accepted": true,
+          "reason": "The cited Statement 4A row for 2024-25 shows Total Consolidated Fund Expenditure of 24,761.18 crore, with Revenue 19,518.62 crore, Capital 4,709.24 crore, and Loans and Advances 533.32 crore. The figures and units match the proposal.",
+          "model_calls": 1
+        },
+        "status": "ok",
+        "candidate_correct_offline": true
+      }
+    ]
+  },
+  "tripura-wrong-state": {
+    "decision": "abstain",
+    "stages": [
+      {
+        "stage": "hybrid",
+        "reason": "candidate_abstained",
+        "prediction": {
+          "answer": "Abstain: the supplied corpus is for Tripura, not Haryana, so Haryana's Statement 3 revenue receipts for 2024-25 cannot be supported from this evidence.",
+          "abstain": true,
+          "values": [],
+          "citations": [
+            {
+              "doc": "tripura-vol-i.md",
+              "start": 5,
+              "end": 5
+            },
+            {
+              "doc": "tripura-vol-i.md",
+              "start": 37,
+              "end": 37
+            },
+            {
+              "doc": "tripura-vol-i.md",
+              "start": 811,
+              "end": 811
+            }
+          ]
+        },
+        "status": "ok",
+        "candidate_correct_offline": true
+      },
+      {
+        "stage": "read",
+        "reason": "candidate_abstained",
+        "prediction": {
+          "answer": "The supplied volume does not contain Haryana data or a Statement 3 entry for Haryana, so the requested 2024-25 total Revenue Receipts cannot be supported from the evidence provided.",
+          "abstain": true,
+          "values": [],
+          "citations": [
+            {
+              "doc": "tripura-vol-i.md",
+              "start": 37,
+              "end": 37
+            }
+          ]
+        },
+        "status": "ok",
+        "candidate_correct_offline": true
+      }
+    ]
+  },
+  "tripura-receipts-change": {
+    "decision": "hybrid",
+    "stages": [
+      {
+        "stage": "hybrid",
+        "reason": "relation_not_verified",
+        "prediction": {
+          "answer": "Total Revenue Receipts increased by 565.60 crore between 2023-24 and 2024-25.",
+          "abstain": false,
+          "values": [
+            {
+              "value": 565.6,
+              "unit": "crore"
+            }
+          ],
+          "citations": [
+            {
+              "doc": "tripura-vol-i.md",
+              "start": 811,
+              "end": 811
+            }
+          ]
+        },
+        "review": {
+          "accepted": true,
+          "reason": "The cited Statement 3 row shows Revenue Receipts of 21,103.62 crore for 2024-25 and 20,538.02 crore for 2023-24; the difference is 565.60 crore, matching the proposal.",
+          "model_calls": 1
+        },
+        "status": "ok",
+        "candidate_correct_offline": false
+      }
+    ]
+  },
+  "tripura-schemes": {
+    "decision": "hybrid",
+    "stages": [
+      {
+        "stage": "hybrid",
+        "reason": "cited_amount_year_label_unit",
+        "prediction": {
+          "answer": "4,078.99 crore",
+          "abstain": false,
+          "values": [
+            {
+              "value": 4078.99,
+              "unit": "crore"
+            }
+          ],
+          "citations": [
+            {
+              "doc": "tripura-vol-i.md",
+              "start": 1145,
+              "end": 1150
+            }
+          ]
+        },
+        "status": "ok",
+        "candidate_correct_offline": true
+      }
+    ]
+  },
+  "tripura-land-prior": {
+    "decision": "hybrid",
+    "stages": [
+      {
+        "stage": "hybrid",
+        "reason": "label_not_supported",
+        "prediction": {
+          "answer": "22.24 crore",
+          "abstain": false,
+          "values": [
+            {
+              "value": 22.24,
+              "unit": "crore"
+            }
+          ],
+          "citations": [
+            {
+              "doc": "tripura-vol-i.md",
+              "start": 1048,
+              "end": 1050
+            }
+          ]
+        },
+        "review": {
+          "accepted": true,
+          "reason": "The cited Statement 3 table shows columns for 2024-25 and 2023-24, and the Land Revenue row lists 12.79 and 22.24 respectively, so 2023-24 Land Revenue is 22.24 crore.",
+          "model_calls": 1
+        },
+        "status": "ok",
+        "candidate_correct_offline": true
+      }
+    ]
+  },
+  "tripura-future-actuals": {
+    "decision": "abstain",
+    "stages": [
+      {
+        "stage": "hybrid",
+        "reason": "candidate_abstained",
+        "prediction": {
+          "answer": "I can’t support the 2025-26 State Excise receipts from the provided corpus; only 2024-25 Statement 3 excerpts are present, and no State Excise figure is shown.",
+          "abstain": true,
+          "values": [],
+          "citations": [
+            {
+              "doc": "tripura-vol-i.md",
+              "start": 1140,
+              "end": 1157
+            },
+            {
+              "doc": "tripura-vol-i.md",
+              "start": 37,
+              "end": 37
+            }
+          ]
+        },
+        "status": "ok",
+        "candidate_correct_offline": true
+      },
+      {
+        "stage": "read",
+        "reason": "candidate_abstained",
+        "prediction": {
+          "answer": "The supplied corpus does not contain a 2025-26 Statement 3 figure for State Excise; it only shows 2024-25 actuals.",
+          "abstain": true,
+          "values": [],
+          "citations": [
+            {
+              "doc": "tripura-vol-i.md",
+              "start": 1040,
+              "end": 1053
+            }
+          ]
+        },
+        "status": "ok",
+        "candidate_correct_offline": true
+      }
+    ]
+  },
+  "tripura-interest-current": {
+    "decision": "hybrid",
+    "stages": [
+      {
+        "stage": "hybrid",
+        "reason": "label_not_supported",
+        "prediction": {
+          "answer": "737.73 crore",
+          "abstain": false,
+          "values": [
+            {
+              "value": 737.73,
+              "unit": "crore"
+            }
+          ],
+          "citations": [
+            {
+              "doc": "tripura-vol-i.md",
+              "start": 2204,
+              "end": 2208
+            }
+          ]
+        },
+        "review": {
+          "accepted": true,
+          "reason": "The cited text shows in 2024-25 under deduct/interest received that Total (iii) is 737.73 crore, which matches the proposed answer.",
+          "model_calls": 1
+        },
+        "status": "ok",
+        "candidate_correct_offline": false
+      }
+    ]
+  }
+}

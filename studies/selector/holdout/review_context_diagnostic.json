@@ -1,0 +1,16 @@
+{
+  "mode": "exploratory_compact_context_diagnostic",
+  "cases": [
+    {
+      "question_id": "haryana-consolidated",
+      "replayed_stage": "hybrid",
+      "accepted": true,
+      "reason": "The cited table row for Total Consolidated Fund Expenditure shows Revenue 1,25,849.21, Capital 12,480.00, Loans and Advances 60,701.73, and Total 1,99,030.94(a) for 2024-25; the footnote only notes a rounding difference.",
+      "status": "ok",
+      "input_tokens": 1384,
+      "cost_usd": 0.001704
+    }
+  ],
+  "actual_or_reserved_usd": 0.001704,
+  "note": "Preserves the original cited text and model. It changes the nearby context only. The registered benchmark results are untouched."
+}

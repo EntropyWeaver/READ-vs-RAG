@@ -32,7 +32,7 @@ points above the hybrid (95% paired CI: −11.1 to +27.8). The study covers one 
 [Per-question CSV](studies/gujarat-volume-i/results/per_question.csv) ·
 [Reproduction guide (Spanish)](studies/gujarat-volume-i/README.md)
 
-[Follow-up study](studies/selector/README.md) · A hybrid-to-READ selector, a replay on Gujarat and a held-out protocol for Haryana and Tripura.
+[Follow-up results](studies/selector/holdout/report.md) · 72 new evaluations on Haryana and Tripura. The selector and BM25 + BGE each scored 19/24. See the [method and replay](studies/selector/README.md).
 
 ## Audit of the published results
 
