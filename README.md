@@ -67,6 +67,9 @@ no mide rendimiento generativo de READ. `plan` no llama APIs ni descarga modelos
 
 ## Nuevas ejecuciones
 
+El [estudio con llamadas reales a OpenAI](studies/gujarat-volume-i/results/report.md)
+compara seis variantes sobre 36 preguntas del Volumen I de las cuentas de Gujarat.
+
 El runner admite OpenAI y Gemini. Para OpenAI, el piloto fija GPT-5.4 mini y usa
 el mismo modelo para READ y BM25. La API cuenta los tokens de entrada antes de cada
 generación y devuelve el uso real para calcular el coste. El adaptador solicita

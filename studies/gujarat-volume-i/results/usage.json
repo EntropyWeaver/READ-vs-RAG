@@ -1,0 +1,67 @@
+{
+  "scope": "study, fixture pilot, and context calibration with metered requests",
+  "per_run": {
+    "gujarat-controls-001": {
+      "settle": {
+        "calls": 123,
+        "usd": 0.56437005
+      },
+      "reserve": {
+        "calls": 0,
+        "usd": 0
+      }
+    },
+    "gujarat-dense-002": {
+      "settle": {
+        "calls": 36,
+        "usd": 0.349734
+      },
+      "reserve": {
+        "calls": 0,
+        "usd": 0
+      }
+    },
+    "gujarat-dense-short-001": {
+      "settle": {
+        "calls": 36,
+        "usd": 0.355287
+      },
+      "reserve": {
+        "calls": 0,
+        "usd": 0
+      }
+    },
+    "gujarat-read-bm25-001": {
+      "settle": {
+        "calls": 36,
+        "usd": 0.0306738
+      },
+      "reserve": {
+        "calls": 7,
+        "usd": 0.07635225
+      }
+    },
+    "gujarat-read-bm25-002": {
+      "settle": {
+        "calls": 230,
+        "usd": 0.60727875
+      },
+      "reserve": {
+        "calls": 0,
+        "usd": 0
+      }
+    },
+    "openai-live-pilot-002": {
+      "settle": {
+        "calls": 16,
+        "usd": 0.015261
+      },
+      "reserve": {
+        "calls": 1,
+        "usd": 0.01058625
+      }
+    }
+  },
+  "settled_usd": 1.9226045999999999,
+  "unresolved_reserve_usd": 0.0869385
+}

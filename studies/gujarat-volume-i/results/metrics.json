@@ -1,0 +1,1245 @@
+{
+  "model": "gpt-5.4-mini-2026-03-17",
+  "workers_per_run": 8,
+  "code_hash": "38f459603cd28d48f237d8c9ce65dd685469e7b2264e189905548db4444c03da",
+  "dependencies": {
+    "sentence-transformers": "3.4.1",
+    "torch": "2.8.0+cpu",
+    "numpy": "2.5.5",
+    "transformers": "4.57.6",
+    "tokenizers": "0.22.2"
+  },
+  "corpus": {
+    "gujarat-vol-i.md": "b8e36d2f6a6ddcf459bb021416d4848d35745126ec3eec8c86f45e28e222a0eb"
+  },
+  "n_questions": 36,
+  "systems": {
+    "read": {
+      "expected": 36,
+      "completed": 36,
+      "statuses": {
+        "ok": 33,
+        "invalid_output": 3
+      },
+      "attempt_statuses": {
+        "ok": 33,
+        "invalid_output": 3
+      },
+      "accuracy": {
+        "n": 36,
+        "mean": 0.75,
+        "low": 0.5892954623327166,
+        "high": 0.8624952233700517
+      },
+      "correct": 27,
+      "accuracy_bounds_including_missing": [
+        0.75,
+        0.75
+      ],
+      "latency_s_successful_cells": {
+        "n": 33,
+        "mean": 72.0036653006365,
+        "p50": 68.49532400499993,
+        "p95": 102.8604231907997,
+        "p99": 106.1508918701202,
+        "total": 2376.1209549210043
+      },
+      "cost_usd_latest_cells": {
+        "n": 36,
+        "mean": 0.0072319875,
+        "p50": 0.0073362,
+        "p95": 0.011902687500000002,
+        "p99": 0.012706012499999999,
+        "total": 0.26035155
+      },
+      "model_calls": {
+        "n": 36,
+        "mean": 5.388888888888889,
+        "p50": 5.0,
+        "p95": 7.0,
+        "p99": 7.0,
+        "total": 194
+      },
+      "input_tokens": {
+        "n": 36,
+        "mean": 9951.583333333334,
+        "p50": 7157.5,
+        "p95": 19307.5,
+        "p99": 22326.35,
+        "total": 358257
+      },
+      "output_tokens": {
+        "n": 36,
+        "mean": 253.86111111111111,
+        "p50": 251.0,
+        "p95": 366.25,
+        "p99": 409.09999999999997,
+        "total": 9139
+      },
+      "reasoning_tokens": {
+        "n": 36,
+        "mean": 229.58333333333334,
+        "p50": 187.5,
+        "p95": 568.75,
+        "p99": 595.8499999999999,
+        "total": 8265
+      },
+      "category_accuracy": {
+        "aggregation": {
+          "n": 4,
+          "mean": 1.0,
+          "low": 0.5101091635454027,
+          "high": 1.0
+        },
+        "arithmetic": {
+          "n": 9,
+          "mean": 0.6666666666666666,
+          "low": 0.3542021355803963,
+          "high": 0.879416181613089
+        },
+        "lookup": {
+          "n": 20,
+          "mean": 0.8,
+          "low": 0.5839825677481064,
+          "high": 0.919342337420202
+        },
+        "unanswerable": {
+          "n": 3,
+          "mean": 0.3333333333333333,
+          "low": 0.06149194472039621,
+          "high": 0.7923403991979522
+        }
+      },
+      "line_recall": {
+        "n": 31,
+        "mean": 0.3939420122887865,
+        "p50": 0.3,
+        "p95": 1.0,
+        "p99": 1.0,
+        "total": 12.21220238095238
+      },
+      "all_gold_lines_seen": {
+        "n": 31,
+        "mean": 0.16129032258064516,
+        "p50": 0.0,
+        "p95": 1.0,
+        "p99": 1.0,
+        "total": 5
+      },
+      "has_citation": {
+        "n": 33,
+        "mean": 1,
+        "p50": 1.0,
+        "p95": 1.0,
+        "p99": 1.0,
+        "total": 33
+      },
+      "citation_validity": {
+        "n": 33,
+        "mean": 1.0,
+        "p50": 1.0,
+        "p95": 1.0,
+        "p99": 1.0,
+        "total": 33.0
+      },
+      "citation_seen_fraction": {
+        "n": 33,
+        "mean": 1.0,
+        "p50": 1.0,
+        "p95": 1.0,
+        "p99": 1.0,
+        "total": 33.0
+      },
+      "citation_gold_overlap_precision": {
+        "n": 33,
+        "mean": 0.696969696969697,
+        "p50": 1.0,
+        "p95": 1.0,
+        "p99": 1.0,
+        "total": 23.0
+      },
+      "ndcg_at_k": {
+        "n": 0,
+        "mean": null,
+        "p50": null,
+        "p95": null,
+        "p99": null,
+        "total": null
+      },
+      "reciprocal_rank": {
+        "n": 0,
+        "mean": null,
+        "p50": null,
+        "p95": null,
+        "p99": null,
+        "total": null
+      },
+      "abstention_answerable": {
+        "n": 31,
+        "mean": 0,
+        "p50": 0.0,
+        "p95": 0.0,
+        "p99": 0.0,
+        "total": 0
+      },
+      "abstention_unanswerable": {
+        "n": 2,
+        "mean": 0.5,
+        "p50": 0.5,
+        "p95": 0.95,
+        "p99": 0.99,
+        "total": 1
+      }
+    },
+    "bm25": {
+      "expected": 36,
+      "completed": 36,
+      "statuses": {
+        "ok": 36
+      },
+      "attempt_statuses": {
+        "ok": 36
+      },
+      "accuracy": {
+        "n": 36,
+        "mean": 0.5833333333333334,
+        "low": 0.4220025157487166,
+        "high": 0.7285943794855394
+      },
+      "correct": 21,
+      "accuracy_bounds_including_missing": [
+        0.5833333333333334,
+        0.5833333333333334
+      ],
+      "latency_s_successful_cells": {
+        "n": 36,
+        "mean": 14.137102235666614,
+        "p50": 13.03668855449996,
+        "p95": 18.25033263625005,
+        "p99": 22.79034553925034,
+        "total": 508.9356804839981
+      },
+      "cost_usd_latest_cells": {
+        "n": 36,
+        "mean": 0.009636866666666667,
+        "p50": 0.009487125,
+        "p95": 0.010591875,
+        "p99": 0.011270174999999999,
+        "total": 0.3469272
+      },
+      "model_calls": {
+        "n": 36,
+        "mean": 1,
+        "p50": 1.0,
+        "p95": 1.0,
+        "p99": 1.0,
+        "total": 36
+      },
+      "input_tokens": {
+        "n": 36,
+        "mean": 11498.388888888889,
+        "p50": 11521.5,
+        "p95": 11916.25,
+        "p99": 12143.1,
+        "total": 413942
+      },
+      "output_tokens": {
+        "n": 36,
+        "mean": 80.16666666666667,
+        "p50": 79.0,
+        "p95": 101.25,
+        "p99": 125.39999999999995,
+        "total": 2886
+      },
+      "reasoning_tokens": {
+        "n": 36,
+        "mean": 154.02777777777777,
+        "p50": 112.5,
+        "p95": 314.5,
+        "p99": 511.64999999999986,
+        "total": 5545
+      },
+      "category_accuracy": {
+        "aggregation": {
+          "n": 4,
+          "mean": 0.5,
+          "low": 0.15003898915214947,
+          "high": 0.8499610108478506
+        },
+        "arithmetic": {
+          "n": 9,
+          "mean": 0.4444444444444444,
+          "low": 0.18877852109766452,
+          "high": 0.733348706504507
+        },
+        "lookup": {
+          "n": 20,
+          "mean": 0.6,
+          "low": 0.3865815007622531,
+          "high": 0.781193467627183
+        },
+        "unanswerable": {
+          "n": 3,
+          "mean": 1.0,
+          "low": 0.4385029682449546,
+          "high": 1.0
+        }
+      },
+      "line_recall": {
+        "n": 33,
+        "mean": 0.231807523284796,
+        "p50": 0.1,
+        "p95": 1.0,
+        "p99": 1.0,
+        "total": 7.649648268398268
+      },
+      "all_gold_lines_seen": {
+        "n": 33,
+        "mean": 0.09090909090909091,
+        "p50": 0.0,
+        "p95": 1.0,
+        "p99": 1.0,
+        "total": 3
+      },
+      "has_citation": {
+        "n": 36,
+        "mean": 1,
+        "p50": 1.0,
+        "p95": 1.0,
+        "p99": 1.0,
+        "total": 36
+      },
+      "citation_validity": {
+        "n": 36,
+        "mean": 1.0,
+        "p50": 1.0,
+        "p95": 1.0,
+        "p99": 1.0,
+        "total": 36.0
+      },
+      "citation_seen_fraction": {
+        "n": 36,
+        "mean": 0.9861111111111112,
+        "p50": 1.0,
+        "p95": 1.0,
+        "p99": 1.0,
+        "total": 35.5
+      },
+      "citation_gold_overlap_precision": {
+        "n": 36,
+        "mean": 0.5277777777777778,
+        "p50": 0.75,
+        "p95": 1.0,
+        "p99": 1.0,
+        "total": 19.0
+      },
+      "ndcg_at_k": {
+        "n": 33,
+        "mean": 0.31137069924483596,
+        "p50": 0.23719771276929622,
+        "p95": 0.7310237541324465,
+        "p99": 0.9460974814667591,
+        "total": 10.275233075079587
+      },
+      "reciprocal_rank": {
+        "n": 33,
+        "mean": 0.4321067821067821,
+        "p50": 0.25,
+        "p95": 1.0,
+        "p99": 1.0,
+        "total": 14.25952380952381
+      },
+      "abstention_answerable": {
+        "n": 33,
+        "mean": 0.3333333333333333,
+        "p50": 0.0,
+        "p95": 1.0,
+        "p99": 1.0,
+        "total": 11
+      },
+      "abstention_unanswerable": {
+        "n": 3,
+        "mean": 1,
+        "p50": 1.0,
+        "p95": 1.0,
+        "p99": 1.0,
+        "total": 3
+      }
+    },
+    "dense": {
+      "expected": 36,
+      "completed": 36,
+      "statuses": {
+        "ok": 36
+      },
+      "attempt_statuses": {
+        "ok": 36
+      },
+      "accuracy": {
+        "n": 36,
+        "mean": 0.5,
+        "low": 0.34474325409626827,
+        "high": 0.6552567459037317
+      },
+      "correct": 18,
+      "accuracy_bounds_including_missing": [
+        0.5,
+        0.5
+      ],
+      "latency_s_successful_cells": {
+        "n": 36,
+        "mean": 13.06620688416673,
+        "p50": 13.204193510500318,
+        "p95": 14.6496389202498,
+        "p99": 14.907513080800163,
+        "total": 470.3834478300023
+      },
+      "cost_usd_latest_cells": {
+        "n": 36,
+        "mean": 0.009714833333333334,
+        "p50": 0.009696375,
+        "p95": 0.010446562500000001,
+        "p99": 0.0106443375,
+        "total": 0.349734
+      },
+      "model_calls": {
+        "n": 36,
+        "mean": 1,
+        "p50": 1.0,
+        "p95": 1.0,
+        "p99": 1.0,
+        "total": 36
+      },
+      "input_tokens": {
+        "n": 36,
+        "mean": 11524.111111111111,
+        "p50": 11520.0,
+        "p95": 11895.5,
+        "p99": 12253.0,
+        "total": 414868
+      },
+      "output_tokens": {
+        "n": 36,
+        "mean": 81.52777777777777,
+        "p50": 80.0,
+        "p95": 110.0,
+        "p99": 119.89999999999999,
+        "total": 2935
+      },
+      "reasoning_tokens": {
+        "n": 36,
+        "mean": 156.63888888888889,
+        "p50": 142.5,
+        "p95": 311.5,
+        "p99": 382.9499999999998,
+        "total": 5639
+      },
+      "category_accuracy": {
+        "aggregation": {
+          "n": 4,
+          "mean": 0.5,
+          "low": 0.15003898915214947,
+          "high": 0.8499610108478506
+        },
+        "arithmetic": {
+          "n": 9,
+          "mean": 0.3333333333333333,
+          "low": 0.1205838183869109,
+          "high": 0.6457978644196036
+        },
+        "lookup": {
+          "n": 20,
+          "mean": 0.5,
+          "low": 0.2992980081982123,
+          "high": 0.7007019918017877
+        },
+        "unanswerable": {
+          "n": 3,
+          "mean": 1.0,
+          "low": 0.4385029682449546,
+          "high": 1.0
+        }
+      },
+      "line_recall": {
+        "n": 33,
+        "mean": 0.22755148891512528,
+        "p50": 0.06666666666666667,
+        "p95": 1.0,
+        "p99": 1.0,
+        "total": 7.509199134199134
+      },
+      "all_gold_lines_seen": {
+        "n": 33,
+        "mean": 0.12121212121212122,
+        "p50": 0.0,
+        "p95": 1.0,
+        "p99": 1.0,
+        "total": 4
+      },
+      "has_citation": {
+        "n": 36,
+        "mean": 0.9722222222222222,
+        "p50": 1.0,
+        "p95": 1.0,
+        "p99": 1.0,
+        "total": 35
+      },
+      "citation_validity": {
+        "n": 35,
+        "mean": 1.0,
+        "p50": 1.0,
+        "p95": 1.0,
+        "p99": 1.0,
+        "total": 35.0
+      },
+      "citation_seen_fraction": {
+        "n": 35,
+        "mean": 1.0,
+        "p50": 1.0,
+        "p95": 1.0,
+        "p99": 1.0,
+        "total": 35.0
+      },
+      "citation_gold_overlap_precision": {
+        "n": 35,
+        "mean": 0.3952380952380952,
+        "p50": 0.0,
+        "p95": 1.0,
+        "p99": 1.0,
+        "total": 13.833333333333334
+      },
+      "ndcg_at_k": {
+        "n": 33,
+        "mean": 0.2729851522515977,
+        "p50": 0.23463936301137822,
+        "p95": 0.8608196695450034,
+        "p99": 0.969509513435864,
+        "total": 9.008510024302725
+      },
+      "reciprocal_rank": {
+        "n": 33,
+        "mean": 0.36717171717171715,
+        "p50": 0.2,
+        "p95": 1.0,
+        "p99": 1.0,
+        "total": 12.116666666666667
+      },
+      "abstention_answerable": {
+        "n": 33,
+        "mean": 0.30303030303030304,
+        "p50": 0.0,
+        "p95": 1.0,
+        "p99": 1.0,
+        "total": 10
+      },
+      "abstention_unanswerable": {
+        "n": 3,
+        "mean": 1,
+        "p50": 1.0,
+        "p95": 1.0,
+        "p99": 1.0,
+        "total": 3
+      }
+    },
+    "dense_short": {
+      "expected": 36,
+      "completed": 36,
+      "statuses": {
+        "ok": 36
+      },
+      "attempt_statuses": {
+        "ok": 36
+      },
+      "accuracy": {
+        "n": 36,
+        "mean": 0.3888888888888889,
+        "low": 0.24784873065371,
+        "high": 0.5513554090339485
+      },
+      "correct": 14,
+      "accuracy_bounds_including_missing": [
+        0.3888888888888889,
+        0.3888888888888889
+      ],
+      "latency_s_successful_cells": {
+        "n": 36,
+        "mean": 14.099698424972253,
+        "p50": 13.992900451999958,
+        "p95": 16.40464298249981,
+        "p99": 18.04459456434997,
+        "total": 507.5891432990011
+      },
+      "cost_usd_latest_cells": {
+        "n": 36,
+        "mean": 0.009869083333333334,
+        "p50": 0.009700875,
+        "p95": 0.01096275,
+        "p99": 0.012934162499999997,
+        "total": 0.355287
+      },
+      "model_calls": {
+        "n": 36,
+        "mean": 1,
+        "p50": 1.0,
+        "p95": 1.0,
+        "p99": 1.0,
+        "total": 36
+      },
+      "input_tokens": {
+        "n": 36,
+        "mean": 11408.777777777777,
+        "p50": 11411.5,
+        "p95": 11769.5,
+        "p99": 11965.55,
+        "total": 410716
+      },
+      "output_tokens": {
+        "n": 36,
+        "mean": 82.94444444444444,
+        "p50": 78.5,
+        "p95": 112.0,
+        "p99": 151.69999999999993,
+        "total": 2986
+      },
+      "reasoning_tokens": {
+        "n": 36,
+        "mean": 208.72222222222223,
+        "p50": 151.0,
+        "p95": 485.75,
+        "p99": 899.7499999999994,
+        "total": 7514
+      },
+      "category_accuracy": {
+        "aggregation": {
+          "n": 4,
+          "mean": 0.25,
+          "low": 0.04558726080970055,
+          "high": 0.6993581574175981
+        },
+        "arithmetic": {
+          "n": 9,
+          "mean": 0.3333333333333333,
+          "low": 0.1205838183869109,
+          "high": 0.6457978644196036
+        },
+        "lookup": {
+          "n": 20,
+          "mean": 0.35,
+          "low": 0.18119182410108206,
+          "high": 0.5671457233147638
+        },
+        "unanswerable": {
+          "n": 3,
+          "mean": 1.0,
+          "low": 0.4385029682449546,
+          "high": 1.0
+        }
+      },
+      "line_recall": {
+        "n": 33,
+        "mean": 0.2626524990161354,
+        "p50": 0.0,
+        "p95": 1.0,
+        "p99": 1.0,
+        "total": 8.667532467532467
+      },
+      "all_gold_lines_seen": {
+        "n": 33,
+        "mean": 0.12121212121212122,
+        "p50": 0.0,
+        "p95": 1.0,
+        "p99": 1.0,
+        "total": 4
+      },
+      "has_citation": {
+        "n": 36,
+        "mean": 1,
+        "p50": 1.0,
+        "p95": 1.0,
+        "p99": 1.0,
+        "total": 36
+      },
+      "citation_validity": {
+        "n": 36,
+        "mean": 1.0,
+        "p50": 1.0,
+        "p95": 1.0,
+        "p99": 1.0,
+        "total": 36.0
+      },
+      "citation_seen_fraction": {
+        "n": 36,
+        "mean": 0.9722222222222222,
+        "p50": 1.0,
+        "p95": 1.0,
+        "p99": 1.0,
+        "total": 35.0
+      },
+      "citation_gold_overlap_precision": {
+        "n": 36,
+        "mean": 0.2638888888888889,
+        "p50": 0.0,
+        "p95": 1.0,
+        "p99": 1.0,
+        "total": 9.5
+      },
+      "ndcg_at_k": {
+        "n": 33,
+        "mean": 0.17835275859623684,
+        "p50": 0.0,
+        "p95": 0.6740325704547234,
+        "p99": 0.8610126999999428,
+        "total": 5.885641033675816
+      },
+      "reciprocal_rank": {
+        "n": 33,
+        "mean": 0.18965958284140103,
+        "p50": 0.0,
+        "p95": 1.0,
+        "p99": 1.0,
+        "total": 6.2587662337662335
+      },
+      "abstention_answerable": {
+        "n": 33,
+        "mean": 0.3939393939393939,
+        "p50": 0.0,
+        "p95": 1.0,
+        "p99": 1.0,
+        "total": 13
+      },
+      "abstention_unanswerable": {
+        "n": 3,
+        "mean": 1,
+        "p50": 1.0,
+        "p95": 1.0,
+        "p99": 1.0,
+        "total": 3
+      }
+    },
+    "hybrid_rrf": {
+      "expected": 36,
+      "completed": 36,
+      "statuses": {
+        "ok": 36
+      },
+      "attempt_statuses": {
+        "ok": 36
+      },
+      "accuracy": {
+        "n": 36,
+        "mean": 0.6666666666666666,
+        "low": 0.5033399787115652,
+        "high": 0.7978538117569468
+      },
+      "correct": 24,
+      "accuracy_bounds_including_missing": [
+        0.6666666666666666,
+        0.6666666666666666
+      ],
+      "latency_s_successful_cells": {
+        "n": 36,
+        "mean": 14.89098695633336,
+        "p50": 13.565023617500174,
+        "p95": 26.09701981399985,
+        "p99": 27.538182173650192,
+        "total": 536.075530428001
+      },
+      "cost_usd_latest_cells": {
+        "n": 36,
+        "mean": 0.0091809375,
+        "p50": 0.00934875,
+        "p95": 0.010279875,
+        "p99": 0.011621249999999998,
+        "total": 0.33051375
+      },
+      "model_calls": {
+        "n": 36,
+        "mean": 1,
+        "p50": 1.0,
+        "p95": 1.0,
+        "p99": 1.0,
+        "total": 36
+      },
+      "input_tokens": {
+        "n": 36,
+        "mean": 11505.083333333334,
+        "p50": 11486.0,
+        "p95": 11830.5,
+        "p99": 11985.25,
+        "total": 414183
+      },
+      "output_tokens": {
+        "n": 36,
+        "mean": 79.27777777777777,
+        "p50": 77.5,
+        "p95": 110.75,
+        "p99": 133.29999999999995,
+        "total": 2854
+      },
+      "reasoning_tokens": {
+        "n": 36,
+        "mean": 142.08333333333334,
+        "p50": 91.0,
+        "p95": 313.0,
+        "p99": 555.1499999999995,
+        "total": 5115
+      },
+      "category_accuracy": {
+        "aggregation": {
+          "n": 4,
+          "mean": 0.5,
+          "low": 0.15003898915214947,
+          "high": 0.8499610108478506
+        },
+        "arithmetic": {
+          "n": 9,
+          "mean": 0.7777777777777778,
+          "low": 0.45258896910698887,
+          "high": 0.9367748928821533
+        },
+        "lookup": {
+          "n": 20,
+          "mean": 0.6,
+          "low": 0.3865815007622531,
+          "high": 0.781193467627183
+        },
+        "unanswerable": {
+          "n": 3,
+          "mean": 1.0,
+          "low": 0.4385029682449546,
+          "high": 1.0
+        }
+      },
+      "line_recall": {
+        "n": 33,
+        "mean": 0.3174963924963925,
+        "p50": 0.1,
+        "p95": 1.0,
+        "p99": 1.0,
+        "total": 10.477380952380953
+      },
+      "all_gold_lines_seen": {
+        "n": 33,
+        "mean": 0.21212121212121213,
+        "p50": 0.0,
+        "p95": 1.0,
+        "p99": 1.0,
+        "total": 7
+      },
+      "has_citation": {
+        "n": 36,
+        "mean": 1,
+        "p50": 1.0,
+        "p95": 1.0,
+        "p99": 1.0,
+        "total": 36
+      },
+      "citation_validity": {
+        "n": 36,
+        "mean": 1.0,
+        "p50": 1.0,
+        "p95": 1.0,
+        "p99": 1.0,
+        "total": 36.0
+      },
+      "citation_seen_fraction": {
+        "n": 36,
+        "mean": 0.9907407407407407,
+        "p50": 1.0,
+        "p95": 1.0,
+        "p99": 1.0,
+        "total": 35.666666666666664
+      },
+      "citation_gold_overlap_precision": {
+        "n": 36,
+        "mean": 0.5555555555555556,
+        "p50": 1.0,
+        "p95": 1.0,
+        "p99": 1.0,
+        "total": 20.0
+      },
+      "ndcg_at_k": {
+        "n": 33,
+        "mean": 0.39512540798248286,
+        "p50": 0.38685280723454163,
+        "p95": 0.9506972441748024,
+        "p99": 1.0,
+        "total": 13.039138463421933
+      },
+      "reciprocal_rank": {
+        "n": 33,
+        "mean": 0.5277777777777778,
+        "p50": 0.3333333333333333,
+        "p95": 1.0,
+        "p99": 1.0,
+        "total": 17.416666666666668
+      },
+      "abstention_answerable": {
+        "n": 33,
+        "mean": 0.18181818181818182,
+        "p50": 0.0,
+        "p95": 1.0,
+        "p99": 1.0,
+        "total": 6
+      },
+      "abstention_unanswerable": {
+        "n": 3,
+        "mean": 1,
+        "p50": 1.0,
+        "p95": 1.0,
+        "p99": 1.0,
+        "total": 3
+      }
+    },
+    "agentic_bm25": {
+      "expected": 36,
+      "completed": 36,
+      "statuses": {
+        "ok": 23,
+        "budget_exhausted": 13
+      },
+      "attempt_statuses": {
+        "ok": 23,
+        "budget_exhausted": 13
+      },
+      "accuracy": {
+        "n": 36,
+        "mean": 0.5277777777777778,
+        "low": 0.37005938022987594,
+        "high": 0.6801395848482095
+      },
+      "correct": 19,
+      "accuracy_bounds_including_missing": [
+        0.5277777777777778,
+        0.5277777777777778
+      ],
+      "latency_s_successful_cells": {
+        "n": 23,
+        "mean": 29.70733911678251,
+        "p50": 25.12920036899959,
+        "p95": 50.02254980730011,
+        "p99": 51.5810443816798,
+        "total": 683.2687996859977
+      },
+      "cost_usd_latest_cells": {
+        "n": 36,
+        "mean": 0.006496008333333333,
+        "p50": 0.005242499999999999,
+        "p95": 0.009503962500000001,
+        "p99": 0.009968212499999999,
+        "total": 0.2338563
+      },
+      "model_calls": {
+        "n": 36,
+        "mean": 2.4166666666666665,
+        "p50": 2.0,
+        "p95": 3.0,
+        "p99": 3.0,
+        "total": 87
+      },
+      "input_tokens": {
+        "n": 36,
+        "mean": 9132.277777777777,
+        "p50": 5495.0,
+        "p95": 15455.5,
+        "p99": 15700.25,
+        "total": 328762
+      },
+      "output_tokens": {
+        "n": 36,
+        "mean": 117.13888888888889,
+        "p50": 111.0,
+        "p95": 165.0,
+        "p99": 177.09999999999997,
+        "total": 4217
+      },
+      "reasoning_tokens": {
+        "n": 36,
+        "mean": 99.30555555555556,
+        "p50": 84.5,
+        "p95": 209.0,
+        "p99": 227.5,
+        "total": 3575
+      },
+      "category_accuracy": {
+        "aggregation": {
+          "n": 4,
+          "mean": 0.75,
+          "low": 0.30064184258240184,
+          "high": 0.9544127391902995
+        },
+        "arithmetic": {
+          "n": 9,
+          "mean": 0.5555555555555556,
+          "low": 0.26665129349549305,
+          "high": 0.8112214789023355
+        },
+        "lookup": {
+          "n": 20,
+          "mean": 0.45,
+          "low": 0.2581978582556243,
+          "high": 0.6579146575496577
+        },
+        "unanswerable": {
+          "n": 3,
+          "mean": 0.6666666666666666,
+          "low": 0.2076596008020477,
+          "high": 0.9385080552796037
+        }
+      },
+      "line_recall": {
+        "n": 21,
+        "mean": 0.348241341991342,
+        "p50": 0.125,
+        "p95": 1.0,
+        "p99": 1.0,
+        "total": 7.313068181818182
+      },
+      "all_gold_lines_seen": {
+        "n": 21,
+        "mean": 0.23809523809523808,
+        "p50": 0.0,
+        "p95": 1.0,
+        "p99": 1.0,
+        "total": 5
+      },
+      "has_citation": {
+        "n": 23,
+        "mean": 1,
+        "p50": 1.0,
+        "p95": 1.0,
+        "p99": 1.0,
+        "total": 23
+      },
+      "citation_validity": {
+        "n": 23,
+        "mean": 1.0,
+        "p50": 1.0,
+        "p95": 1.0,
+        "p99": 1.0,
+        "total": 23.0
+      },
+      "citation_seen_fraction": {
+        "n": 23,
+        "mean": 1.0,
+        "p50": 1.0,
+        "p95": 1.0,
+        "p99": 1.0,
+        "total": 23.0
+      },
+      "citation_gold_overlap_precision": {
+        "n": 23,
+        "mean": 0.782608695652174,
+        "p50": 1.0,
+        "p95": 1.0,
+        "p99": 1.0,
+        "total": 18.0
+      },
+      "ndcg_at_k": {
+        "n": 0,
+        "mean": null,
+        "p50": null,
+        "p95": null,
+        "p99": null,
+        "total": null
+      },
+      "reciprocal_rank": {
+        "n": 0,
+        "mean": null,
+        "p50": null,
+        "p95": null,
+        "p99": null,
+        "total": null
+      },
+      "abstention_answerable": {
+        "n": 21,
+        "mean": 0,
+        "p50": 0.0,
+        "p95": 0.0,
+        "p99": 0.0,
+        "total": 0
+      },
+      "abstention_unanswerable": {
+        "n": 2,
+        "mean": 1,
+        "p50": 1.0,
+        "p95": 1.0,
+        "p99": 1.0,
+        "total": 2
+      }
+    }
+  },
+  "comparisons_vs_read": {
+    "bm25": {
+      "delta": {
+        "n": 36,
+        "mean": 0.16666666666666666,
+        "low": 0.0,
+        "high": 0.3333333333333333
+      },
+      "n_questions": 36,
+      "missing_reference": 0,
+      "missing_other": 0,
+      "mcnemar": {
+        "n_pairs": 36,
+        "wins": 9,
+        "losses": 3,
+        "ties": 24,
+        "p_raw": 0.14599609375
+      },
+      "p_holm": 0.3072509765625
+    },
+    "dense": {
+      "delta": {
+        "n": 36,
+        "mean": 0.25,
+        "low": 0.0,
+        "high": 0.4722222222222222
+      },
+      "n_questions": 36,
+      "missing_reference": 0,
+      "missing_other": 0,
+      "mcnemar": {
+        "n_pairs": 36,
+        "wins": 15,
+        "losses": 6,
+        "ties": 15,
+        "p_raw": 0.0783538818359375
+      },
+      "p_holm": 0.3072509765625
+    },
+    "dense_short": {
+      "delta": {
+        "n": 36,
+        "mean": 0.3611111111111111,
+        "low": 0.1388888888888889,
+        "high": 0.5555555555555556
+      },
+      "n_questions": 36,
+      "missing_reference": 0,
+      "missing_other": 0,
+      "mcnemar": {
+        "n_pairs": 36,
+        "wins": 16,
+        "losses": 3,
+        "ties": 17,
+        "p_raw": 0.004425048828125
+      },
+      "p_holm": 0.022125244140625
+    },
+    "hybrid_rrf": {
+      "delta": {
+        "n": 36,
+        "mean": 0.08333333333333333,
+        "low": -0.1111111111111111,
+        "high": 0.2777777777777778
+      },
+      "n_questions": 36,
+      "missing_reference": 0,
+      "missing_other": 0,
+      "mcnemar": {
+        "n_pairs": 36,
+        "wins": 9,
+        "losses": 6,
+        "ties": 21,
+        "p_raw": 0.60723876953125
+      },
+      "p_holm": 0.60723876953125
+    },
+    "agentic_bm25": {
+      "delta": {
+        "n": 36,
+        "mean": 0.2222222222222222,
+        "low": 0.027777777777777776,
+        "high": 0.4166666666666667
+      },
+      "n_questions": 36,
+      "missing_reference": 0,
+      "missing_other": 0,
+      "mcnemar": {
+        "n_pairs": 36,
+        "wins": 12,
+        "losses": 4,
+        "ties": 20,
+        "p_raw": 0.076812744140625
+      },
+      "p_holm": 0.3072509765625
+    }
+  },
+  "budgets": {
+    "gujarat-read-bm25-002": {
+      "cost_from_provider_usage_usd": 0.60727875,
+      "unresolved_budget_reserve_usd": 0,
+      "settled_calls": 230,
+      "unresolved_calls": 0
+    },
+    "gujarat-dense-002": {
+      "cost_from_provider_usage_usd": 0.349734,
+      "unresolved_budget_reserve_usd": 0,
+      "settled_calls": 36,
+      "unresolved_calls": 0
+    },
+    "gujarat-dense-short-001": {
+      "cost_from_provider_usage_usd": 0.355287,
+      "unresolved_budget_reserve_usd": 0,
+      "settled_calls": 36,
+      "unresolved_calls": 0
+    },
+    "gujarat-controls-001": {
+      "cost_from_provider_usage_usd": 0.56437005,
+      "unresolved_budget_reserve_usd": 0,
+      "settled_calls": 123,
+      "unresolved_calls": 0
+    }
+  },
+  "indexes": {
+    "gujarat-read-bm25-002": [
+      {
+        "index_key": "736b6371de4fd9ad5a4884183512f54519383651fbe3626be2ea3cd05829a62b",
+        "system": "bm25",
+        "build_s": 0.07018563099973107,
+        "chunks": 130,
+        "truncated_chunks": 0,
+        "at": "2026-11-17T18:14:59.695461+00:00"
+      }
+    ],
+    "gujarat-dense-002": [
+      {
+        "index_key": "906a42acf00685efd0e292cd0b2134cb16307c468970be769397614906017807",
+        "system": "dense",
+        "build_s": 73.05922253500012,
+        "chunks": 130,
+        "truncated_chunks": 67,
+        "at": "2026-11-17T18:16:43.552390+00:00"
+      }
+    ],
+    "gujarat-dense-short-001": [
+      {
+        "index_key": "cfc1ab9f2ba3ce917deea6e93dcd586f114570b2510ffa2fdeefcaae48ff1369",
+        "system": "dense_short",
+        "build_s": 132.84151942599965,
+        "chunks": 245,
+        "truncated_chunks": 5,
+        "at": "2026-11-17T18:20:47.103705+00:00"
+      }
+    ],
+    "gujarat-controls-001": [
+      {
+        "index_key": "98a6aec7039f92321691d5042c57a411189fdc2b3579444feace538abd4f56b3",
+        "system": "hybrid_rrf",
+        "build_s": 82.96146238500023,
+        "chunks": 130,
+        "truncated_chunks": 67,
+        "at": "2026-11-17T18:18:40.381430+00:00"
+      },
+      {
+        "index_key": "736b6371de4fd9ad5a4884183512f54519383651fbe3626be2ea3cd05829a62b",
+        "system": "agentic_bm25",
+        "build_s": 0.05766744199991081,
+        "chunks": 130,
+        "truncated_chunks": 0,
+        "at": "2026-11-17T18:18:40.442310+00:00"
+      }
+    ]
+  }
+}

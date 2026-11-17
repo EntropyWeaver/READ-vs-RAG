@@ -1,5 +1,7 @@
 # READ vs RAG con un informe financiero real
 
+[Resultados de la ejecución](results/report.md) · [CSV por pregunta](results/per_question.csv)
+
 La prueba usa las 94 páginas del Volumen I de las cuentas de Gujarat 2024–25.
 `prepare.py` convierte el PDF oficial con versiones fijadas y comprueba el hash
 del PDF y del Markdown. El PDF y la conversión se descargan y preparan en local.

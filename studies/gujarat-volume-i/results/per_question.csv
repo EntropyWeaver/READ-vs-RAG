@@ -1,0 +1,217 @@
+system,question_id,category,status,correct,expected_values,values,abstained,line_recall,citation_seen_fraction,cost_usd,latency_s,attempt
+read,arith-001,arithmetic,ok,True,"[{""value"": 30021.95, ""unit"": ""crore""}]","[{""value"": 30021.95, ""unit"": ""crore""}]",False,1.0,1.0,0.0084282,76.66784528599965,1
+read,unans-001,unanswerable,invalid_output,False,[],null,,,,0.00591555,86.76193004200013,1
+read,unans-002,unanswerable,ok,False,[],"[{""value"": 33477.03, ""unit"": ""crore""}]",False,,1.0,0.010930200000000001,91.14648702100021,1
+read,unans-003,unanswerable,ok,True,[],[],True,,1.0,0.0103155,92.84719551299986,1
+read,lookup-010,lookup,invalid_output,False,"[{""value"": 472397.46, ""unit"": ""crore""}]",null,,,,0.0099384,95.72086422400025,1
+read,lookup-011,lookup,ok,False,"[{""value"": 31532.66, ""unit"": ""crore""}]","[{""value"": 7.21, ""unit"": ""crore""}]",False,0.0,1.0,0.0081903,47.46322635500019,1
+read,lookup-012,lookup,ok,True,"[{""value"": 18133.37, ""unit"": ""crore""}]","[{""value"": 18133.37, ""unit"": ""crore""}]",False,0.03571428571428571,1.0,0.00511935,49.506594360000236,1
+read,lookup-013,lookup,ok,True,"[{""value"": -67278.26, ""unit"": ""crore""}]","[{""value"": -67278.26, ""unit"": ""crore""}]",False,0.15625,1.0,0.0088851,107.40261586500037,1
+read,lookup-014,lookup,invalid_output,False,"[{""value"": 490008.99, ""unit"": ""crore""}]",null,,,,0.010387799999999999,87.9373383709999,1
+read,lookup-015,lookup,ok,True,"[{""value"": 218554.38, ""unit"": ""crore""}]","[{""value"": 218554.38, ""unit"": ""crore""}]",False,0.08333333333333333,1.0,0.00316425,39.026815281999916,1
+read,lookup-016,lookup,ok,False,"[{""value"": 199611.44, ""unit"": ""crore""}]","[{""value"": 148743.95, ""unit"": ""crore""}]",False,0.16666666666666666,1.0,0.0110697,102.44005306399958,1
+read,lookup-017,lookup,ok,True,"[{""value"": 26212.12, ""unit"": ""crore""}]","[{""value"": 26212.12, ""unit"": ""crore""}]",False,1.0,1.0,0.00506655,67.10679144400001,1
+read,lookup-018,lookup,ok,True,"[{""value"": 26530.36, ""unit"": ""crore""}]","[{""value"": 26530.36, ""unit"": ""crore""}]",False,0.08333333333333333,1.0,0.0073404,68.49532400499993,1
+read,lookup-019,lookup,ok,True,"[{""value"": 23707.75, ""unit"": ""crore""}]","[{""value"": 23707.75, ""unit"": ""crore""}]",False,1.0,1.0,0.0051327000000000005,76.75770165700033,1
+read,arith-010,arithmetic,ok,False,"[{""value"": 10325.74, ""unit"": ""crore""}]","[{""value"": -24532.44, ""unit"": ""crore""}]",False,0.16666666666666666,1.0,0.008571,51.63034034300017,1
+read,arith-011,arithmetic,ok,False,"[{""value"": 11121.46, ""unit"": ""crore""}]","[{""value"": 1417.46, ""unit"": ""crore""}]",False,0.16666666666666666,1.0,0.0079317,62.512563264000164,1
+read,arith-012,arithmetic,ok,True,"[{""value"": 42525.85, ""unit"": ""crore""}]","[{""value"": 42525.85, ""unit"": ""crore""}]",False,0.7142857142857143,1.0,0.01290105,103.49097838099988,1
+read,agg-010,aggregation,ok,True,"[{""value"": 16791.09, ""unit"": ""crore""}, {""value"": 111.53, ""unit"": ""crore""}]","[{""value"": 16791.09, ""unit"": ""crore""}, {""value"": 111.53, ""unit"": ""crore""}]",False,0.2,1.0,0.004299000000000001,50.44979854800022,1
+read,lookup-020,lookup,ok,True,"[{""value"": 115.4, ""unit"": ""crore""}]","[{""value"": 115.4, ""unit"": ""crore""}]",False,0.2,1.0,0.0038227499999999998,40.966943154000546,1
+read,agg-011,aggregation,ok,True,"[{""value"": 0.52, ""unit"": ""crore""}, {""value"": 16726.34, ""unit"": ""crore""}]","[{""value"": 0.52, ""unit"": ""crore""}, {""value"": 16726.34, ""unit"": ""crore""}]",False,0.6666666666666666,1.0,0.0042378,37.32236644800014,1
+read,conv-002,lookup,ok,True,"[{""value"": 26837.65, ""unit"": ""crore""}]","[{""value"": 26837.65, ""unit"": ""crore""}]",False,0.5,1.0,0.0107307,90.60376223000003,1
+read,lookup-030,lookup,ok,True,"[{""value"": 1015.7, ""unit"": ""crore""}]","[{""value"": 1015.7, ""unit"": ""crore""}]",False,0.3,1.0,0.00447,63.69277461300044,1
+read,lookup-031,lookup,ok,True,"[{""value"": 16831.85, ""unit"": ""crore""}]","[{""value"": 16831.85, ""unit"": ""crore""}]",False,0.2,1.0,0.00298875,37.42936177199954,1
+read,lookup-032,lookup,ok,True,"[{""value"": 238.62, ""unit"": ""crore""}]","[{""value"": 238.62, ""unit"": ""crore""}]",False,0.7,1.0,0.0123438,88.82782798700009,1
+read,lookup-033,lookup,ok,True,"[{""value"": 372.92, ""unit"": ""crore""}]","[{""value"": 372.92, ""unit"": ""crore""}]",False,0.3,1.0,0.0040662,58.99499622300027,1
+read,lookup-034,lookup,ok,True,"[{""value"": 0.0, ""unit"": ""crore""}]","[{""value"": 0, ""unit"": ""crore""}]",False,0.3,1.0,0.00453225,60.402360616000806,1
+read,agg-020,aggregation,ok,True,"[{""value"": 297717.24, ""unit"": ""crore""}, {""value"": 199611.44, ""unit"": ""crore""}, {""value"": 65428.32, ""unit"": ""crore""}, {""value"": 32677.48, ""unit"": ""crore""}]","[{""value"": 297717.24, ""unit"": ""crore""}, {""value"": 199611.44, ""unit"": ""crore""}, {""value"": 65428.32, ""unit"": ""crore""}, {""value"": 32677.48, ""unit"": ""crore""}]",False,0.38095238095238093,1.0,0.0087744,89.76892903600037,1
+read,arith-020,arithmetic,ok,True,"[{""value"": 1085.79, ""unit"": ""crore""}]","[{""value"": 1085.79, ""unit"": ""crore""}]",False,0.7,1.0,0.009566999999999999,100.80250810100006,1
+read,arith-021,arithmetic,ok,False,"[{""value"": 19.03, ""unit"": ""percent""}]","[{""value"": 16.5, ""unit"": ""percent""}]",False,0.2,1.0,0.00393135,62.34031006500027,1
+read,arith-022,arithmetic,ok,True,"[{""value"": 1417.46, ""unit"": ""crore""}]","[{""value"": 1417.46, ""unit"": ""crore""}]",False,0.3,1.0,0.0049222499999999995,73.92381024499991,1
+read,lookup-035,lookup,ok,True,"[{""value"": 132.11, ""unit"": ""crore""}]","[{""value"": 132.11, ""unit"": ""crore""}]",False,1.0,1.0,0.0064254,88.989918708,1
+read,lookup-036,lookup,ok,True,"[{""value"": 144.23, ""unit"": ""crore""}]","[{""value"": 144.23, ""unit"": ""crore""}]",False,0.3,1.0,0.0044442,62.406683436000094,1
+read,vol1-transport-01,lookup,ok,True,"[{""value"": 16513.22, ""unit"": ""crore""}]","[{""value"": 16513.22, ""unit"": ""crore""}]",False,0.06666666666666667,1.0,0.00484605,48.55956321600024,1
+read,vol1-transport-02,arithmetic,ok,True,"[{""value"": 14802.86, ""unit"": ""crore""}]","[{""value"": 14802.86, ""unit"": ""crore""}]",False,0.125,1.0,0.007332,93.4266317190004,1
+read,vol1-travel-01,arithmetic,ok,True,"[{""value"": 54.47, ""unit"": ""crore""}]","[{""value"": 54.47, ""unit"": ""crore""}]",False,0.2,1.0,0.007574249999999999,99.95566467000026,1
+read,vol1-expenses-01,aggregation,ok,True,"[{""value"": 1146.08, ""unit"": ""crore""}]","[{""value"": 1146.08, ""unit"": ""crore""}]",False,1.0,1.0,0.011755650000000001,90.76221229400016,1
+bm25,arith-001,arithmetic,ok,True,"[{""value"": 30021.95, ""unit"": ""crore""}]","[{""value"": 30021.95, ""unit"": ""crore""}]",False,0.18181818181818182,1.0,0.00896925,15.383936266999626,1
+bm25,unans-001,unanswerable,ok,True,[],[],True,,1.0,0.0090225,11.197920131999126,1
+bm25,unans-002,unanswerable,ok,True,[],[],True,,1.0,0.00880575,10.652575010999499,1
+bm25,unans-003,unanswerable,ok,True,[],[],True,,1.0,0.009372,12.930020373999469,1
+bm25,lookup-010,lookup,ok,False,"[{""value"": 472397.46, ""unit"": ""crore""}]",[],True,0.9642857142857143,1.0,0.00939375,17.623201121999955,1
+bm25,lookup-011,lookup,ok,False,"[{""value"": 31532.66, ""unit"": ""crore""}]","[{""value"": 7.21, ""unit"": ""crore""}]",False,0.0,1.0,0.00935925,11.359796789000029,1
+bm25,lookup-012,lookup,ok,False,"[{""value"": 18133.37, ""unit"": ""crore""}]",[],True,0.0,1.0,0.00993825,12.590745361999325,1
+bm25,lookup-013,lookup,ok,False,"[{""value"": -67278.26, ""unit"": ""crore""}]","[{""value"": 67278.26, ""unit"": ""crore""}]",False,0.15625,1.0,0.00904425,11.443834114999845,1
+bm25,lookup-014,lookup,ok,False,"[{""value"": 490008.99, ""unit"": ""crore""}]",[],True,0.0,1.0,0.00969525,18.234903298000063,1
+bm25,lookup-015,lookup,ok,True,"[{""value"": 218554.38, ""unit"": ""crore""}]","[{""value"": 218554.38, ""unit"": ""crore""}]",False,0.0,1.0,0.00904275,13.840112453000074,1
+bm25,lookup-016,lookup,ok,True,"[{""value"": 199611.44, ""unit"": ""crore""}]","[{""value"": 199611.44, ""unit"": ""crore""}]",False,0.0,1.0,0.009222,17.61695725899972,1
+bm25,lookup-017,lookup,ok,False,"[{""value"": 26212.12, ""unit"": ""crore""}]",[],True,0.0,1.0,0.00945825,15.217228096000326,1
+bm25,lookup-018,lookup,ok,False,"[{""value"": 26530.36, ""unit"": ""crore""}]",[],True,0.0,1.0,0.0100185,14.522813253000095,1
+bm25,lookup-019,lookup,ok,True,"[{""value"": 23707.75, ""unit"": ""crore""}]","[{""value"": 23707.75, ""unit"": ""crore""}]",False,0.1,1.0,0.009444,13.425215374999425,1
+bm25,arith-010,arithmetic,ok,False,"[{""value"": 10325.74, ""unit"": ""crore""}]",[],True,0.9166666666666666,1.0,0.009642,13.010854684999686,1
+bm25,arith-011,arithmetic,ok,False,"[{""value"": 11121.46, ""unit"": ""crore""}]",[],True,0.0,0.5,0.00929925,10.124211796000054,1
+bm25,arith-012,arithmetic,ok,False,"[{""value"": 42525.85, ""unit"": ""crore""}]",[],True,0.0,1.0,0.01043475,18.296620651000012,1
+bm25,agg-010,aggregation,ok,False,"[{""value"": 16791.09, ""unit"": ""crore""}, {""value"": 111.53, ""unit"": ""crore""}]",[],True,0.0,1.0,0.01025025,12.908847688000606,1
+bm25,lookup-020,lookup,ok,False,"[{""value"": 115.4, ""unit"": ""crore""}]","[{""value"": 111.53, ""unit"": ""crore""}]",False,0.0,1.0,0.011424,15.739098619999822,1
+bm25,agg-011,aggregation,ok,True,"[{""value"": 0.52, ""unit"": ""crore""}, {""value"": 16726.34, ""unit"": ""crore""}]","[{""value"": 0.52, ""unit"": ""crore""}, {""value"": 16726.34, ""unit"": ""crore""}]",False,1.0,1.0,0.0097185,12.770173775999865,1
+bm25,conv-002,lookup,ok,True,"[{""value"": 26837.65, ""unit"": ""crore""}]","[{""value"": 26837.65, ""unit"": ""crore""}]",False,0.35714285714285715,1.0,0.0092415,11.813401011999304,1
+bm25,lookup-030,lookup,ok,True,"[{""value"": 1015.7, ""unit"": ""crore""}]","[{""value"": 1015.7, ""unit"": ""crore""}]",False,1.0,1.0,0.00791895,12.014675123000416,1
+bm25,lookup-031,lookup,ok,True,"[{""value"": 16831.85, ""unit"": ""crore""}]","[{""value"": 16831.85, ""unit"": ""crore""}]",False,0.1,1.0,0.00966225,15.052089202000388,1
+bm25,lookup-032,lookup,ok,True,"[{""value"": 238.62, ""unit"": ""crore""}]","[{""value"": 238.62, ""unit"": ""crore""}]",False,1.0,1.0,0.00960975,17.758058230000643,1
+bm25,lookup-033,lookup,ok,True,"[{""value"": 372.92, ""unit"": ""crore""}]","[{""value"": 372.92, ""unit"": ""crore""}]",False,0.1,1.0,0.009468,12.37136429200018,1
+bm25,lookup-034,lookup,ok,True,"[{""value"": 0.0, ""unit"": ""crore""}]","[{""value"": 0, ""unit"": ""crore""}]",False,0.1,1.0,0.010044,16.358184187000006,1
+bm25,agg-020,aggregation,ok,False,"[{""value"": 297717.24, ""unit"": ""crore""}, {""value"": 199611.44, ""unit"": ""crore""}, {""value"": 65428.32, ""unit"": ""crore""}, {""value"": 32677.48, ""unit"": ""crore""}]",[],True,0.0,1.0,0.0109845,15.222588885000732,1
+bm25,arith-020,arithmetic,ok,False,"[{""value"": 1085.79, ""unit"": ""crore""}]",[],True,0.0,1.0,0.0094545,12.274770749999334,1
+bm25,arith-021,arithmetic,ok,False,"[{""value"": 19.03, ""unit"": ""percent""}]","[{""value"": 19.0, ""unit"": ""percent""}]",False,0.9,1.0,0.010461,12.994816192000144,1
+bm25,arith-022,arithmetic,ok,True,"[{""value"": 1417.46, ""unit"": ""crore""}]","[{""value"": 1417.46, ""unit"": ""crore""}]",False,0.1,1.0,0.00950625,25.210043556000528,1
+bm25,lookup-035,lookup,ok,True,"[{""value"": 132.11, ""unit"": ""crore""}]","[{""value"": 132.11, ""unit"": ""crore""}]",False,0.1,1.0,0.010344,10.639413583000533,1
+bm25,lookup-036,lookup,ok,True,"[{""value"": 144.23, ""unit"": ""crore""}]","[{""value"": 144.23, ""unit"": ""crore""}]",False,0.1,1.0,0.01026225,14.067620039999383,1
+bm25,vol1-transport-01,lookup,ok,True,"[{""value"": 16513.22, ""unit"": ""crore""}]","[{""value"": 16513.22, ""unit"": ""crore""}]",False,0.06666666666666667,1.0,0.00931575,12.33486714799983,1
+bm25,vol1-transport-02,arithmetic,ok,True,"[{""value"": 14802.86, ""unit"": ""crore""}]","[{""value"": 14802.86, ""unit"": ""crore""}]",False,0.125,1.0,0.009414,13.062522424000235,1
+bm25,vol1-travel-01,arithmetic,ok,True,"[{""value"": 54.47, ""unit"": ""crore""}]","[{""value"": 54.47, ""unit"": ""crore""}]",False,0.1,1.0,0.0100545,11.00618420399951,1
+bm25,vol1-expenses-01,aggregation,ok,True,"[{""value"": 1146.08, ""unit"": ""crore""}]","[{""value"": 1146.08, ""unit"": ""crore""}]",False,0.18181818181818182,1.0,0.0096315,17.866015534000326,1
+dense,arith-001,arithmetic,ok,True,"[{""value"": 30021.95, ""unit"": ""crore""}]","[{""value"": 30021.95, ""unit"": ""crore""}]",False,1.0,1.0,0.00952275,13.467874201000086,1
+dense,unans-001,unanswerable,ok,True,[],[],True,,1.0,0.00948525,11.511027237000235,1
+dense,unans-002,unanswerable,ok,True,[],[],True,,1.0,0.00924375,11.241826743000274,1
+dense,unans-003,unanswerable,ok,True,[],[],True,,1.0,0.00904575,13.204935207000744,1
+dense,lookup-010,lookup,ok,False,"[{""value"": 472397.46, ""unit"": ""crore""}]",[],True,0.9642857142857143,1.0,0.01039575,13.66301022100015,1
+dense,lookup-011,lookup,ok,True,"[{""value"": 31532.66, ""unit"": ""crore""}]","[{""value"": 31532.66, ""unit"": ""crore""}]",False,1.0,1.0,0.00884925,13.283205668999472,1
+dense,lookup-012,lookup,ok,True,"[{""value"": 18133.37, ""unit"": ""crore""}]","[{""value"": 18133.37, ""unit"": ""crore""}]",False,0.0,1.0,0.009846,12.508771219000664,1
+dense,lookup-013,lookup,ok,True,"[{""value"": -67278.26, ""unit"": ""crore""}]","[{""value"": -67278.26, ""unit"": ""crore""}]",False,1.0,1.0,0.009549,13.758131391999996,1
+dense,lookup-014,lookup,ok,True,"[{""value"": 490008.99, ""unit"": ""crore""}]","[{""value"": 490008.99, ""unit"": ""crore""}]",False,1.0,1.0,0.00936225,12.238494540999454,1
+dense,lookup-015,lookup,ok,True,"[{""value"": 218554.38, ""unit"": ""crore""}]","[{""value"": 218554.38, ""unit"": ""crore""}]",False,0.25,1.0,0.00950475,11.44136887500008,1
+dense,lookup-016,lookup,ok,True,"[{""value"": 199611.44, ""unit"": ""crore""}]","[{""value"": 199611.44, ""unit"": ""crore""}]",False,0.0,1.0,0.00906825,12.475750349000009,1
+dense,lookup-017,lookup,ok,False,"[{""value"": 26212.12, ""unit"": ""crore""}]",[],True,0.0,1.0,0.009417,13.20345181399989,1
+dense,lookup-018,lookup,ok,False,"[{""value"": 26530.36, ""unit"": ""crore""}]","[{""value"": 16832.02, ""unit"": ""crore""}]",False,0.0,1.0,0.00976425,11.997771366999586,1
+dense,lookup-019,lookup,ok,False,"[{""value"": 23707.75, ""unit"": ""crore""}]",[],True,0.0,1.0,0.010599,13.41873680900062,1
+dense,arith-010,arithmetic,ok,True,"[{""value"": 10325.74, ""unit"": ""crore""}]","[{""value"": 10325.74, ""unit"": ""crore""}]",False,0.0,1.0,0.0092955,11.473463538999567,1
+dense,arith-011,arithmetic,ok,False,"[{""value"": 11121.46, ""unit"": ""crore""}]","[{""value"": 1417.46, ""unit"": ""crore""}]",False,0.0,1.0,0.01006875,14.06457877000048,1
+dense,arith-012,arithmetic,ok,False,"[{""value"": 42525.85, ""unit"": ""crore""}]","[{""value"": 65428.31, ""unit"": ""crore""}]",False,0.9642857142857143,1.0,0.0096615,13.259290822000366,1
+dense,agg-010,aggregation,ok,False,"[{""value"": 16791.09, ""unit"": ""crore""}, {""value"": 111.53, ""unit"": ""crore""}]",[],True,0.0,1.0,0.01033875,14.910353013000531,1
+dense,lookup-020,lookup,ok,False,"[{""value"": 115.4, ""unit"": ""crore""}]",[],True,0.0,1.0,0.010155,14.90223892099948,1
+dense,agg-011,aggregation,ok,True,"[{""value"": 0.52, ""unit"": ""crore""}, {""value"": 16726.34, ""unit"": ""crore""}]","[{""value"": 0.52, ""unit"": ""crore""}, {""value"": 16726.34, ""unit"": ""crore""}]",False,0.0,1.0,0.0099105,11.26973884600011,1
+dense,conv-002,lookup,ok,True,"[{""value"": 26837.65, ""unit"": ""crore""}]","[{""value"": 26837.65, ""unit"": ""crore""}]",False,0.35714285714285715,1.0,0.00935625,12.77649829800066,1
+dense,lookup-030,lookup,ok,False,"[{""value"": 1015.7, ""unit"": ""crore""}]","[{""value"": 992.75, ""unit"": ""crore""}]",False,0.1,1.0,0.01035675,13.801204340000368,1
+dense,lookup-031,lookup,ok,False,"[{""value"": 16831.85, ""unit"": ""crore""}]","[{""value"": 2.61, ""unit"": ""crore""}]",False,0.0,1.0,0.01008225,13.757874842999627,1
+dense,lookup-032,lookup,ok,False,"[{""value"": 238.62, ""unit"": ""crore""}]",[],True,0.0,,0.00969,12.046817096000268,1
+dense,lookup-033,lookup,ok,True,"[{""value"": 372.92, ""unit"": ""crore""}]","[{""value"": 372.92, ""unit"": ""crore""}]",False,0.1,1.0,0.00998025,14.24088506499993,1
+dense,lookup-034,lookup,ok,False,"[{""value"": 0.0, ""unit"": ""crore""}]",[],True,0.0,1.0,0.0091815,13.608237426000414,1
+dense,agg-020,aggregation,ok,False,"[{""value"": 297717.24, ""unit"": ""crore""}, {""value"": 199611.44, ""unit"": ""crore""}, {""value"": 65428.32, ""unit"": ""crore""}, {""value"": 32677.48, ""unit"": ""crore""}]",[],True,0.0,1.0,0.010119,13.090627020000284,1
+dense,arith-020,arithmetic,ok,False,"[{""value"": 1085.79, ""unit"": ""crore""}]","[{""value"": 1085.85, ""unit"": ""crore""}]",False,0.1,1.0,0.0098265,11.86246255199967,1
+dense,arith-021,arithmetic,ok,False,"[{""value"": 19.03, ""unit"": ""percent""}]",[],True,0.0,1.0,0.00958725,14.035425092999503,1
+dense,arith-022,arithmetic,ok,False,"[{""value"": 1417.46, ""unit"": ""crore""}]",[],True,0.0,1.0,0.01066875,13.636224949999814,1
+dense,lookup-035,lookup,ok,True,"[{""value"": 132.11, ""unit"": ""crore""}]","[{""value"": 132.11, ""unit"": ""crore""}]",False,0.1,1.0,0.00994125,12.614154740000231,1
+dense,lookup-036,lookup,ok,False,"[{""value"": 144.23, ""unit"": ""crore""}]","[{""value"": 198.7, ""unit"": ""crore""}]",False,0.1,1.0,0.00983175,14.067388303999905,1
+dense,vol1-transport-01,lookup,ok,True,"[{""value"": 16513.22, ""unit"": ""crore""}]","[{""value"": 16513.22, ""unit"": ""crore""}]",False,0.06666666666666667,1.0,0.00908925,13.06361512500007,1
+dense,vol1-transport-02,arithmetic,ok,True,"[{""value"": 14802.86, ""unit"": ""crore""}]","[{""value"": 14802.86, ""unit"": ""crore""}]",False,0.125,1.0,0.00914775,13.048486549999325,1
+dense,vol1-travel-01,arithmetic,ok,False,"[{""value"": 54.47, ""unit"": ""crore""}]","[{""value"": -54.47, ""unit"": ""crore""}]",False,0.1,1.0,0.01008975,14.565438919999906,1
+dense,vol1-expenses-01,aggregation,ok,True,"[{""value"": 1146.08, ""unit"": ""crore""}]","[{""value"": 1146.08, ""unit"": ""crore""}]",False,0.18181818181818182,1.0,0.00970275,12.874087953000526,1
+dense_short,arith-001,arithmetic,ok,True,"[{""value"": 30021.95, ""unit"": ""crore""}]","[{""value"": 30021.95, ""unit"": ""crore""}]",False,1.0,1.0,0.00932025,13.59075328400013,1
+dense_short,unans-001,unanswerable,ok,True,[],[],True,,1.0,0.0092115,14.43962901499981,1
+dense_short,unans-002,unanswerable,ok,True,[],[],True,,1.0,0.008928,11.847925476000455,1
+dense_short,unans-003,unanswerable,ok,True,[],[],True,,1.0,0.008907,13.495394313999896,1
+dense_short,lookup-010,lookup,ok,False,"[{""value"": 472397.46, ""unit"": ""crore""}]",[],True,0.9642857142857143,1.0,0.01056675,15.434241036000458,1
+dense_short,lookup-011,lookup,ok,False,"[{""value"": 31532.66, ""unit"": ""crore""}]","[{""value"": -7.21, ""unit"": ""crore""}]",False,1.0,1.0,0.009255,13.424553398000171,1
+dense_short,lookup-012,lookup,ok,False,"[{""value"": 18133.37, ""unit"": ""crore""}]",[],True,0.0,1.0,0.01004925,13.474986188999537,1
+dense_short,lookup-013,lookup,ok,False,"[{""value"": -67278.26, ""unit"": ""crore""}]",[],True,0.0,1.0,0.0103125,14.717797727999823,1
+dense_short,lookup-014,lookup,ok,False,"[{""value"": 490008.99, ""unit"": ""crore""}]","[{""value"": 297717.24, ""unit"": ""crore""}]",False,0.0,1.0,0.009909,15.44998269000007,1
+dense_short,lookup-015,lookup,ok,True,"[{""value"": 218554.38, ""unit"": ""crore""}]","[{""value"": 218554.38, ""unit"": ""crore""}]",False,1.0,1.0,0.009228,14.441092882999328,1
+dense_short,lookup-016,lookup,ok,True,"[{""value"": 199611.44, ""unit"": ""crore""}]","[{""value"": 199611.44, ""unit"": ""crore""}]",False,0.0,1.0,0.00893775,11.803295251000236,1
+dense_short,lookup-017,lookup,ok,True,"[{""value"": 26212.12, ""unit"": ""crore""}]","[{""value"": 26212.12, ""unit"": ""crore""}]",False,0.9,1.0,0.0095415,13.194186372999866,1
+dense_short,lookup-018,lookup,ok,False,"[{""value"": 26530.36, ""unit"": ""crore""}]",[],True,0.0,1.0,0.01067775,16.119691918999706,1
+dense_short,lookup-019,lookup,ok,True,"[{""value"": 23707.75, ""unit"": ""crore""}]","[{""value"": 23707.75, ""unit"": ""crore""}]",False,0.9,0.0,0.0092655,12.885692159000428,1
+dense_short,arith-010,arithmetic,ok,False,"[{""value"": 10325.74, ""unit"": ""crore""}]","[{""value"": 24532.44, ""unit"": ""crore""}]",False,0.0,1.0,0.00953925,14.96020800900078,1
+dense_short,arith-011,arithmetic,ok,False,"[{""value"": 11121.46, ""unit"": ""crore""}]","[{""value"": 1417.43, ""unit"": ""crore""}]",False,0.0,1.0,0.0095445,12.914224026999364,1
+dense_short,arith-012,arithmetic,ok,False,"[{""value"": 42525.85, ""unit"": ""crore""}]",[],True,0.9642857142857143,1.0,0.01038375,14.986795460999929,1
+dense_short,agg-010,aggregation,ok,False,"[{""value"": 16791.09, ""unit"": ""crore""}, {""value"": 111.53, ""unit"": ""crore""}]",[],True,0.0,1.0,0.0117705,17.259496173000116,1
+dense_short,lookup-020,lookup,ok,False,"[{""value"": 115.4, ""unit"": ""crore""}]",[],True,0.0,1.0,0.010299,14.973813495000286,1
+dense_short,agg-011,aggregation,ok,True,"[{""value"": 0.52, ""unit"": ""crore""}, {""value"": 16726.34, ""unit"": ""crore""}]","[{""value"": 0.52, ""unit"": ""crore""}, {""value"": 16726.34, ""unit"": ""crore""}]",False,0.0,1.0,0.00990525,11.085864904000118,1
+dense_short,conv-002,lookup,ok,True,"[{""value"": 26837.65, ""unit"": ""crore""}]","[{""value"": 26837.65, ""unit"": ""crore""}]",False,0.35714285714285715,1.0,0.009699,14.186853424000219,1
+dense_short,lookup-030,lookup,ok,False,"[{""value"": 1015.7, ""unit"": ""crore""}]",[],True,0.0,1.0,0.009546,13.226137168000605,1
+dense_short,lookup-031,lookup,ok,False,"[{""value"": 16831.85, ""unit"": ""crore""}]","[{""value"": 9700.95, ""unit"": ""crore""}]",False,0.0,1.0,0.00970275,14.54374704499969,1
+dense_short,lookup-032,lookup,ok,False,"[{""value"": 238.62, ""unit"": ""crore""}]",[],True,0.0,1.0,0.00981225,15.482847692000178,1
+dense_short,lookup-033,lookup,ok,True,"[{""value"": 372.92, ""unit"": ""crore""}]","[{""value"": 372.92, ""unit"": ""crore""}]",False,0.1,1.0,0.00976125,13.925983338000151,1
+dense_short,lookup-034,lookup,ok,False,"[{""value"": 0.0, ""unit"": ""crore""}]",[],True,0.0,1.0,0.01041,15.430375412999638,1
+dense_short,agg-020,aggregation,ok,False,"[{""value"": 297717.24, ""unit"": ""crore""}, {""value"": 199611.44, ""unit"": ""crore""}, {""value"": 65428.32, ""unit"": ""crore""}, {""value"": 32677.48, ""unit"": ""crore""}]","[{""value"": 297960.06, ""unit"": ""crore""}, {""value"": 199611.44, ""unit"": ""crore""}, {""value"": 98105.8, ""unit"": ""crore""}, {""value"": 242.82, ""unit"": ""crore""}]",False,0.0,1.0,0.01356075,18.467339851999895,1
+dense_short,arith-020,arithmetic,ok,False,"[{""value"": 1085.79, ""unit"": ""crore""}]",[],True,0.0,1.0,0.00993225,12.213864003999333,1
+dense_short,arith-021,arithmetic,ok,False,"[{""value"": 19.03, ""unit"": ""percent""}]",[],True,0.0,1.0,0.00944775,13.793274892000227,1
+dense_short,arith-022,arithmetic,ok,False,"[{""value"": 1417.46, ""unit"": ""crore""}]",[],True,0.0,1.0,0.0106935,14.13873755900022,1
+dense_short,lookup-035,lookup,ok,False,"[{""value"": 132.11, ""unit"": ""crore""}]","[{""value"": 126.51, ""unit"": ""crore""}]",False,0.1,1.0,0.00990375,14.059817565999765,1
+dense_short,lookup-036,lookup,ok,False,"[{""value"": 144.23, ""unit"": ""crore""}]","[{""value"": 197.76, ""unit"": ""crore""}]",False,0.1,1.0,0.009021,13.167121029000555,1
+dense_short,vol1-transport-01,lookup,ok,True,"[{""value"": 16513.22, ""unit"": ""crore""}]","[{""value"": 16513.22, ""unit"": ""crore""}]",False,1.0,1.0,0.00957075,13.846259766000003,1
+dense_short,vol1-transport-02,arithmetic,ok,True,"[{""value"": 14802.86, ""unit"": ""crore""}]","[{""value"": 14802.86, ""unit"": ""crore""}]",False,0.0,1.0,0.009093,13.507780795000144,1
+dense_short,vol1-travel-01,arithmetic,ok,True,"[{""value"": 54.47, ""unit"": ""crore""}]","[{""value"": 54.47, ""unit"": ""crore""}]",False,0.1,1.0,0.01018575,14.651447625999936,1
+dense_short,vol1-expenses-01,aggregation,ok,False,"[{""value"": 1146.08, ""unit"": ""crore""}]","[{""value"": 1156.53, ""unit"": ""crore""}]",False,0.18181818181818182,1.0,0.00939525,12.447932346000016,1
+hybrid_rrf,arith-001,arithmetic,ok,True,"[{""value"": 30021.95, ""unit"": ""crore""}]","[{""value"": 30021.95, ""unit"": ""crore""}]",False,1.0,1.0,0.00937275,12.782254407999972,1
+hybrid_rrf,unans-001,unanswerable,ok,True,[],[],True,,1.0,0.00885975,12.029876941000111,1
+hybrid_rrf,unans-002,unanswerable,ok,True,[],[],True,,0.6666666666666666,0.009036,12.369806145000439,1
+hybrid_rrf,unans-003,unanswerable,ok,True,[],[],True,,1.0,0.0067803,27.855553242000497,1
+hybrid_rrf,lookup-010,lookup,ok,False,"[{""value"": 472397.46, ""unit"": ""crore""}]","[{""value"": 658011.47, ""unit"": ""crore""}]",False,0.9642857142857143,1.0,0.00794895,9.861299893999785,1
+hybrid_rrf,lookup-011,lookup,ok,True,"[{""value"": 31532.66, ""unit"": ""crore""}]","[{""value"": 31532.66, ""unit"": ""crore""}]",False,1.0,1.0,0.0078252,25.45883106600013,1
+hybrid_rrf,lookup-012,lookup,ok,True,"[{""value"": 18133.37, ""unit"": ""crore""}]","[{""value"": 18133.37, ""unit"": ""crore""}]",False,0.0,1.0,0.0092325,25.813100164999923,1
+hybrid_rrf,lookup-013,lookup,ok,False,"[{""value"": -67278.26, ""unit"": ""crore""}]","[{""value"": 67278.26, ""unit"": ""crore""}]",False,1.0,1.0,0.00924,15.303493174999858,1
+hybrid_rrf,lookup-014,lookup,ok,True,"[{""value"": 490008.99, ""unit"": ""crore""}]","[{""value"": 490008.99, ""unit"": ""crore""}]",False,1.0,1.0,0.009144,15.416661287999887,1
+hybrid_rrf,lookup-015,lookup,ok,True,"[{""value"": 218554.38, ""unit"": ""crore""}]","[{""value"": 218554.38, ""unit"": ""crore""}]",False,0.0,1.0,0.00920025,13.444653247000133,1
+hybrid_rrf,lookup-016,lookup,ok,False,"[{""value"": 199611.44, ""unit"": ""crore""}]","[{""value"": 148743.95, ""unit"": ""crore""}]",False,0.0,1.0,0.009099,11.686976336999578,1
+hybrid_rrf,lookup-017,lookup,ok,False,"[{""value"": 26212.12, ""unit"": ""crore""}]",[],True,0.0,1.0,0.0074802,12.459185532999982,1
+hybrid_rrf,lookup-018,lookup,ok,False,"[{""value"": 26530.36, ""unit"": ""crore""}]",[],True,0.0,1.0,0.0102015,15.924634882000646,1
+hybrid_rrf,lookup-019,lookup,ok,True,"[{""value"": 23707.75, ""unit"": ""crore""}]","[{""value"": 23707.75, ""unit"": ""crore""}]",False,0.1,1.0,0.009573,15.71524487500028,1
+hybrid_rrf,arith-010,arithmetic,ok,True,"[{""value"": 10325.74, ""unit"": ""crore""}]","[{""value"": 10325.74, ""unit"": ""crore""}]",False,0.0,1.0,0.00952275,12.409581107000122,1
+hybrid_rrf,arith-011,arithmetic,ok,False,"[{""value"": 11121.46, ""unit"": ""crore""}]",[],True,0.0,1.0,0.0102855,14.636509396999827,1
+hybrid_rrf,arith-012,arithmetic,ok,False,"[{""value"": 42525.85, ""unit"": ""crore""}]",[],True,0.9642857142857143,1.0,0.009894,13.849224427000081,1
+hybrid_rrf,agg-010,aggregation,ok,False,"[{""value"": 16791.09, ""unit"": ""crore""}, {""value"": 111.53, ""unit"": ""crore""}]",[],True,0.0,1.0,0.0088917,15.684440633999657,1
+hybrid_rrf,lookup-020,lookup,ok,False,"[{""value"": 115.4, ""unit"": ""crore""}]",[],True,0.0,1.0,0.00982275,13.209590691999438,1
+hybrid_rrf,agg-011,aggregation,ok,True,"[{""value"": 0.52, ""unit"": ""crore""}, {""value"": 16726.34, ""unit"": ""crore""}]","[{""value"": 0.52, ""unit"": ""crore""}, {""value"": 16726.34, ""unit"": ""crore""}]",False,0.0,1.0,0.00802995,13.065230460999373,1
+hybrid_rrf,conv-002,lookup,ok,False,"[{""value"": 26837.65, ""unit"": ""crore""}]","[{""value"": 67278.26, ""unit"": ""crore""}]",False,0.35714285714285715,1.0,0.009363,26.94877876099963,1
+hybrid_rrf,lookup-030,lookup,ok,True,"[{""value"": 1015.7, ""unit"": ""crore""}]","[{""value"": 1015.7, ""unit"": ""crore""}]",False,1.0,1.0,0.0093345,12.264058738999665,1
+hybrid_rrf,lookup-031,lookup,ok,False,"[{""value"": 16831.85, ""unit"": ""crore""}]","[{""value"": 16832.02, ""unit"": ""crore""}]",False,0.1,1.0,0.0064743000000000005,12.136988797999948,1
+hybrid_rrf,lookup-032,lookup,ok,True,"[{""value"": 238.62, ""unit"": ""crore""}]","[{""value"": 238.62, ""unit"": ""crore""}]",False,0.1,1.0,0.00972975,13.647810712000137,1
+hybrid_rrf,lookup-033,lookup,ok,True,"[{""value"": 372.92, ""unit"": ""crore""}]","[{""value"": 372.92, ""unit"": ""crore""}]",False,0.1,1.0,0.00983175,8.988647119999769,1
+hybrid_rrf,lookup-034,lookup,ok,True,"[{""value"": 0.0, ""unit"": ""crore""}]","[{""value"": 0, ""unit"": ""crore""}]",False,0.1,1.0,0.0097665,14.880528855999728,1
+hybrid_rrf,agg-020,aggregation,ok,False,"[{""value"": 297717.24, ""unit"": ""crore""}, {""value"": 199611.44, ""unit"": ""crore""}, {""value"": 65428.32, ""unit"": ""crore""}, {""value"": 32677.48, ""unit"": ""crore""}]","[{""value"": 4647.19, ""unit"": ""crore""}, {""value"": 1296.32, ""unit"": ""crore""}, {""value"": 3108.05, ""unit"": ""crore""}, {""value"": 242.82, ""unit"": ""crore""}]",False,0.0,1.0,0.0123405,19.14015083800041,1
+hybrid_rrf,arith-020,arithmetic,ok,True,"[{""value"": 1085.79, ""unit"": ""crore""}]","[{""value"": 1085.79, ""unit"": ""crore""}]",False,0.1,1.0,0.010278,9.411820803999944,1
+hybrid_rrf,arith-021,arithmetic,ok,True,"[{""value"": 19.03, ""unit"": ""percent""}]","[{""value"": 19.03, ""unit"": ""percent""}]",False,0.1,1.0,0.00986625,13.293466713999806,1
+hybrid_rrf,arith-022,arithmetic,ok,True,"[{""value"": 1417.46, ""unit"": ""crore""}]","[{""value"": 1417.46, ""unit"": ""crore""}]",False,0.1,1.0,0.00943725,12.271996505000061,1
+hybrid_rrf,lookup-035,lookup,ok,True,"[{""value"": 132.11, ""unit"": ""crore""}]","[{""value"": 132.11, ""unit"": ""crore""}]",False,0.1,1.0,0.0085137,16.042472597000597,1
+hybrid_rrf,lookup-036,lookup,ok,True,"[{""value"": 144.23, ""unit"": ""crore""}]","[{""value"": 144.23, ""unit"": ""crore""}]",False,1.0,1.0,0.0093795,13.48223652300021,1
+hybrid_rrf,vol1-transport-01,lookup,ok,True,"[{""value"": 16513.22, ""unit"": ""crore""}]","[{""value"": 16513.22, ""unit"": ""crore""}]",False,0.06666666666666667,1.0,0.0081837,14.471969112000806,1
+hybrid_rrf,vol1-transport-02,arithmetic,ok,True,"[{""value"": 14802.86, ""unit"": ""crore""}]","[{""value"": 14802.86, ""unit"": ""crore""}]",False,0.125,1.0,0.00919275,13.851331994000248,1
+hybrid_rrf,vol1-travel-01,arithmetic,ok,True,"[{""value"": 54.47, ""unit"": ""crore""}]","[{""value"": 54.47, ""unit"": ""crore""}]",False,0.1,1.0,0.00996375,14.042862080000305,1
+hybrid_rrf,vol1-expenses-01,aggregation,ok,True,"[{""value"": 1146.08, ""unit"": ""crore""}]","[{""value"": 1146.08, ""unit"": ""crore""}]",False,1.0,1.0,0.0094185,12.224262359000022,1
+agentic_bm25,arith-001,arithmetic,ok,True,"[{""value"": 30021.95, ""unit"": ""crore""}]","[{""value"": 30021.95, ""unit"": ""crore""}]",False,0.18181818181818182,1.0,0.004790249999999999,27.66278579899972,1
+agentic_bm25,unans-001,unanswerable,ok,True,[],[],True,,1.0,0.008574,51.19851198000015,1
+agentic_bm25,unans-002,unanswerable,ok,True,[],[],True,,1.0,0.004781250000000001,27.53313086399976,1
+agentic_bm25,unans-003,unanswerable,budget_exhausted,False,[],null,,,,0.004363499999999999,25.814497160999963,1
+agentic_bm25,lookup-010,lookup,budget_exhausted,False,"[{""value"": 472397.46, ""unit"": ""crore""}]",null,,,,0.00889245,40.1569000139998,1
+agentic_bm25,lookup-011,lookup,ok,False,"[{""value"": 31532.66, ""unit"": ""crore""}]","[{""value"": -7.21, ""unit"": ""crore""}]",False,0.39285714285714285,1.0,0.00489225,22.396881503999793,1
+agentic_bm25,lookup-012,lookup,budget_exhausted,False,"[{""value"": 18133.37, ""unit"": ""crore""}]",null,,,,0.00802725,37.35914479799976,1
+agentic_bm25,lookup-013,lookup,ok,False,"[{""value"": -67278.26, ""unit"": ""crore""}]","[{""value"": 67278.26, ""unit"": ""crore""}]",False,0.15625,1.0,0.0044925,24.12257986500026,1
+agentic_bm25,lookup-014,lookup,budget_exhausted,False,"[{""value"": 490008.99, ""unit"": ""crore""}]",null,,,,0.008196,40.70896716399966,1
+agentic_bm25,lookup-015,lookup,ok,True,"[{""value"": 218554.38, ""unit"": ""crore""}]","[{""value"": 218554.38, ""unit"": ""crore""}]",False,0.0,1.0,0.004587,23.443688821999785,1
+agentic_bm25,lookup-016,lookup,ok,True,"[{""value"": 199611.44, ""unit"": ""crore""}]","[{""value"": 199611.44, ""unit"": ""crore""}]",False,0.0,1.0,0.004482,25.12920036899959,1
+agentic_bm25,lookup-017,lookup,ok,True,"[{""value"": 26212.12, ""unit"": ""crore""}]","[{""value"": 26212.12, ""unit"": ""crore""}]",False,0.1,1.0,0.008570850000000001,39.438890252999954,1
+agentic_bm25,lookup-018,lookup,budget_exhausted,False,"[{""value"": 26530.36, ""unit"": ""crore""}]",null,,,,0.0083121,39.629170299999714,1
+agentic_bm25,lookup-019,lookup,budget_exhausted,False,"[{""value"": 23707.75, ""unit"": ""crore""}]",null,,,,0.00855645,39.75988202799999,1
+agentic_bm25,arith-010,arithmetic,budget_exhausted,False,"[{""value"": 10325.74, ""unit"": ""crore""}]",null,,,,0.00472725,25.531451023000045,1
+agentic_bm25,arith-011,arithmetic,budget_exhausted,False,"[{""value"": 11121.46, ""unit"": ""crore""}]",null,,,,0.00858435,52.89823926200006,1
+agentic_bm25,arith-012,arithmetic,budget_exhausted,False,"[{""value"": 42525.85, ""unit"": ""crore""}]",null,,,,0.00891315,39.675151198000094,1
+agentic_bm25,agg-010,aggregation,ok,True,"[{""value"": 16791.09, ""unit"": ""crore""}, {""value"": 111.53, ""unit"": ""crore""}]","[{""value"": 16791.09, ""unit"": ""crore""}, {""value"": 111.53, ""unit"": ""crore""}]",False,1.0,1.0,0.00494175,23.918207435999648,1
+agentic_bm25,lookup-020,lookup,budget_exhausted,False,"[{""value"": 115.4, ""unit"": ""crore""}]",null,,,,0.008725199999999999,36.52869439599999,1
+agentic_bm25,agg-011,aggregation,ok,True,"[{""value"": 0.52, ""unit"": ""crore""}, {""value"": 16726.34, ""unit"": ""crore""}]","[{""value"": 0.52, ""unit"": ""crore""}, {""value"": 16726.34, ""unit"": ""crore""}]",False,1.0,1.0,0.00529575,37.88680687899978,1
+agentic_bm25,conv-002,lookup,ok,True,"[{""value"": 26837.65, ""unit"": ""crore""}]","[{""value"": 26837.65, ""unit"": ""crore""}]",False,0.35714285714285715,1.0,0.008645100000000001,36.250191348000044,1
+agentic_bm25,lookup-030,lookup,ok,True,"[{""value"": 1015.7, ""unit"": ""crore""}]","[{""value"": 1015.7, ""unit"": ""crore""}]",False,1.0,1.0,0.0048562499999999995,25.684994508000273,1
+agentic_bm25,lookup-031,lookup,ok,False,"[{""value"": 16831.85, ""unit"": ""crore""}]","[{""value"": 16832.02, ""unit"": ""crore""}]",False,0.1,1.0,0.00465675,25.234633547000158,1
+agentic_bm25,lookup-032,lookup,ok,True,"[{""value"": 238.62, ""unit"": ""crore""}]","[{""value"": 238.62, ""unit"": ""crore""}]",False,1.0,1.0,0.0051045000000000005,24.668755462000263,1
+agentic_bm25,lookup-033,lookup,ok,False,"[{""value"": 372.92, ""unit"": ""crore""}]","[{""value"": 801.4, ""unit"": ""crore""}]",False,0.1,1.0,0.004519499999999999,22.842154408999704,1
+agentic_bm25,lookup-034,lookup,budget_exhausted,False,"[{""value"": 0.0, ""unit"": ""crore""}]",null,,,,0.0094017,39.61520293800004,1
+agentic_bm25,agg-020,aggregation,ok,True,"[{""value"": 297717.24, ""unit"": ""crore""}, {""value"": 199611.44, ""unit"": ""crore""}, {""value"": 65428.32, ""unit"": ""crore""}, {""value"": 32677.48, ""unit"": ""crore""}]","[{""value"": 297717.24, ""unit"": ""crore""}, {""value"": 199611.44, ""unit"": ""crore""}, {""value"": 65428.32, ""unit"": ""crore""}, {""value"": 32677.48, ""unit"": ""crore""}]",False,0.3333333333333333,1.0,0.005201249999999999,37.834355953999875,1
+agentic_bm25,arith-020,arithmetic,budget_exhausted,False,"[{""value"": 1085.79, ""unit"": ""crore""}]",null,,,,0.004618499999999999,28.194335558000603,1
+agentic_bm25,arith-021,arithmetic,ok,True,"[{""value"": 19.03, ""unit"": ""percent""}]","[{""value"": 19.03, ""unit"": ""percent""}]",False,1.0,1.0,0.00529425,24.558397441000125,1
+agentic_bm25,arith-022,arithmetic,ok,True,"[{""value"": 1417.46, ""unit"": ""crore""}]","[{""value"": 1417.46, ""unit"": ""crore""}]",False,0.1,1.0,0.00500475,23.568782614000156,1
+agentic_bm25,lookup-035,lookup,ok,True,"[{""value"": 132.11, ""unit"": ""crore""}]","[{""value"": 132.11, ""unit"": ""crore""}]",False,0.1,1.0,0.00981075,51.688938135999706,1
+agentic_bm25,lookup-036,lookup,ok,True,"[{""value"": 144.23, ""unit"": ""crore""}]","[{""value"": 144.23, ""unit"": ""crore""}]",False,0.1,1.0,0.005283749999999999,23.696054413999263,1
+agentic_bm25,vol1-transport-01,lookup,ok,True,"[{""value"": 16513.22, ""unit"": ""crore""}]","[{""value"": 16513.22, ""unit"": ""crore""}]",False,0.06666666666666667,1.0,0.004656749999999999,23.320015648999288,1
+agentic_bm25,vol1-transport-02,arithmetic,ok,True,"[{""value"": 14802.86, ""unit"": ""crore""}]","[{""value"": 14802.86, ""unit"": ""crore""}]",False,0.125,1.0,0.0050279999999999995,23.587374821000594,1
+agentic_bm25,vol1-travel-01,arithmetic,ok,True,"[{""value"": 54.47, ""unit"": ""crore""}]","[{""value"": 54.47, ""unit"": ""crore""}]",False,0.1,1.0,0.010053,37.603467611999804,1
+agentic_bm25,vol1-expenses-01,aggregation,budget_exhausted,False,"[{""value"": 1146.08, ""unit"": ""crore""}]",null,,,,0.0090162,37.71326891099943,1
