@@ -2,6 +2,7 @@ import json
 import tempfile
 import unittest
 from pathlib import Path
+from threading import Barrier
 from unittest.mock import patch
 
 from read_vs_rag.io import load_jsonl
@@ -49,6 +50,8 @@ class OpenAITests(unittest.TestCase):
             if action == "count":
                 self.assertNotIn("max_output_tokens", body)
                 self.assertNotIn("store", body)
+                if body.get("text", {}).get("format", {}).get("type") == "json_object":
+                    self.assertIn({"role": "user", "content": "Return a JSON object."}, body["input"])
                 return {"input_tokens": 2000}
             self.assertFalse(body["store"])
             requests.append(body)
@@ -93,3 +96,27 @@ class OpenAITests(unittest.TestCase):
                 with self.assertRaises(ProviderError):
                     provider.generate("JSON", [{"role": "user", "parts": [{"text": "question"}]}], [], **params)
             self.assertEqual(load_jsonl(path)[0]["event"], "reserve")
+
+    def test_parallel_run_accounts_for_each_cell_independently(self):
+        cfg = json.loads((ROOT / "configs/pilot.json").read_text(encoding="utf-8"))
+        cfg.update(workers=2, project_root=str(ROOT))
+        both_running = Barrier(2, timeout=5)
+        final = answer({"answer": "18,942.94 crore INR", "abstain": False,
+                        "values": [{"value": 18942.94, "unit": "crore"}], "citations": []})
+
+        def fake_post(provider, action, body):
+            if action == "count":
+                return {"input_tokens": 2000}
+            both_running.wait()
+            return api_response([final])
+
+        with tempfile.TemporaryDirectory() as tmp, patch.object(OpenAI, "_post", fake_post):
+            config = Path(tmp) / "config.json"
+            config.write_text(json.dumps(cfg), encoding="utf-8")
+            output = Path(tmp) / "run"
+            run(config, output, limit=1, provider_config=CONFIG)
+            rows = load_jsonl(output / "results.jsonl")
+            self.assertEqual(len(rows), 2)
+            for row in rows:
+                self.assertEqual(row["status"], "ok")
+                self.assertAlmostEqual(row["cost_usd"], row["reserved_or_billed_usd"])

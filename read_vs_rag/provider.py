@@ -7,6 +7,7 @@ Prices are user-supplied estimates, not a provider-side billing guarantee.
 import json
 import math
 import os
+import threading
 import time
 import urllib.error
 import urllib.request
@@ -33,6 +34,7 @@ class Ledger:
         if max_cost <= 0 or max_tokens <= 0:
             raise ValueError("Positive run cost/token limits required")
         self.entries = {}
+        self._lock = threading.RLock()
         if self.path.exists():
             for event in load_jsonl(self.path):
                 if event["event"] == "reserve":
@@ -44,30 +46,38 @@ class Ledger:
 
     @property
     def spent(self):
-        return sum(e["cost_usd"] for e in self.entries.values())
+        with self._lock:
+            return sum(e["cost_usd"] for e in self.entries.values())
 
     @property
     def tokens(self):
-        return sum(e["tokens"] for e in self.entries.values())
+        with self._lock:
+            return sum(e["tokens"] for e in self.entries.values())
+
+    def spent_for(self, tag):
+        with self._lock:
+            return sum(e["cost_usd"] for e in self.entries.values() if e["tag"] == tag)
 
     def reserve(self, cost, tokens, tag):
         if cost < 0 or tokens < 0:
             raise ValueError("Invalid reservation")
-        if self.spent + cost > self.max_cost or self.tokens + tokens > self.max_tokens:
-            raise BudgetExceeded("Run budget reached before issuing the next model request", scope="run")
-        event = {"event": "reserve", "id": uuid.uuid4().hex, "at": utcnow(), "tag": tag,
-                 "cost_usd": cost, "tokens": tokens}
-        append_jsonl(self.path, event)
-        self.entries[event["id"]] = event
+        with self._lock:
+            if self.spent + cost > self.max_cost or self.tokens + tokens > self.max_tokens:
+                raise BudgetExceeded("Run budget reached before issuing the next model request", scope="run")
+            event = {"event": "reserve", "id": uuid.uuid4().hex, "at": utcnow(), "tag": tag,
+                     "cost_usd": cost, "tokens": tokens}
+            append_jsonl(self.path, event)
+            self.entries[event["id"]] = event
         return event["id"]
 
     def settle(self, key, cost, tokens, usage):
-        if key not in self.entries:
-            raise ValueError("Unknown reservation")
-        event = {**self.entries[key], "event": "settle", "at": utcnow(), "cost_usd": cost,
-                 "tokens": tokens, "usage": usage}
-        append_jsonl(self.path, event)
-        self.entries[key] = event
+        with self._lock:
+            if key not in self.entries:
+                raise ValueError("Unknown reservation")
+            event = {**self.entries[key], "event": "settle", "at": utcnow(), "cost_usd": cost,
+                     "tokens": tokens, "usage": usage}
+            append_jsonl(self.path, event)
+            self.entries[key] = event
 
 
 class ModelProvider:

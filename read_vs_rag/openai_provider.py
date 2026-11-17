@@ -59,6 +59,8 @@ class OpenAI(ModelProvider):
         if declarations:
             request["tools"] = response_tools(declarations)
         if final:
+            # JSON mode also requires a JSON instruction in input, outside the instructions field.
+            request["input"].append({"role": "user", "content": "Return a JSON object."})
             request["text"] = {"format": {"type": "json_object"}}
         output_cap = self.config.get("max_output_tokens", 4096)
         started = time.perf_counter()

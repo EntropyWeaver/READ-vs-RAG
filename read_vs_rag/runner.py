@@ -5,6 +5,7 @@ import json
 import os
 import random
 import time
+from concurrent.futures import FIRST_COMPLETED, ThreadPoolExecutor, wait
 from pathlib import Path
 
 from .corpus import ReadTools, bounded_result
@@ -52,7 +53,8 @@ def run_one(question, system, corpus, provider, budgets, repeat, retriever=None)
                         max_chars=budgets["max_tool_result_chars"])
     messages = [{"role": "user", "parts": [{"text": question["question"]}]}]
     trace, exposed, chunks, prediction = [], [], [], None
-    calls_start, spent_start = len(provider.calls), provider.ledger.spent
+    tag = f"{system['name']}/{question['id']}/{repeat}"
+    calls_start, spent_start = len(provider.calls), provider.ledger.spent_for(tag)
     exposure_chars, stop_reason, status, error, error_scope = 0, None, "ok", None, None
     used_tokens, used_cost = 0, 0.
     if kind not in {"read", "rag", "agentic_rag", "full_context", "oracle"}:
@@ -105,7 +107,7 @@ def run_one(question, system, corpus, provider, budgets, repeat, retriever=None)
             if used_cost + upper_cost > budgets["max_question_cost_usd"]:
                 raise BudgetExceeded("Question cost budget cannot fit the next worst-case call")
             model_content, usage = provider.generate(ANSWER_INSTRUCTION, messages, tools,
-                                                     tag=f"{system['name']}/{question['id']}/{repeat}", seed=repeat,
+                                                     tag=tag, seed=repeat,
                                                      max_input_tokens=max_input, final=not tools)
             used_tokens += usage["total_tokens"]
             used_cost += usage["cost_usd"]
@@ -172,7 +174,7 @@ def run_one(question, system, corpus, provider, budgets, repeat, retriever=None)
             "prediction": prediction, "scores": metrics, "trace": trace, "retrieved_chunks": chunks,
             "calls": calls, "latency_s": time.perf_counter() - started,
             "cost_usd": sum(c["cost_usd"] for c in calls),
-            "reserved_or_billed_usd": provider.ledger.spent - spent_start,
+            "reserved_or_billed_usd": provider.ledger.spent_for(tag) - spent_start,
             "input_tokens": sum(c["input_tokens"] for c in calls),
             "output_tokens": sum(c["output_tokens"] for c in calls),
             "thinking_tokens": sum(c["thinking_tokens"] for c in calls),
@@ -184,6 +186,9 @@ def load_experiment(config_path, provider_config=None):
     cfg = json.loads(config_path.read_text(encoding="utf-8"))
     if provider_config is not None:
         cfg["provider"] = json.loads(Path(provider_config).read_text(encoding="utf-8"))
+    workers = cfg.get("workers", 1)
+    if type(workers) is not int or not 1 <= workers <= 16:
+        raise ValueError("workers must be an integer from 1 to 16")
     root = (config_path.parent / cfg.get("project_root", "..")).resolve()
     from .corpus import Corpus
     corpus = Corpus(root / cfg["corpus"])
@@ -215,6 +220,7 @@ def plan(config_path, split="dev", limit=None, *, provider_config=None):
             "questions": len(qs), "systems": [s["name"] for s in cfg["systems"]],
             "repeats": cfg["repeats"], "cells": cells, "model": cfg["provider"]["model"],
             "provider": cfg["provider"].get("name", "gemini"),
+            "workers": cfg.get("workers", 1),
             "max_model_calls": len(qs) * len(cfg["repeats"]) *
             sum(cfg["budgets"]["max_model_calls"] if s["kind"] in {"read", "agentic_rag"} else 1 for s in cfg["systems"]),
             "max_run_cost_usd": cfg["max_run_cost_usd"],
@@ -260,28 +266,61 @@ def run(config_path, output, split="dev", limit=None, retry_errors=False, *, pro
         jobs = [(q, s, repeat) for q in questions for s in cfg["systems"] for repeat in cfg["repeats"]]
         random.Random(cfg.get("order_seed", 20261117)).shuffle(jobs)
         indexes = {}
-        for q, s, repeat in jobs:
-            key = (q["id"], s["name"], repeat)
-            if key in latest and (latest[key]["status"] == "ok" or not retry_errors):
-                continue
-            retriever = None
-            if s["kind"] in {"rag", "agentic_rag"}:
-                index_key = stable_hash({k: v for k, v in s.items() if k not in {"name", "kind"}})
-                if index_key not in indexes:
-                    indexes[index_key] = Retriever(corpus, s)
-                    append_jsonl(output / "index_builds.jsonl", {"index_key": index_key, "system": s["name"],
-                                 "build_s": indexes[index_key].build_s, "chunks": len(indexes[index_key].chunks),
-                                 "truncated_chunks": getattr(indexes[index_key].dense, "truncated_chunks", 0),
-                                 "at": utcnow()})
-                retriever = indexes[index_key]
-            row = run_one(q, s, corpus, provider, cfg["budgets"], repeat, retriever)
+
+        def pending_jobs():
+            for q, s, repeat in jobs:
+                key = (q["id"], s["name"], repeat)
+                if key in latest and (latest[key]["status"] == "ok" or not retry_errors):
+                    continue
+                yield q, s, repeat
+
+        def index_for(s):
+            if s["kind"] not in {"rag", "agentic_rag"}:
+                return None
+            index_key = stable_hash({k: v for k, v in s.items() if k not in {"name", "kind"}})
+            if index_key not in indexes:
+                idx = Retriever(corpus, s)
+                indexes[index_key] = idx
+                append_jsonl(output / "index_builds.jsonl", {"index_key": index_key, "system": s["name"],
+                             "build_s": idx.build_s, "chunks": len(idx.chunks),
+                             "truncated_chunks": getattr(idx.dense, "truncated_chunks", 0), "at": utcnow()})
+            return indexes[index_key]
+
+        def record(row):
+            key = (row["question_id"], row["system"], row["repeat"])
             row["fingerprint"], row["attempt"] = fingerprint, latest.get(key, {}).get("attempt", 0) + 1
             append_jsonl(output / "results.jsonl", row)
-            print(f"{s['name']:24s} {q['id']:18s} repeat={repeat} {row['status']} "
+            print(f"{row['system']:24s} {row['question_id']:18s} repeat={row['repeat']} {row['status']} "
                   f"correct={row['scores']['correct']} reserved/billed=${ledger.spent:.4f}", flush=True)
-            if row["status"] == "provider_error" or row["error_scope"] == "run":
-                # Avoid spending the rest of a run on a broken provider or an exhausted budget.
-                break
+            return row["status"] == "provider_error" or row["error_scope"] == "run"
+
+        remaining = list(pending_jobs())
+        workers = cfg.get("workers", 1)
+        if workers == 1:
+            for q, s, repeat in remaining:
+                if record(run_one(q, s, corpus, provider, cfg["budgets"], repeat, index_for(s))):
+                    break
+            return output
+
+        # Build each index once before timing queries or starting API requests.
+        work = iter([(q, s, repeat, index_for(s)) for q, s, repeat in remaining])
+        with ThreadPoolExecutor(max_workers=workers) as pool:
+            def submit_next():
+                job = next(work, None)
+                if job is None:
+                    return None
+                q, s, repeat, retriever = job
+                cell_provider = make_provider(cfg["provider"], ledger)
+                return pool.submit(run_one, q, s, corpus, cell_provider, cfg["budgets"], repeat, retriever)
+
+            pending = {f for _ in range(workers) if (f := submit_next()) is not None}
+            stopped = False
+            while pending:
+                done, pending = wait(pending, return_when=FIRST_COMPLETED)
+                for future in done:
+                    stopped = record(future.result()) or stopped
+                if not stopped:
+                    pending.update(f for _ in done if (f := submit_next()) is not None)
         return output
     finally:
         lock.unlink(missing_ok=True)

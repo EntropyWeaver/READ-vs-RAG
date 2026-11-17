@@ -1,0 +1,7 @@
+{
+  "pages": 94,
+  "pdf_sha256": "2c5c3b75ad46e7de9e40d24d871874a1e4c89b0c79f829f9cb7ca186d0aed46c",
+  "markdown_sha256": "b8e36d2f6a6ddcf459bb021416d4848d35745126ec3eec8c86f45e28e222a0eb",
+  "pymupdf": "1.28.2",
+  "pymupdf4llm": "0.2.2"
+}
