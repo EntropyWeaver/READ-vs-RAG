@@ -1,0 +1,25 @@
+state	id	category	question	reference_answer	expected_crore	spans
+haryana	total-current	lookup	In Statement 3, what were total Revenue Receipts for 2024-25?	106429.46 crore, the Statement 3 figure that differs by 0.05 from the actual receipts due to rounding.	106429.46	866-868,877,879
+haryana	total-prior	lookup	In Statement 3, what were total Revenue Receipts for 2023-24?	101314.84 crore in the prior-year column.	101314.84	866-868,877
+haryana	finance-commission	lookup	How much did total Finance Commission Grants amount to in 2024-25 in Statement 3?	2392.53 crore.	2392.53	866-868,873
+haryana	schemes	lookup	What were total Grants for Centrally Sponsored Schemes in 2023-24 in Statement 3?	2768.55 crore.	2768.55	866-868,871
+haryana	other-transfers	lookup	What were total Other Transfer/Grants to States/Union Territories with Legislatures in 2024-25 in Statement 3?	1638.37 crore.	1638.37	866-868,875
+haryana	tax-current	lookup	What is the 2024-25 total of section A (Tax Revenue) in Statement 3, including the share of net proceeds?	92008.34 crore, Total A.	92008.34	840-845
+haryana	cash-balance	lookup	In the Annexure to Statement No. 2, what was Total(A) General Cash Balance on 31 March 2025?	1672.20 crore INR including the investment account.	1672.20	720-722,724-726,730
+haryana	cash-combined	lookup	In the Annexure to Statement No. 2, what was the combined 31 March 2025 cash balance and investments shown as Total (A) and (B)?	6057.28 crore INR.	6057.28	720-722,724-726,733
+haryana	consolidated	aggregation	For 2024-25, report total Consolidated Fund Expenditure from Statement 4A and its Revenue, Capital, and Loans and Advances components.	199030.94 crore total, with 125849.21 revenue, 12480.00 capital and 60701.73 loans and advances.	199030.94,125849.21,12480.00,60701.73	952-958
+haryana	receipts-change	arithmetic	In Statement 3, by how much did total Revenue Receipts increase between 2023-24 and 2024-25?	5114.62 crore = 106429.46 minus 101314.84.	5114.62	866-868,877
+haryana	wrong-state	abstention	According to this volume, what were Gujarat's total Revenue Receipts for 2024-25 in Statement 3?	The volume reports Haryana accounts and cannot support the Gujarat figure.	-	-
+haryana	future-actuals	abstention	What actual 2025-26 total Finance Commission Grants are shown in Statement 3?	The Statement 3 actuals columns cover 2024-25 and 2023-24.	-	-
+tripura	total-current	lookup	In Statement 3, what were total Revenue Receipts for 2024-25?	21103.59 crore in Statement 3.	21103.59	1140-1144,1169
+tripura	total-prior	lookup	In Statement 3, what were total Revenue Receipts for 2023-24?	20538.00 crore in the prior-year column.	20538.00	1140-1144,1169
+tripura	excise-current	lookup	How much State Excise did the report record in Statement 3 for 2024-25?	484.09 crore.	484.09	1040-1044,1052
+tripura	land-prior	lookup	What Land Revenue did the report record in Statement 3 for 2023-24?	22.24 crore.	22.24	1040-1044,1050
+tripura	interest-current	lookup	In Statement 3, what were Interest receipts in 2024-25?	759.43 crore.	759.43	1073-1079
+tripura	disaster-grants	lookup	According to Statement 3, what Grant-in-aid for the State Disaster Mitigation Fund was recorded in 2023-24?	7.10 crore in the prior-year column.	7.10	1140-1144,1156
+tripura	surplus	lookup	What Revenue Surplus does Statement 2 report for 2024-25?	1585.01 crore.	1585.01	805-810,822
+tripura	schemes	lookup	What were total Grants for Centrally Sponsored Schemes in 2023-24 in Statement 3?	4078.99 crore.	4078.99	1140-1144,1150
+tripura	consolidated	aggregation	For 2024-25, report total Consolidated Fund Expenditure from Statement 4A and its Revenue, Capital, and Loans and Advances components.	24761.18 crore total, with 19518.62 revenue, 4709.24 capital and 533.32 loans and advances.	24761.18,19518.62,4709.24,533.32	1351-1354,1363
+tripura	receipts-change	arithmetic	In Statement 3, by how much did total Revenue Receipts increase between 2023-24 and 2024-25?	565.59 crore = 21103.59 minus 20538.00.	565.59	1140-1144,1169
+tripura	wrong-state	abstention	According to this volume, what were Haryana's total Revenue Receipts for 2024-25 in Statement 3?	The volume reports Tripura accounts and cannot support the Haryana figure.	-	-
+tripura	future-actuals	abstention	What actual 2025-26 Statement 3 receipts did Tripura report from State Excise?	The Statement 3 actuals columns cover 2024-25 and 2023-24.	-	-

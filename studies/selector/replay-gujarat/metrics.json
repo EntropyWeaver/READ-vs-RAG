@@ -1,0 +1,131 @@
+{
+  "mode": "counterfactual_rules_only_replay",
+  "model": "gpt-5.4-mini-2026-03-17",
+  "source_sha256": {
+    "hybrid_results": "740151dc0da941ec4083f72d1c08866dfacd86f59b2f534f382b1834a18a1bff",
+    "read_results": "6e6bd740835313b6d32f3a64c6021411a69d488d56474b788ae32bf40055b05a",
+    "corpus": {
+      "gujarat-vol-i.md": "b8e36d2f6a6ddcf459bb021416d4848d35745126ec3eec8c86f45e28e222a0eb"
+    }
+  },
+  "n_unanswerable": 3,
+  "rules_only_routes": {
+    "abstain": 32,
+    "error": 3,
+    "hybrid": 1
+  },
+  "rules_only_read_calls": 35,
+  "systems": {
+    "hybrid": {
+      "correct": 24,
+      "n": 36,
+      "correct_abstentions": 3,
+      "false_abstentions": 6,
+      "errors": 0,
+      "cost_usd": {
+        "n": 36,
+        "mean": 0.0091809375,
+        "p50": 0.00934875,
+        "p95": 0.010279875,
+        "p99": 0.011621249999999998,
+        "total": 0.33051375
+      },
+      "latency_s": {
+        "n": 36,
+        "mean": 14.89098695633336,
+        "p50": 13.565023617500174,
+        "p95": 26.09701981399985,
+        "p99": 27.538182173650192,
+        "total": 536.075530428001
+      }
+    },
+    "read": {
+      "correct": 27,
+      "n": 36,
+      "correct_abstentions": 1,
+      "false_abstentions": 0,
+      "errors": 3,
+      "cost_usd": {
+        "n": 36,
+        "mean": 0.0072319875,
+        "p50": 0.0073362,
+        "p95": 0.011902687500000002,
+        "p99": 0.012706012499999999,
+        "total": 0.26035155
+      },
+      "latency_s": {
+        "n": 36,
+        "mean": 73.51503020994457,
+        "p50": 75.29582776549978,
+        "p95": 102.70278439324966,
+        "p99": 106.03354274560019,
+        "total": 2646.5410875580046
+      }
+    },
+    "rules_only": {
+      "correct": 3,
+      "n": 36,
+      "correct_abstentions": 2,
+      "false_abstentions": 30,
+      "errors": 3,
+      "cost_usd": {
+        "n": 36,
+        "mean": 0.016325029166666668,
+        "p50": 0.016270124999999996,
+        "p95": 0.021399,
+        "p99": 0.022542525,
+        "total": 0.58770105
+      },
+      "latency_s": {
+        "n": 36,
+        "mean": 87.32193896400015,
+        "p50": 87.8229532219998,
+        "p95": 118.34009293199983,
+        "p99": 122.00493294025027,
+        "total": 3143.5898027040057
+      }
+    }
+  },
+  "paired_vs_rules_only": {
+    "hybrid": {
+      "delta": {
+        "n": 36,
+        "mean": -0.5833333333333334,
+        "low": -0.75,
+        "high": -0.4166666666666667
+      },
+      "n_questions": 36,
+      "missing_reference": 0,
+      "missing_other": 0,
+      "mcnemar": {
+        "n_pairs": 36,
+        "wins": 0,
+        "losses": 21,
+        "ties": 15,
+        "p_raw": 9.5367431640625e-07
+      },
+      "p_holm": 1.6093254089355469e-06
+    },
+    "read": {
+      "delta": {
+        "n": 36,
+        "mean": -0.6666666666666666,
+        "low": -0.8333333333333334,
+        "high": -0.5
+      },
+      "n_questions": 36,
+      "missing_reference": 0,
+      "missing_other": 0,
+      "mcnemar": {
+        "n_pairs": 36,
+        "wins": 1,
+        "losses": 25,
+        "ties": 10,
+        "p_raw": 8.046627044677734e-07
+      },
+      "p_holm": 1.6093254089355469e-06
+    }
+  },
+  "latency_note": "Cascade latency sums the original hybrid and READ durations on escalated questions. Original cells ran independently with concurrency, so the result is a sequential proxy.",
+  "scope_note": "Retrospective development data. Semantic review was not run and is not represented."
+}

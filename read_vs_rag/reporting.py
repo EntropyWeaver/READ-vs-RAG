@@ -2,7 +2,7 @@
 
 import html
 import json
-from collections import defaultdict
+from collections import Counter, defaultdict
 from pathlib import Path
 
 from .audit import csv_write, pct
@@ -75,6 +75,16 @@ def report_run(run_dir, output=None):
         ans = [r for r in rs if not r["scores"].get("unanswerable")]
         summary["abstention_on_unanswerable"] = distribution([r["scores"].get("abstained") for r in unans])
         summary["abstention_on_answerable"] = distribution([r["scores"].get("abstained") for r in ans])
+        if spec["kind"] == "selector":
+            routes = [r["routing"] for r in rs]
+            summary["routing"] = {
+                "decisions": dict(Counter(r["decision"] for r in routes)),
+                "read_started": sum(len(r["stages"]) == 2 for r in routes),
+                "reviews_requested": sum("review" in s for r in routes for s in r["stages"]),
+                "review_model_calls": sum(s.get("review", {}).get("model_calls", 0)
+                                          for r in routes for s in r["stages"]),
+                "checks": dict(Counter(s["reason"] for r in routes for s in r["stages"])),
+            }
         systems.append(summary)
         for category in sorted({q["category"] for q in questions}):
             crs = [r for r in scored if r["category"] == category]
@@ -86,11 +96,15 @@ def report_run(run_dir, output=None):
             if name == "read":
                 continue
             c = paired_comparison(paired["read"], values)
-            c["system"] = name
-            comparisons.append(c)
-        corrected = holm({c["system"]: c["mcnemar"]["p_raw"] for c in comparisons if c["mcnemar"]})
-        for c in comparisons:
-            c["p_holm"] = corrected.get(c["system"])
+            comparisons.append({**c, "system": name})
+        for spec in cfg["systems"]:
+            if spec["kind"] == "selector":
+                base = spec["hybrid"]["name"]
+                c = paired_comparison(paired[base], paired[spec["name"]])
+                comparisons.append({**c, "reference": base, "system": spec["name"]})
+        corrected = holm({i: c["mcnemar"]["p_raw"] for i, c in enumerate(comparisons) if c["mcnemar"]})
+        for i, c in enumerate(comparisons):
+            c["p_holm"] = corrected.get(i)
     ledger = Ledger(run_dir / "budget.jsonl", cfg["max_run_cost_usd"], cfg["max_run_tokens"])
     result = {"source": "new_model_run", "fingerprint": manifest["fingerprint"],
               "provider": cfg["provider"].get("name", "gemini"), "model": cfg["provider"]["model"],
@@ -112,6 +126,11 @@ def report_run(run_dir, output=None):
     flat = [{"system": r["system"], "question_id": r["question_id"], "repeat": r["repeat"],
              "status": r["status"], "correct": r["scores"].get("correct"), "cost_usd": r["cost_usd"],
              "latency_s": r["latency_s"], "error": r["error"]} for r in latest.values()]
+    if any(spec["kind"] == "selector" for spec in cfg["systems"]):
+        for item, row in zip(flat, latest.values()):
+            route = row.get("routing", {})
+            item["decision"] = route.get("decision", "")
+            item["checks"] = " / ".join(s["stage"] + "=" + s["reason"] for s in route.get("stages", []))
     csv_write(output / "per_question.csv", flat)
     table = ["| Sistema | Ejecutadas/previstas | Scored | Accuracy scored | Límites con pendientes | p95 |",
              "|---|---:|---:|---:|---:|---:|"]

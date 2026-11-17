@@ -1,0 +1,14 @@
+{
+  "haryana": {
+    "url": "https://cag.gov.in/uploads/state_accounts_report/account-report-Finance-Accounts-Volume-I-2024-25-1-06949342f0c1bd1-60544781.pdf",
+    "pages": 92,
+    "pdf_sha256": "4c2de512daa2070af7d5ab9ef91d4f011bf82ee7acfb95d4311ab7d35f55466e",
+    "markdown_sha256": "76ad1403584167e6045956f3b2610992e56ee1af7fd48e9c191c4a97a5184756"
+  },
+  "tripura": {
+    "url": "https://cag.gov.in/uploads/state_accounts_report/account-report-Finance-Accounts-Vol-I-2024-25-PRINT-069c11f2a724454-49441218.pdf",
+    "pages": 100,
+    "pdf_sha256": "353d6d6fb229d856a34a5a3b76a0b39abed4933a42b5e464c733b0e8fbb06f12",
+    "markdown_sha256": "016d5ae9d1d9dfe1c465d5091e6718e03ce96bee126f98f59c4084d0ba571a23"
+  }
+}

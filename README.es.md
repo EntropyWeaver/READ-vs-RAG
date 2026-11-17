@@ -34,6 +34,8 @@ de −11,1 a +27,8). La muestra corresponde a un informe y un modelo.
 [CSV por pregunta](studies/gujarat-volume-i/results/per_question.csv) ·
 [Reproducción](studies/gujarat-volume-i/README.md)
 
+[Segundo estudio](studies/selector/README.md) · Un selector híbrido → READ, una reproducción en Gujarat y un protocolo de evaluación en Haryana y Tripura.
+
 ## Auditoría de los resultados publicados
 
 Recalculamos **663 ejecuciones publicadas** por los autores en el estudio original.

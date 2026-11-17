@@ -32,6 +32,8 @@ points above the hybrid (95% paired CI: −11.1 to +27.8). The study covers one 
 [Per-question CSV](studies/gujarat-volume-i/results/per_question.csv) ·
 [Reproduction guide (Spanish)](studies/gujarat-volume-i/README.md)
 
+[Follow-up study](studies/selector/README.md) · A hybrid-to-READ selector, a replay on Gujarat and a held-out protocol for Haryana and Tripura.
+
 ## Audit of the published results
 
 We recomputed the metrics for **663 published runs** from the original study, using the authors' labels.
